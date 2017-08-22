@@ -16,11 +16,9 @@ Queries are defined in  a query file (suffix .qry) in the parent directory of th
 
 It is recommended to do the [Developer-Tutorial](developer-guide.html) first, where the business network `my-network` has first been deployed. Alternatively, you can  if you wish, do this tutorial from 'scratch' but observe these following 3 steps:
 
-``` 
-1. Build a new 'my-network' VSCode project (as shown in the Developer tutorial) 
+`1. Build a new 'my-network' VSCode project (as shown in the Developer tutorial) 
 2. Edit your package.json, once again changing the 'name' field to `my-network`, the 'description' to 'My Commodity Trading network' and modify the 'prepublish' script (at the end) to change the name of the business network archive - oe to 'my-network.bna'
-3. Finally,  remember to use `composer network deploy` later on (not 'composer network update') to deploy the BNA file as a new network (ie that step is shown later on in this tutorial).
-```
+3. Finally,  remember to use `composer network deploy` later on (not 'composer network update') to deploy the BNA file as a new network (ie that step is shown later on in this tutorial). `
 
 ## Re-open your Commodities Trading 'my-network' project
 
