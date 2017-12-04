@@ -9,7 +9,7 @@ Using is easy-peasy :last_quarter_moon_with_face: - find your topic area, and ch
 
 | ~ [**Blockchain Recap**](#recap) | ~ [**Business Network Cards**](#bizcards) | ~ [**Creating issues**](#issue) | ~ [**Filters**](#filters) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
-| ~ [**Event Hub Problems**](#event) | ~ [**Help with Kubernetes**](#kubernetes) | ~ [**Multi Org Setup**](#multiorg) | ~ [**Sample Networks**](#samples) 
+| ~ [**Event Hub Problems**](#event) | ~ [**Help with IBM Cloud / Kubernetes**](#cloud) | ~ [**Multi Org Setup**](#multiorg) | ~ [**Sample Networks**](#samples) 
 | ~ [**Upgrading Composer**](#upgrade) | ~ [**Topic Name**](#kubernetes) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#samples) | ~ [**Topic Name**](#bizcards) 
 
 ***
@@ -91,9 +91,15 @@ See below for suggested resolutions and follow the link in a new window.
 
 
 <a name="cloud"></a>
+
+
+### :information_source:  IBM Cloud / Kubernetes Support / IBM Container service
+
+
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
-| IBM Sandbox / Kubernetes support  |for support with your particular environment on IBM Cloud you should go to this page  https://console.bluemix.net/docs/support/index.html#contacting-support
+| IBM Sandbox / Kubernetes support  |for support with your particular environment on IBM Cloud you should go to this page https://console.bluemix.net/docs/support/index.html#contacting-support
+
 
 #### :card_index: [back to base camp :camping: ](#top)  
 
