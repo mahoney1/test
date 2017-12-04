@@ -10,7 +10,7 @@ Using is easy-peasy :last_quarter_moon_with_face: - find your topic area, and ch
 | ~ [**Blockchain Recap**](#recap) | ~ [**Business Network Card**](#bizcards) | ~ [**Creating issues**](#issue) | ~ [**Filters**](#filters) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
 | ~ [**Event Hub Problems**](#event) | ~ [**Help with Kubernetes**](#kubernetes) | ~ [**Multi Org Setup**](#multiorg) | ~ [**Sample Networks**](#samples) 
-| ~ [**Upgrading Composer**](#upgrade) | ~ [**Topic 2**](#kubernetes) | ~ [**Topic Name**](#bizcards) | ~ [**Sample Networks**](#samples) | ~ [**Topic Name**](#bizcards) 
+| ~ [**Upgrading Composer**](#upgrade) | ~ [**Topic Name**](#kubernetes) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#samples) | ~ [**Topic Name**](#bizcards) 
 
 ***
 Each topic area has links to suggested solutions (you can open these in a new window) sourced from:
@@ -72,9 +72,13 @@ Together, both `cards` and `client-data` directories in $HOME/.composer are 
 
 #### :card_index: [back to base camp :camping: ](#top)   
 
+
 <a name="event"></a>
 
-Error encountered:
+### :information_source:  Event Hub Issues
+
+Event Hub issues can vary in the kind of error reported - for example 'Unhandled Promise Rejection' is a case in point.
+See below for suggest resolutions and follow the link in a new window.
 
 | Error encountered | Resolution 
 | :---------------------- | :-----------------------
