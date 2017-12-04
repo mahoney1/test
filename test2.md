@@ -9,7 +9,8 @@ Using is easy-peasy :last_quarter_moon_with_face: - find your topic area, and ch
 
 | ~ [**Blockchain Recap**](#recap) | ~ [**Business Network Card**](#bizcards) | ~ [**Creating issues**](#issue) | ~ [**Filters**](#filters) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
-| ~ [**Help with Kubernetes**](#kubernetes) | ~ [**Multi Org Setup**](#bizcards) | ~ [**Sample Networks**](#samples) | ~ [**Upgrading Composer**](#bizcards) 
+| ~ [**Event Hub Problems**](#event) | ~ [**Help with Kubernetes**](#kubernetes) | ~ [**Multi Org Setup**](#multiorg) | ~ [**Sample Networks**](#samples) 
+| ~ [**Upgrading Composer**](#upgrade) | ~ [**Topic 2**](#kubernetes) | ~ [**Topic Name**](#bizcards) | ~ [**Sample Networks**](#samples) | ~ [**Topic Name**](#bizcards) 
 
 ***
 Each topic area has links to suggested solutions (you can open these in a new window) sourced from:
@@ -68,6 +69,17 @@ Note: If you export a Business Network Card that has never been used, it will co
 More technical:
 
 Together, both `cards` and `client-data` directories in $HOME/.composer are an integral part of the whole card structure. `client-data` is where the hlfv1 composer connector will store the identity credentials for a card (either by importing or when it enrolls an identity). eg for `admin@tutorial-network` it will have the usual client crypto artifacts eg. 'admin' xx-priv, xx-pub . Meanwhile, the imported cards get persisted to the `cards` subdirectory. If a card contains only an enrollment secret, this will get used on 'first use' to obtain the certificate, which will get stored initially only in`client-data`. It includes the certificate and private key for the user identity (which come either directly from the imported business network card, or are retrieved from the CA using the enrollment secret). If the card is subsequently exported then any certificate data gets retrieved from `client-data` and added to the exported card. If you like, one subdirectory acts as the card store including business network metadata elements and the other (client-data) is the working cache/store for client credentials.. 
+
+#### :card_index: [back to base camp :camping: ](#top)   
+
+<a name="event"></a>
+
+Error encountered:
+
+| Error encountered | Resolution 
+| :---------------------- | :-----------------------
+| Unhandled Promise Rejections | See https://chat.hyperledger.org/channel/composer?msg=wnz6YZpvFMdCrgHZJ
+| Unhandled Promise Rejections | Your connection profile info (in your card) has been incorrectly defined
 
 #### :card_index: [back to base camp :camping: ](#top)   
 
