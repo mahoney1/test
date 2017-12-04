@@ -7,7 +7,7 @@ Using is easy-peasy :last_quarter_moon_with_face: - find your topic area, and ch
 ***
 ### :basecamp:  TOPIC INDEX   :basecamp:
 
-| ~ [**Blockchain Recap**](#recap) | ~ [**Business Network Card**](#bizcards) | ~ [**Creating issues**](#issue) | ~ [**Filters**](#filters) 
+| ~ [**Blockchain Recap**](#recap) | ~ [**Business Network Cards**](#bizcards) | ~ [**Creating issues**](#issue) | ~ [**Filters**](#filters) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
 | ~ [**Event Hub Problems**](#event) | ~ [**Help with Kubernetes**](#kubernetes) | ~ [**Multi Org Setup**](#multiorg) | ~ [**Sample Networks**](#samples) 
 | ~ [**Upgrading Composer**](#upgrade) | ~ [**Topic Name**](#kubernetes) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#samples) | ~ [**Topic Name**](#bizcards) 
