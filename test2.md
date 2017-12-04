@@ -1,7 +1,17 @@
-This Wiki is a knowledge base to help Composer folks having issues we class as  "_we've seen something similar before"_ :-)  :1st_place_medal:  :2nd_place_medal: :3rd_place_medal: :rocket: 
+This Wiki is a knowledge base to help Composer folks having issues we class as  "_we've seen something similar before"_ :-)  :1st_place_medal:  :2nd_place_medal: :3rd_place_medal: :rocket: :recycle: :sos: :face_with_head_bandage:. The idea is we help steer you towards a resolution :ok_man: 
 
-Its grouped by Topic. Simply click on one - there's a brief description and a list of related issues. Click the 'back to top' link to return at any time to the topic index.
+Using is easy-peasy :last_quarter_moon_with_face: - find your topic area, and check out related issues. 
 
+
+<a name="top"></a>
+***
+### :basecamp:  TOPIC INDEX   :basecamp:
+
+| ~ [**Blockchain Recap**](#recap) | ~ [**Business Network Card**](#bizcards) | ~ [**Creating issues**](#issue) | ~ [**Filters**](#filters) 
+| :---------------------- | :-----------------------| :----------------------- | :-------------------- 
+| :small_blue_diamond: [**Help with Kubernetes**](#kubernetes) | :small_blue_diamond: [**Multi Org Setup**](#bizcards) | :small_blue_diamond: [**Sample Networks**](#samples) | :small_blue_diamond: [**Upgrading Composer**](#bizcards) 
+
+***
 Each topic area has links to suggested solutions (you can open these in a new window) sourced from:
 
 * **Documented Resolutions** 
@@ -12,43 +22,11 @@ Each topic area has links to suggested solutions (you can open these in a new wi
 If you still have an issue,  see :link:  [here ](#issue)    
 
 
-<a name="top"></a>
-
-### :basecamp:  TOPIC INDEX   :basecamp:
-
-Colons can be used to align columns.
-
-| Topic       | Topic         | Topic  |
-| ------------- |:-------------:| -----:|
-| :link:  [Blockchain Recap](#recap)   | :link:  [Business Network Cards](#bizcards)| :link:  [Issues](#issue) |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-| col 4 is      | centered      |   $12 |
-
-
-LOTS OF TEXT
-LOTS OF TEXT
-LOTS OF TEXT
-LOTS OF TEXT
-LOTS OF TEXT
-LOTS OF TEXT
-LOTS OF TEXT
-LOTS OF TEXT
-LOTS OF TEXT
-LOTS OF TEXT
-LOTS OF TEXT
-LOTS OF TEXT
-LOTS OF TEXT
-LOTS OF TEXT
-LOTS OF TEXT
-LOTS OF TEXT
-
-
-
 <a name="recap"></a>
+
 ### :information_source:  Blockchain Recap
 
-There are two place which "store" data in Hyperledger Fabric:
+There are two place which "store" data in Hyperledger Fabric (the underlying blockchain infrastructure used by Composer):
 
     * the ledger
     * the state database ('World state')
@@ -65,17 +43,33 @@ The state database is simply an indexed view into the chain’s transaction log,
 
 Source: http://hyperledger-fabric.readthedocs.io/en/release/ledger.html
 
-:card_index: [back to top](#top)
+#### :card_index: [back to base camp :camping: ](#top)  
 
 <a name="bizcards"></a>
 
 ### :information_source:  Business Network Cards
 
-A Business Network Card provides the means to connect to a Composer business network which runs in a Composer runtime container. It is only possible to access a Composer business network through a valid Business Network Card. It consists of a connection profile, some metadata for the identity using it, and ultimately, a set of credentials (certificate/private key). An identity can have one or more cards, to connect to one or more business networks.
+A Business Network Card provides the means to connect to a Composer business network which runs in a Composer runtime container. It is only possible to access a Composer business network through a valid Business Network Card. It consists of a connection profile, some metadata for the identity using it, and ultimately, a set of credentials (certificate/private key). An identity (linked to a participant in Composer) can have one or more cards, to connect to one or more business networks.
 
-The benefits are that once you export a card, it is a portable card to connect to the Composer business network running on the blockchain network, so can be issued/given to someone (usually that real identity in that Organisation) to then transact on business network, on the blockchain network.
+The benefits are that once you export a card, it is a portable card. So it can be issued to a new user/given to someone (usually that real identity in that Organisation) to then connect and transact on business network, on the blockchain network. Yes, of course - they should be handled with care. We recommend that you only send identity cards that have been encrypted.
 
-:card_index: [back to top](#top)
+Best practices with cards:
+
+When you create a card **file** on disk (eg. user4.card, networkAdmin.card) for the first time (eg, via CLI, a Playground export or using the APIs) - the file will most likely just have a single-use enrolment id and secret (as opposed to the certificate/key combo when its gets used later on). To populate the **card store** (ie in your or the other user's credentials vault)  with the certificate/key (from the Certificate of Authority or CA server) - follow the sequence below:
+
+* Import the card **file** (eg. via Playground, or use the CLI eg. composer card import --file networkAdmin.card` or `composer card import -f user4.card`) into your CARD STORE. The only means to import a business network card into a user's cardstore is to use either the CLI, Playground or the Composer APIs - to actually import it.
+
+* Connect to the business network using that **imported** card in Playground (or ping it via command line eg. composer network ping -c admin@tutorial-network` or `composer network ping -c user4@trade-network` - notice it refers to the business network) so that it gets 'used' and therefore it requests credentials (certificate/key combo) from the CA server and imports them into the card in the card store.
+
+* Optionally: export the card (complete with certificate/key credentials).
+
+Note: If you export a Business Network Card that has never been used, it will contain just the one-time enrollment ID and enrollment secret only. The first time the exported card gets used,  it connects with the one-time secret and then new certificate/key combo is downloaded to that local card store (credentials vault) - and the enrol secret is no longer valid. If you then attempt to re-use the same card elsewhere with only the secret still in it, it registers a different identity and this can be a cause of major pain for many (this is how certificates work, its not a 'Composer' thing).
+
+More technical:
+
+Together, both `cards` and `client-data` directories in $HOME/.composer are an integral part of the whole card structure. `client-data` is where the hlfv1 composer connector will store the identity credentials for a card (either by importing or when it enrolls an identity). eg for `admin@tutorial-network` it will have the usual client crypto artifacts eg. 'admin' xx-priv, xx-pub . Meanwhile, the imported cards get persisted to the `cards` subdirectory. If a card contains only an enrollment secret, this will get used on 'first use' to obtain the certificate, which will get stored initially only in`client-data`. It includes the certificate and private key for the user identity (which come either directly from the imported business network card, or are retrieved from the CA using the enrollment secret). If the card is subsequently exported then any certificate data gets retrieved from `client-data` and added to the exported card. If you like, one subdirectory acts as the card store including business network metadata elements and the other (client-data) is the working cache/store for client credentials.. 
+
+#### :card_index: [back to base camp :camping: ](#top)   
 
 <a name="issue"></a>
 
@@ -94,4 +88,4 @@ You simply create a problem with the tag 'hyperledger-composer'  and provide:
 
 Thank you
 
-:card_index: [back to top](#top)
+#### :card_index: [back to base camp :camping: ](#top)   
