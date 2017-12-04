@@ -9,7 +9,7 @@ Using is easy-peasy :last_quarter_moon_with_face: - find your topic area, and ch
 
 | ~ [**Blockchain Recap**](#recap) | ~ [**Business Network Card**](#bizcards) | ~ [**Creating issues**](#issue) | ~ [**Filters**](#filters) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
-| :small_blue_diamond: [**Help with Kubernetes**](#kubernetes) | :small_blue_diamond: [**Multi Org Setup**](#bizcards) | :small_blue_diamond: [**Sample Networks**](#samples) | :small_blue_diamond: [**Upgrading Composer**](#bizcards) 
+| ~ [**Help with Kubernetes**](#kubernetes) | ~ [**Multi Org Setup**](#bizcards) | ~ [**Sample Networks**](#samples) | ~ [**Upgrading Composer**](#bizcards) 
 
 ***
 Each topic area has links to suggested solutions (you can open these in a new window) sourced from:
