@@ -62,9 +62,9 @@ When you create a card **file** on disk (eg. user4.card, networkAdmin.card) for 
 
 * Connect to the business network using that **imported** card in Playground (or ping it via command line eg. composer network ping -c admin@tutorial-network` or `composer network ping -c user4@trade-network` - notice it refers to the business network) so that it gets 'used' and therefore it requests credentials (certificate/key combo) from the CA server and imports them into the card in the card store.
 
-* Optionally: export the card (complete with certificate/key credentials).
 
-Note: If you export a Business Network Card that has never been used, it will contain just the one-time enrollment ID and enrollment secret only. The first time the exported card gets used,  it connects with the one-time secret and then new certificate/key combo is downloaded to that local card store (credentials vault) - and the enrol secret is no longer valid. If you then attempt to re-use the same card elsewhere with only the secret still in it, it registers a different identity and this can be a cause of major pain for many (this is how certificates work, its not a 'Composer' thing).
+
+Note: If you export a Business Network Card that has never been used, it will contain just the one-time enrollment ID and enrollment secret only. The first time the exported card gets used,  it connects with the one-time secret and then new certificate/key combo is downloaded to that local card store (credentials vault) - and the enrol secret is no longer valid. If you then attempt to re-use the same card file elsewhere with only the secret still in it, it registers a different identity and this can be a cause of major pain for many (this is how security and certificates work, its not a 'Composer' thing).
 
 More technical:
 
