@@ -81,6 +81,9 @@ Together, both `cards` and `client-data` directories in $HOME/.composer are 
 Event Hub issues can vary in the kind of error reported - for example 'Unhandled Promise Rejection' is a case in point.
 See below for suggested resolutions and follow the link in a new window.
 
+* Have you checked the listening Fabric Event Hub is actually up and running (listening for events) ?
+* Are you configuring a Multi-Org environment ? EventURLs are only defined for 'this' Org's peers (and not other Org's peers)
+
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
 | Unhandled Promise Rejections  | Your connection profile info (in your card) has been incorrectly defined
