@@ -75,10 +75,11 @@ Together, both `cards` and `client-data` directories in $HOME/.composer are 
 
 <a name="event"></a>
 
+
 ### :information_source:  Event Hub Issues
 
 Event Hub issues can vary in the kind of error reported - for example 'Unhandled Promise Rejection' is a case in point.
-See below for suggest resolutions and follow the link in a new window.
+See below for suggested resolutions and follow the link in a new window.
 
 | Error encountered | Resolution 
 | :---------------------- | :-----------------------
