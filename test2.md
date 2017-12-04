@@ -84,7 +84,8 @@ See below for suggested resolutions and follow the link in a new window.
 | Error encountered | Resolution 
 | :---------------------- | :-----------------------
 | Unhandled Promise Rejections | See https://chat.hyperledger.org/channel/composer?msg=wnz6YZpvFMdCrgHZJ
-| Unhandled Promise Rejections | Your connection profile info (in your card) has been incorrectly defined
+| Unhandled Promise Rejections RC | Your connection profile info (in your card) has been incorrectly defined
+| Unhandled Promise Rejections SO | https://stackoverflow.com/questions/46270080/node8232-unhandledpromiserejectionwarning-error-could-not-find-chaincode-wit
 
 #### :card_index: [back to base camp :camping: ](#top)   
 
