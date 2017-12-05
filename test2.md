@@ -64,7 +64,7 @@ When you create a card **file** on disk (eg. user4.card, networkAdmin.card) for 
 
 
 
-Note: If you export a Business Network Card that has never been used, it will contain just the one-time enrollment ID and enrollment secret only. The first time the exported card gets used,  it connects with the one-time secret and then new certificate/key combo is downloaded to that local card store (credentials vault) - and the enrol secret is no longer valid. If you then attempt to re-use the same card file elsewhere with only the secret still in it, it registers a different identity and this can be a cause of major pain for many (this is how security and certificates work, its not a 'Composer' thing).
+Note: If you export a Business Network Card that has never been used, it will contain just the one-time enrollment ID and enrollment secret only. The first time that exported card gets used,  it connects with the one-time secret and the identity's certificate/key combo is downloaded to the user's local wallet(credentials vault) - thus the enrol secret is no longer valid. If you then attempt to re-use the same card file elsewhere with only the secret still in it, it registers a different identity and this can be a cause of major pain for many (this is how security and certificates work, its not a 'Composer' thing).
 
 More technical:
 
