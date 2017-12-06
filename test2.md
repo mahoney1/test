@@ -9,7 +9,8 @@ Using is easy-peasy :last_quarter_moon_with_face: - find your topic area, and ch
 
 | ~ [**Blockchain Recap**](#recap) | ~ [**Business Network Cards**](#bizcards) | ~ [**Creating issues**](#issue) | ~ [**Filters**](#filters) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
-| ~ [**Event Hub Problems**](#event) | ~ [**Help with IBM Cloud / Kubernetes**](#cloud) | ~ [**Multi Org Setup**](#multiorg) | ~ [**Sample Networks**](#samples) 
+| ~ [**Event Hub Problems**](#event) | ~ [**Help with IBM Cloud / Kubernetes**](#cloud) | ~ [**tba**](#xxx) | ~ [**Sample Networks**](#samples) 
+| ~ [**Multi Org Setup**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy)
 | ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install Help**](#runtime-install) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#samples) | ~ [**Topic Name**](#bizcards) 
 
 ***
@@ -126,8 +127,23 @@ The following are a selection of answers, to help understand what you may be enc
 | xxx |  xxx
 
 
+#### :card_index: [back to base camp :camping: ](#top)  
+
+
+<a name="passport-strategy"></a>
+
+### :information_source:  Passport Strategy Info
+
+The following are a selection of answers, to help understand what you may be encountering:
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+| Is Passport-local supported  |Not tested - see Rocketchat thread [here](https://chat.hyperledger.org/channel/composer?msg=jP6znqHXa6fChLiAX)
+| Custom Passport strategy |  Useful Rocketchat thread (as-is) [here](https://chat.hyperledger.org/channel/composer?msg=KW4DbESMZKkPRWmPQ)
+
 
 #### :card_index: [back to base camp :camping: ](#top)  
+
 
 <a name="runtime-install"></a>
 
@@ -140,20 +156,6 @@ The following are a selection of answers, to help understand what you may be enc
 | Error: No valid responses from any peers  | see below
 | Error: Error: Endpoint read failed |  This is likely to be a connection (.json) config issue -  it needs to be configured for TLS (or non-TLS) communications depending in your setup
 
-
-#### :card_index: [back to base camp :camping: ](#top)  
-
-#### :card_index: [back to base camp :camping: ](#top)  
-
-<a name="passport-strategy"></a>
-
-### :information_source:  Passport Strategy Info
-The following are a selection of answers, to help understand what you may be encountering:
-
-| Message encountered | Resolution 
-| :---------------------- | :-----------------------
-| Is Passport-local supported  |Not tested - see Rocketchat thread [here](https://chat.hyperledger.org/channel/composer?msg=jP6znqHXa6fChLiAX)
-| Custom Passport strategy |  Useful Rocketchat thread (as-is) [here](https://chat.hyperledger.org/channel/composer?msg=KW4DbESMZKkPRWmPQ)
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
