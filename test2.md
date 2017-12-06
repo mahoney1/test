@@ -73,6 +73,14 @@ Together, both `cards` and `client-data` directories in $HOME/.composer are 
 #### :card_index: [back to base camp :camping: ](#top)   
 
 
+<a name="byfn"></a>
+
+### :information_source:  BYFN Issues
+
+See Multi-Org issues
+
+
+#### :card_index: [back to base camp :camping: ](#top)  
 <a name="event"></a>
 
 
@@ -106,21 +114,37 @@ See below for suggested resolutions and follow the link in a new window.
 
 #### :card_index: [back to base camp :camping: ](#top)  
 
+<a name="multiorg"></a>
+
+### :information_source:  Multi Org / BYFN Composer tutorial - issues.
+
+The following are a selection of answers, to help understand what you may be encountering. Check also [Runtime Install errors](#runtime-install) for runtime issues
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+| xxx  | xxx
+| xxx |  xxx
+
+
+
+#### :card_index: [back to base camp :camping: ](#top)  
 
 <a name="runtime-install"></a>
 
-### :information_source:  Runtime install errors
+### :information_source:  Runtime install errors 
 
 The following are a selection of answers, to help understand what you may be encountering:
 
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
-| #mytest  Error: No valid responses from any peers  | see below
-| Error: Error: Endpoint read failed |  This is likely to be a connection (.json) config issue -  it needs to be configured for TLS (or non-TLS) communications 
-
+| Error: No valid responses from any peers  | see below #runtime1
+| Error: Error: Endpoint read failed |  This is likely to be a connection (.json) config issue -  it needs to be configured for TLS (or non-TLS) communications depending in your setup
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
+
+
+#### Creating a problem report (issue)
 
 <a name="issue"></a>
 
