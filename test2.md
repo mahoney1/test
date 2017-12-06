@@ -10,7 +10,7 @@ Using is easy-peasy :last_quarter_moon_with_face: - find your topic area, and ch
 | ~ [**Blockchain Recap**](#recap) | ~ [**Business Network Cards**](#bizcards) | ~ [**Creating issues**](#issue) | ~ [**Filters**](#filters) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
 | ~ [**Event Hub Problems**](#event) | ~ [**Help with IBM Cloud / Kubernetes**](#cloud) | ~ [**Multi Org Setup**](#multiorg) | ~ [**Sample Networks**](#samples) 
-| ~ [**Upgrading Composer**](#upgrade) | ~ [**Topic Name**](#kubernetes) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#samples) | ~ [**Topic Name**](#bizcards) 
+| ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install Help**](#runtime-install) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#samples) | ~ [**Topic Name**](#bizcards) 
 
 ***
 Each topic area has links to suggested solutions (you can open these in a new window) sourced from:
@@ -102,6 +102,22 @@ See below for suggested resolutions and follow the link in a new window.
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
 | IBM Sandbox / Kubernetes support  |for support with your particular environment on IBM Cloud you should go to this page https://console.bluemix.net/docs/support/index.html#contacting-support
+
+
+#### :card_index: [back to base camp :camping: ](#top)  
+
+
+<a name="runtime-install"></a>
+
+### :information_source:  Runtime install errors
+
+The following are a selection of answers, to help understand what you may be encountering:
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+|<a name="runtime1"></a> Error: No valid responses from any peers  | see below
+| Error: Error: Endpoint read failed |  This is likely to be a connection (.json) config issue -  it needs to be configured for TLS (or non-TLS) communications 
+
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
