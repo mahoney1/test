@@ -10,7 +10,7 @@ Using is easy-peasy :last_quarter_moon_with_face: - find your topic area, and ch
 | ~ [**Blockchain Recap**](#recap) | ~ [**Business Network Cards**](#bizcards) | ~ [**Creating issues**](#issue) | ~ [**Filters**](#filters) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
 | ~ [**Event Hub Problems**](#event) | ~ [**Help with IBM Cloud / Kubernetes**](#cloud) | ~ [**Multi Org Setup**](#multiorg) | ~ [**Sample Networks**](#samples) 
-| ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install Help**](#runtimeinstall) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#samples) | ~ [**Topic Name**](#bizcards) 
+| ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install Help**](#runtime-install) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#samples) | ~ [**Topic Name**](#bizcards) 
 
 ***
 Each topic area has links to suggested solutions (you can open these in a new window) sourced from:
@@ -107,7 +107,7 @@ See below for suggested resolutions and follow the link in a new window.
 #### :card_index: [back to base camp :camping: ](#top)  
 
 
-<a name="runtimeinstall"></a>
+<a name="runtime-install"></a>
 
 ### :information_source:  Runtime install errors
 
