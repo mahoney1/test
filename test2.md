@@ -92,6 +92,7 @@ See below for suggested resolutions and follow the link in a new window.
 
 * Have you checked the listening Fabric Event Hub is actually up and running (listening for events) ?
 * Are you configuring a Multi-Org environment ? EventURLs are only defined for 'this' Org's peers (and not other Org's peers)
+* grpc or grpcs (http or https for CA) protocol defined correctly in your connection info ?
 
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
