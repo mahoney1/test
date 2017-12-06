@@ -137,8 +137,23 @@ The following are a selection of answers, to help understand what you may be enc
 
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
-| Error: No valid responses from any peers  | see below #runtime1
+| Error: No valid responses from any peers  | see below
 | Error: Error: Endpoint read failed |  This is likely to be a connection (.json) config issue -  it needs to be configured for TLS (or non-TLS) communications depending in your setup
+
+
+#### :card_index: [back to base camp :camping: ](#top)  
+
+#### :card_index: [back to base camp :camping: ](#top)  
+
+<a name="passport-strategy"></a>
+
+### :information_source:  Passport Strategy Info
+The following are a selection of answers, to help understand what you may be encountering:
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+| Is Passport-local supported  |Not tested - see Rocketchat thread [here](https://chat.hyperledger.org/channel/composer?msg=jP6znqHXa6fChLiAX)
+| Custom Passport strategy |  Useful Rocketchat thread (as-is) [here](https://chat.hyperledger.org/channel/composer?msg=KW4DbESMZKkPRWmPQ)
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
