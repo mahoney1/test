@@ -115,7 +115,7 @@ The following are a selection of answers, to help understand what you may be enc
 
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
-|<a name="runtime1"></a> Error: No valid responses from any peers  | see below
+|:infornation_source: Error: No valid responses from any peers  | see below
 | Error: Error: Endpoint read failed |  This is likely to be a connection (.json) config issue -  it needs to be configured for TLS (or non-TLS) communications 
 
 
