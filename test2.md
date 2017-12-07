@@ -1,4 +1,4 @@
-## COMPOSER KNOWLEDGE BASE :eyes:
+## :eyes: :eyes: COMPOSER KNOWLEDGE BASE :eyes: :eyes:
 
 This Wiki is a knowledge base to help Composer folks having issues we class as  "_we've seen something similar before"_ :-)  :1st_place_medal:  :2nd_place_medal: :3rd_place_medal: :rocket: :recycle: :sos: :face_with_head_bandage:. The idea is we help steer you towards a resolution :ok_man:
 
