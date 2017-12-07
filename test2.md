@@ -9,8 +9,8 @@ Using is easy-peasy :last_quarter_moon_with_face: - find your topic area, and ch
 
 | ~ [**Blockchain Recap**](#recap) | ~ [**ACLs **](#acls) | ~ [**Business Network Cards**](#bizcards) | ~ [**Creating issues**](#issue) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
-| ~ [**Event Hub Problems**](#event) | ~ [**Filters**](#filters) | ~ [**Help with IBM Cloud / Kubernetes**](#cloud) | ~ [**test**](#xxx) | ~ [**Sample Networks**](#samples) 
-| ~ [**Multi Org Setup**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy)
+| ~ [**Event Hub Problems**](#event) | ~ [**Filters**](#filters) | ~ [**Help with IBM Cloud / Kubernetes**](#cloud) 
+| ~ [**Multi Org Setup**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) | ~ [**Sample Networks**](#samples) 
 | ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install Help**](#runtime-install) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#samples) | ~ [**Topic Name**](#bizcards) 
 
 ***
