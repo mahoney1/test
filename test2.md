@@ -130,14 +130,21 @@ See below for suggested resolutions and follow the link in a new window.
 
 Examples of stringified JSON Filters 
 
+| Filter Type  | Example
+| :---------------------- | :-----------------------
 | Two condition 'and' filter | `{ "where":{ "and":[ { "isAccepted":true }, { "isClosed":false }] } }`
 | Three condition 'and' filter | ` "where":{ "and":[ { "isAccepted":true }, { "isClosed":false }, { "providertype":"Broker"} ] } }`
 
 Examples of non- stringified JSON Filters 
 
+| Filter Type  | Example
+| :---------------------- | :-----------------------
 | Three Condition 'and' filter | `curl -g -X GET "http://127.0.0.1:3000/api/Commodity?filter[where][and][0][isAccepted]=1&filter[where][and][1][isClosed]=0&filter[where][and][2][providerType]=Broker""`
 
 Example of Filter resolve: (meaning: Search on a modeled asset and resolve the data for the related model (eg. Commodity owner below)
+
+| Filter goal  | Example
+| :---------------------- | :-----------------------
 | resolve relationships | `{"where":{"":"resource:org.acme.biznet.Commodity#ABC"}, "include":"resolve"}`
 
 
