@@ -67,6 +67,8 @@ Source: http://hyperledger-fabric.readthedocs.io/en/release/ledger.html
 
 ### :information_source:  Business Network Cards
 
+jump to [review card errors](#carderrors) to see more on current errors & resolutions
+
 A Business Network Card provides the means to connect to a Composer business network which runs in a Composer runtime container. It is only possible to access a Composer business network through a valid Business Network Card. It consists of a connection profile, some metadata for the identity using it, and ultimately, a set of credentials (certificate/private key). An identity (linked to a participant in Composer) can have one or more cards, to connect to one or more business networks.
 
 The benefits are that once you export a card, it is a portable card. So it can be issued to a new user/given to someone (usually that real identity in that Organisation) to then connect and transact on business network, on the blockchain network. Yes, of course - they should be handled with care. We recommend that you only send identity cards that have been encrypted. See separate note on use of cards with a multi-user REST server environment.
@@ -86,6 +88,7 @@ More technical:
 
 Together, both `cards` and `client-data` directories in $HOME/.composer are an integral part of the whole wallet structure in the card store (credentials vault). `client-data` is where the hlfv1 composer connector will store the identity credentials for a card (either by importing or when it enrolls an identity). eg for `admin@tutorial-network` it will have the usual client crypto artifacts eg. for a user admin it has : 'admin' xx-priv, xx-pub . Meanwhile,an imported card get persisted to the `cards` subdirectory. If that card contains only an enrollment secret, on 'first use' it will retrieve the cert/key combo from the CA server and get stored in`client-data`. If the card is subsequently exported then the certificate/key gets retrieved from `client-data` too and added to the exported card. 
 
+<a name-"carderrors"></a>
 
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
