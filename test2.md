@@ -2,12 +2,13 @@ This Wiki is a knowledge base to help Composer folks having issues we class as  
 
 Using is easy-peasy :last_quarter_moon_with_face: - find your topic area, and check out related answers/resolutions. If you don't see one - go to Stack Overflow to create a problem report - see ~ [**Creating S/O issues**](#issue) below
 
-
+Our [Documentation](https://hyperledger.github.io/composer) page should be the 'first port of call' to understand concepts/examples/usage and also check out the [Documentation](https://hyperledger.github.io/composer/reference/reference-index.html) section
+Our [Tutorials](https://hyperledger.github.io/composer/tutorials/tutorials.html) should be done to consolidate your learning
 <a name="top"></a>
 ***
 ### :basecamp:  TOPIC INDEX   :basecamp:
 
-| ~ [**Blockchain Recap**](#recap) | ~ [**ACLs **](#acls) | ~ [**Business Network Cards**](#bizcards) |  
+| ~ [**Blockchain Recap**](#recap) | ~ [**ACLs **](#acls) | ~ [**Business Network Cards**](#bizcards)  
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
 | ~ [**Event Hub Problems**](#event) | ~ [**Filters**](#filters) | ~ [**Help with IBM Cloud / Kubernetes**](#cloud) 
 | ~ [**Multi Org Setup**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) | ~ [**Sample Networks**](#samples) 
