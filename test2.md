@@ -93,7 +93,7 @@ Together, both `cards` and `client-data` directories in $HOME/.composer are 
 
 ### :information_source:  BYFN Issues
 
-See Multi-Org issues
+We only use the Fabric BYFN network as a means to demonstrate the Multi-Org tutorial. See [Multi-Org](#multiorg) for more info.
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
