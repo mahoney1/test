@@ -166,12 +166,13 @@ Some typical examples of historian queries asked are below (obviously you would 
 
 | Filter goal  | Example
 | :---------------------- | :-----------------------
-| SELECt ALL | SELECT org.hyperledger.composer.system.HistorianRecord 
+| SELECt ALL | `SELECT org.hyperledger.composer.system.HistorianRecord `
 | Select Transaction Type | ` SELECT org.hyperledger.composer.system.HistorianRecord  WHERE (transactionType == 'myTranType' `
 | with Order By  | `SELECT org.hyperledger.composer.system.HistorianRecord  WHERE (transactionType == 'myTranType') ORDER BY [transactionTimestamp DESC `
 | Select by Txn ID | SELECT org.hyperledger.composer.system.HistorianRecord WHERE (transactionId==_$trxID)
 
 eg.  `SELECT org.hyperledger.composer.system.HistorianRecord  WHERE (transactionType == 'ShipmentReceived') ORDER BY [transactionTimestamp DESC `
+
 
 <a name="ibmcloud"></a>
 
