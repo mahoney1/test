@@ -9,7 +9,7 @@ Our [Tutorials](https://hyperledger.github.io/composer/tutorials/tutorials.html)
 
 <a name="top"></a>
 ***
-###  :o: :basecamp:  TOPIC INDEX   :basecamp:  :o:
+###  :o: TOPIC INDEX  :o:
 
 | ~ [**Blockchain Recap**](#recap) | ~ [**ACLs**](#acls) | ~ [**Business Network Cards**](#bizcards)  | hfh
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
