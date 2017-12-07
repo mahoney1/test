@@ -173,9 +173,21 @@ The following are a selection of answers, to help understand what you may be enc
 | Error: Error: Endpoint read failed |  This is likely to be a connection (.json) config issue -  it needs to be configured for TLS (or non-TLS) communications depending in your setup
 
 
-
 #### :card_index: [back to base camp :camping: ](#top)  
 
+
+#### Sample Networks (issue)
+
+The link below provides the link to our Sample Networks - to clone it simply do a `git clone https://github.com/hyperledger/composer-sample-networks.git` from the command line or from the same Github repo in a browser.
+
+<a name="samples"></a>
+
+| Description | Link
+| Sample Networks | https://github.com/hyperledger/composer-sample-networks
+| Sample Applications | https://github.com/hyperledger/composer-sample-applications
+| Sample Models | https://github.com/hyperledger/composer-sample-models
+
+#### :card_index: [back to base camp :camping: ](#top)  
 
 #### Creating a problem report (issue)
 
