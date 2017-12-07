@@ -4,7 +4,7 @@ This Wiki is a knowledge base to help Composer folks having issues we class as  
 
 Using is easy-peasy :last_quarter_moon_with_face: - find your topic area, and check out related answers/resolutions. If you don't see one - go to Stack Overflow to create a problem report - see ~ [**Creating S/O issues**](#issue) below
 
-Our [Documentation](https://hyperledger.github.io/composer) page should be the 'first :ship: port  :ship: of call' to understand concepts/examples/usage. Also check out the [Reference](https://hyperledger.github.io/composer/reference/reference-index.html) section to understand how to use the CLI/ACLs/APIs and a glossary of terms used.
+Our [Documentation](https://hyperledger.github.io/composer) page should be the 'first port of call'  :ship:  :boat: to understand concepts/examples/usage. Also check out the [Reference](https://hyperledger.github.io/composer/reference/reference-index.html) section to understand how to use the CLI/ACLs/APIs and a glossary of terms used.
 Our [Tutorials](https://hyperledger.github.io/composer/tutorials/tutorials.html) should be used to get going - and consolidate your learning
 <a name="top"></a>
 ***
