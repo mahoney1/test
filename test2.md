@@ -183,6 +183,7 @@ The link below provides the link to our Sample Networks - to clone it simply do 
 <a name="samples"></a>
 
 | Description | Link
+| ----------- | ---------
 | Sample Networks | https://github.com/hyperledger/composer-sample-networks
 | Sample Applications | https://github.com/hyperledger/composer-sample-applications
 | Sample Models | https://github.com/hyperledger/composer-sample-models
