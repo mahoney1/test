@@ -157,7 +157,8 @@ The following are a selection of answers, to help understand what you may be enc
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
 | Multi-Org on separate physical machines | See Rocketchat here ->  https://chat.hyperledger.org/channel/composer?msg=JtwfHPJmbSgLG5dr5
-| xxx |  xxx
+| As above - other things to consider | https://chat.hyperledger.org/channel/composer?msg=f8yyrCfaBKXwt9qKH
+
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
