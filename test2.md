@@ -30,13 +30,15 @@ If you still have an issue,  see :link:  [here ](#issue)
 
 <a name="acls"></a>
 
+
+### :information_source:  Access Control Lists (ACLs)
+
 The following are a selection of answers, to help understand what you may be encountering:
 
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
 | ACL that target > 1 transaction  | see Rocketchat thread for target definition [here](https://chat.hyperledger.org/channel/composer?msg=HaxJg3sHESrPCvzcd)
 
-### :information_source:  Blockchain Recap
 
 <a name="recap"></a>
 
