@@ -128,6 +128,9 @@ See below for suggested resolutions and follow the link in a new window.
 
 <a name="filters"></a>
 
+
+### :information_source:  Filters
+
 The syntax examples below are Loopback Filter syntax FYI
 
 Examples of stringified JSON Filters 
@@ -151,8 +154,6 @@ Example of Filter resolve: (meaning: Search on a modeled asset and resolve the d
 | :---------------------- | :-----------------------
 | resolve relationships | `{"where":{"":"resource:org.acme.biznet.Commodity#ABC"}, "include":"resolve"}`
 
-
-### :information_source:  Filters
 
 
 #### :card_index: [back to base camp :camping: ](#top)   
