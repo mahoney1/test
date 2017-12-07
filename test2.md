@@ -7,9 +7,9 @@ Using is easy-peasy :last_quarter_moon_with_face: - find your topic area, and ch
 ***
 ### :basecamp:  TOPIC INDEX   :basecamp:
 
-| ~ [**Blockchain Recap**](#recap) | ~ [**Business Network Cards**](#bizcards) | ~ [**Creating issues**](#issue) | ~ [**Filters**](#filters) 
+| ~ [**Blockchain Recap**](#recap) | ~ [**ACLs **](#acls) | ~ [**Business Network Cards**](#bizcards) | ~ [**Creating issues**](#issue) | ~ [**Filters**](#filters) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
-| ~ [**Event Hub Problems**](#event) | ~ [**Help with IBM Cloud / Kubernetes**](#cloud) | ~ [**tba**](#xxx) | ~ [**Sample Networks**](#samples) 
+| ~ [**Event Hub Problems**](#event) | ~ [**Help with IBM Cloud / Kubernetes**](#cloud) | ~ [**test**](#xxx) | ~ [**Sample Networks**](#samples) 
 | ~ [**Multi Org Setup**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy)
 | ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install Help**](#runtime-install) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#samples) | ~ [**Topic Name**](#bizcards) 
 
@@ -23,6 +23,15 @@ Each topic area has links to suggested solutions (you can open these in a new wi
 
 If you still have an issue,  see :link:  [here ](#issue)    
 
+<a name="acls"></a>
+
+The following are a selection of answers, to help understand what you may be encountering:
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+| ACL that target > 1 transaction  | see Rocketchat thread for target definition [here](https://chat.hyperledger.org/channel/composer?msg=HaxJg3sHESrPCvzcd)
+
+### :information_source:  Blockchain Recap
 
 <a name="recap"></a>
 
@@ -107,6 +116,7 @@ See below for suggested resolutions and follow the link in a new window.
 
 ### :information_source:  IBM Cloud / Kubernetes Support / IBM Container service
 
+Please seek support through the official channels - see link below for more info
 
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
