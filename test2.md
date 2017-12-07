@@ -13,9 +13,10 @@ Our [Tutorials](https://hyperledger.github.io/composer/tutorials/tutorials.html)
 
 | ~ [**Blockchain Recap**](#recap) | ~ [**ACLs **](#acls) | ~ [**Business Network Cards**](#bizcards)  | hfh
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
-| ~ [**Event Hub Problems**](#event) | ~ [**Filters**](#filters) | ~ [**Help with IBM Cloud / Kubernetes**](#cloud) 
-| ~ [**Multi Org Setup**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) | ~ [**Sample Networks**](#samples) 
-| ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install Help**](#runtime-install) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#samples) | ~ [**Topic Name**](#bizcards) 
+| ~ [**Event Hub Problems**](#event) | ~ [**Filters**](#filters) | ~ [**Help with IBM Cloud / Kubernetes**](#ibmcloud) | tba
+| ~ [**Multi Org Setup**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) | ~ [**Queries**](#queries)  | ~ [**Sample Networks**](#samples) 
+| ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install Help**](#runtime-install) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#samples) 
+| ~ [**Topic Name**](#bizcards) | test | test | test
 
 ***
 Each topic area has links to suggested solutions (you can open these in a new window) sourced from:
@@ -115,7 +116,15 @@ See below for suggested resolutions and follow the link in a new window.
 #### :card_index: [back to base camp :camping: ](#top)   
 
 
-<a name="cloud"></a>
+<a name="filters"></a>
+
+
+### :information_source:  Filters
+
+
+#### :card_index: [back to base camp :camping: ](#top)   
+
+<a name="ibmcloud"></a>
 
 
 ### :information_source:  IBM Cloud / Kubernetes Support / IBM Container service
