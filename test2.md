@@ -1,13 +1,13 @@
 This Wiki is a knowledge base to help Composer folks having issues we class as  "_we've seen something similar before"_ :-)  :1st_place_medal:  :2nd_place_medal: :3rd_place_medal: :rocket: :recycle: :sos: :face_with_head_bandage:. The idea is we help steer you towards a resolution :ok_man: 
 
-Using is easy-peasy :last_quarter_moon_with_face: - find your topic area, and check out related issues. 
+Using is easy-peasy :last_quarter_moon_with_face: - find your topic area, and check out related answers/resolutions. If you don't see one - go to Stack Overflow to create a problem report - see ~ [**Creating S/O issues**](#issue) below
 
 
 <a name="top"></a>
 ***
 ### :basecamp:  TOPIC INDEX   :basecamp:
 
-| ~ [**Blockchain Recap**](#recap) | ~ [**ACLs **](#acls) | ~ [**Business Network Cards**](#bizcards) | ~ [**Creating issues**](#issue) 
+| ~ [**Blockchain Recap**](#recap) | ~ [**ACLs **](#acls) | ~ [**Business Network Cards**](#bizcards) |  
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
 | ~ [**Event Hub Problems**](#event) | ~ [**Filters**](#filters) | ~ [**Help with IBM Cloud / Kubernetes**](#cloud) 
 | ~ [**Multi Org Setup**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) | ~ [**Sample Networks**](#samples) 
