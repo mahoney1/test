@@ -1,6 +1,6 @@
 ## :sos: :eyes: COMPOSER KNOWLEDGE BASE :eyes: :sos:
 
-This Wiki is a knowledge base to help Composer folks having issues we class as  "_we've seen something similar before"_ :-)  :1st_place_medal:  :2nd_place_medal: :3rd_place_medal: :rocket: :recycle: :sos: :face_with_head_bandage:. The idea is we help steer you towards a resolution :ok_man: :thumbsup:
+This Wiki is a knowledge base to help Composer folks having issues we class as  "_we've seen something similar before"_ or "_gotchas_" :-)  :1st_place_medal:  :2nd_place_medal: :3rd_place_medal: :rocket: :recycle: :sos: :face_with_head_bandage:. The idea is we help steer you towards a resolution :ok_man: :thumbsup:
 
 Using is easy-peasy :last_quarter_moon_with_face: - find your  [**TOPIC**](#top) below, and check out related answers/resolutions. If you don't see an answer - you can 1) check our [**Open Composer Issues**](https://github.com/hyperledger/composer/issues) list and 2) search [**Stack Overflow list**](https://stackoverflow.com/questions/tagged/hyperledger-composer) for answers. Failing that, go to [S/O]((https://stackoverflow.com/questions/tagged/hyperledger-composer)) to create a problem report - see guidance on ~ [**Creating Stack Overflow issues**](#issue) below
 
