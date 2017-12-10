@@ -28,6 +28,22 @@ Each topic area has links to suggested solutions (you can open these in a new wi
 
 If you still have an issue,  see :link:  [here ](#issue)    
 
+<a name="authorization"></a>
+
+
+
+### :information_source:  Authorization Issues / Errors
+
+
+The following are a selection of answers, to help understand what you may be encountering:
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+| Error: Error trying login and get user Context. Error: Error trying to enroll user or load channel configuration. Error: Enrollment failed with errors [[{"code":400,"message":"Authorization failure"}]]  | review logs of your ca server to see errors.  Eg. `docker logs ca.org1.example.com` to get info on the auth failure
+
+
+#### :card_index: [back to base camp :camping: ](#top)  
+
 <a name="acls"></a>
 
 
