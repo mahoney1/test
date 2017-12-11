@@ -14,9 +14,9 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 | ~ [**Blockchain Recap**](#recap) | ~ [**ACLs**](#acls)  | ~ [**Authorization Errors**](#authorization) | ~ [**Business Network Cards**](#bizcards) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
 | ~ [**Event Hub Problems**](#event) | ~ [**Debugging**](#debug) | ~ [**Filters**](#filters) | ~ [**Help with IBM Cloud / Kubernetes**](#ibmcloud) | ~ [**Historian Queries**](#historian)
-| ~ [**Multi Org Setup**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) | ~ [**Queries**](#queries)  | ~ [**Sample Networks**](#samples) 
-| ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install Help**](#runtime-install) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#samples) 
-| ~ [**Topic Name**](#bizcards) | test | test | test
+| ~ [**Modeling**](#model) | ~ [**Multi Org Setup**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) | ~ [**Queries**](#queries)  
+| ~ [**Sample Networks**](#samples) | ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install Help**](#runtime-install) | ~ [**Topic Name**](#bizcards) | 
+| ~ [**Topic Name**](#bizcards) ~ [**Topic Name**](#samples)  | test | test
 
 ***
 Each topic area has links to suggested solutions (you can open these in a new window) sourced from:
@@ -224,6 +224,24 @@ Please seek support through the official channels - see link below for more info
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
+
+
+
+<a name="model"></a>
+
+
+### :information_source:  Modeling and Modeling types
+
+The following are a selection of answers, to help understand what you may be encountering or how to handle certain types from a modeling perspective
+
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+| Modeling for images/PDFs/media | see https://stackoverflow.com/questions/47751609/how-to-deal-with-forms-images-videos-of-an-asset-in-hyperledger-composer
+
+
+#### :card_index: [back to base camp :camping: ](#top)  
+
 
 <a name="multiorg"></a>
 
