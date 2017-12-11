@@ -136,11 +136,10 @@ We only use the Fabric BYFN network as a means to demonstrate the Multi-Org tuto
 
 ### :information_source:  Code Debugging etc
 
-Resolutions
+More info on the kinds of debugging, logging and Editor breakpoint setting is shown below.
 
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
-
 | Debug / Logs | https://hyperledger.github.io/composer/problems/diagnostics.html
 | printing to debug console | see S/O: https://stackoverflow.com/questions/47177296/hyperledger-composer-playground-can-you-see-results-of-console-logsomething 
 | Setting Breakpoints (Atom,VSCode) | You can just use the embedded connector  (eg TP functions) to try out / step through each breakpoint - for more info on VSCode  -> https://code.visualstudio.com/docs/editor/debugging and Atom -> https://stackoverflow.com/questions/36964280/how-do-i-set-a-breakpoint-inside-of-atoms-package 
