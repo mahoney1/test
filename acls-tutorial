@@ -21,3 +21,99 @@ Specifically, access control rules fall into two main areas:
 This tutorial will enable you to use the 'Commodity Trading' sample network in the online Playground to try out some simple and conditional access rules. In doing so, you will interact with the sample network as various identities - ultimately it is the users of the blockchain that we want to control and we'll see how to achieve this in this tutorial. We'll also see how a Participant role can be used to control access, where multiple identities are mapped to a designated Participant role.
 
 You can if you wish, implement these same rules in your local Fabric Commodity Trading business network from the [Developer Tutorial](https://hyperledger.github.io/composer/tutorials/developer-tutorial.html) if you wish. The online playground is used here, purely to enable you to get going quicker - you don't need to install anything to do it.
+
+
+## Prerequisites
+
+None - just an internet connection, which you have right now :-) 
+
+If you plan on trying this out in your local Development environment, complete the  [Developer Tutorial](https://hyperledger.github.io/composer/tutorials/developer-tutorial.html) first.
+
+## Step One: Access the Online Playground and select your business network
+
+We'll use a sample, pre-built business network (`trade-network`)from the Composer sample networks repository. 
+
+1. Go to the [Online Playground](https://composer-playground.mybluemix.net/login) and if necessary clear local storage when prompted. Accept the Welcome logo, you are ready to start.
+
+2. Click on the `Deploy a new business network` icon
+
+3. Enter `trade-network` for the Network Name. Leave the next two fields as default (Description and Network admin card name). 
+
+4. Scroll down to the 'Choose a Business Network Definition` section and select the `trade-network` sample.
+
+5. With the Deploy button active (confirm that the name is `trade-network`) - click on **Deploy** to deploy the business network.
+
+6. Lastly, click on 'Connect' to connect to the deployed business network (the default id to connect with is shown top right).
+
+7. The 'Trade Network' README file should be active and you can see the components of the business network listed in the left columnn - one of these is the ACLs file `permissions.acl` which controls the access to resources. Out of the box, the sample business networks have 'all access' turned on, which would of course, ultimately be different to that for a production style environment.
+
+### Create Trader Participants 
+
+1. Click on the 'Test' tab near the top of the screen. This is where we create sample Trader Participants 
+2. Click on `Trader` on the left - Create a Participant (top right) as follows - the example below is 'TRADER1', '
+
+    1st record
+    {
+      "$class": "org.acme.biznet.Trader",
+      "tradeId": "TRADER1",
+      "firstName": "Jenny",
+      "lastName": "Jones"
+    }
+    
+    
+    
+3. Repeat step 2 and create 5 additional `Trader` participants ('TRADER2' through 'TRADER6') using the sample data above (change the names as appropriate). We have provided 'TRADER2', and 'TRADER3' as an example below.
+
+    
+    {
+     "$class": "org.acme.biznet.Trader",
+      "tradeId": "TRADER2",
+      "firstName": "Jack",
+      "lastName": "Sock"
+    }
+  
+    
+    {
+      "$class": "org.acme.biznet.Trader",
+      "tradeId": "TRADER3",
+      "firstName": "Rainer",
+      "lastName": "Valens"
+    }
+    
+### Create Commodity Assets
+
+1. Still in the 'Test' screen, create some Commodity records by selecting 'Commodity' on the left - the ownership (`owner` field) relates back to the 'Trader' participant for the purposes of this tutorial.
+   
+   1st record:
+   
+    {
+      "$class": "org.acme.biznet.Commodity",
+      "tradingSymbol": "EMA",
+      "description": "Corn",
+      "mainExchange": "EURONEXT",
+      "quantity": 10,
+      "owner": "resource:org.acme.biznet.Trader#TRADER1"
+    }
+    
+     2nd record:
+
+    {
+      "$class": "org.acme.biznet.Commodity",
+      "tradingSymbol": "CC",
+      "description": "Cocoa",
+      "mainExchange": "ICE",
+      "quantity": 80,
+      "owner": "resource:org.acme.biznet.Trader#TRADER2"
+    }
+    
+    3rd record:
+    
+    {
+      "$class": "org.acme.biznet.Commodity",
+      "tradingSymbol": "EMA",
+      "description": "Corn",
+      "mainExchange": "EURONEXT",
+      "quantity": 10,
+      "owner": "resource:org.acme.biznet.Trader#TRADER1"
+    }
+    
