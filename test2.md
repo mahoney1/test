@@ -111,7 +111,7 @@ Together, both `cards` and `client-data` directories in $HOME/.composer are 
 
 <a name="cardfaq"></a>
 
-Card Errors / Resolutions
+### Card Errors / Resolutions
 
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
