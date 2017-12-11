@@ -120,14 +120,7 @@ Card Errors / Resolutions
 #### :card_index: [back to base camp :camping: ](#top)   
 
 
-<a name="byfn"></a>
 
-### :information_source:  BYFN Issues
-
-We only use the Fabric BYFN network as a means to demonstrate the Multi-Org tutorial. See [Multi-Org](#multiorg) for more info.
-
-
-#### :card_index: [back to base camp :camping: ](#top)  
 
 
 <a name="debug"></a>
@@ -247,7 +240,10 @@ The following are a selection of answers, to help understand what you may be enc
 
 ### :information_source:  Multi Org / BYFN Composer tutorial - issues.
 
-The following are a selection of answers, to help understand what you may be encountering. Check also [Runtime Install errors](#runtime-install) for runtime issues
+The following are a selection of answers, to help understand what you may be encountering. Check also [Runtime Install errors](#runtime-install) for runtime issues.
+
+We only use the Fabric 'BYFN' sample network as a means to demonstrate the Multi-Org tutorial. We only provide for assistance for the multi-org [tutorial](https://hyperledger.github.io/composer/tutorials/deploy-to-fabric-multi-org.html) we have built to make use of that sample Fabric network
+
 
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
