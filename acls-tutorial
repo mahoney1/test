@@ -50,9 +50,9 @@ We'll use a sample, pre-built business network (`trade-network`)from the Compose
 ### Create Trader Participants 
 
 1. Click on the 'Test' tab near the top of the screen. This is where we create sample Trader Participants 
+
 2. Click on `Trader` on the left - Create a Participant (top right) as follows - the example below is 'TRADER1', '
 
-    1st record
     {
       "$class": "org.acme.biznet.Trader",
       "tradeId": "TRADER1",
@@ -110,10 +110,44 @@ We'll use a sample, pre-built business network (`trade-network`)from the Compose
     
     {
       "$class": "org.acme.biznet.Commodity",
-      "tradingSymbol": "EMA",
-      "description": "Corn",
-      "mainExchange": "EURONEXT",
-      "quantity": 10,
-      "owner": "resource:org.acme.biznet.Trader#TRADER1"
+      "tradingSymbol": "HO",
+      "description": "Heating Oil",
+      "mainExchange": "NYMEX",
+      "quantity": 40,
+      "owner": "resource:org.acme.biznet.Trader#TRADER3"
     }
     
+    4th record:
+    
+    {
+      "$class": "org.acme.biznet.Commodity",
+      "tradingSymbol": "HG",
+      "description": "Copper",
+      "mainExchange": "COMEX",
+      "quantity": 100,
+      "owner": "resource:org.acme.biznet.Trader#TRADER4"
+    }
+    
+    5th record:
+    
+    {
+      "$class": "org.acme.biznet.Commodity",
+      "tradingSymbol": "SM",
+      "description": "Soybean Meal",
+      "mainExchange": "CBOT",
+      "quantity": 70,
+      "owner": "resource:org.acme.biznet.Trader#TRADER5"
+    }
+    
+    6th record:
+    
+    {
+      "$class": "org.acme.biznet.Commodity",
+      "tradingSymbol": "AG",
+      "description": "Silver",
+      "mainExchange": "CBOT",
+      "quantity": 60,
+      "owner": "resource:org.acme.biznet.Trader#TRADER6"
+    }
+
+### Add basic Commodity ownership rules
