@@ -207,10 +207,8 @@ Some typical examples of historian queries asked are below (obviously you would 
 | :---------------------- | :-----------------------
 | SELECT ALL | `SELECT org.hyperledger.composer.system.HistorianRecord `
 | Select Transaction Type | ` SELECT org.hyperledger.composer.system.HistorianRecord  WHERE (transactionType == 'myTranType' `
-| with Order By  | `SELECT org.hyperledger.composer.system.HistorianRecord  WHERE (transactionType == 'myTranType') ORDER BY [transactionTimestamp DESC `
+| with Order By  | `SELECT org.hyperledger.composer.system.HistorianRecord  WHERE (transactionType == 'myTranType') ORDER BY [transactionTimestamp DESC] `
 | Select by Txn ID | SELECT org.hyperledger.composer.system.HistorianRecord WHERE (transactionId==_$trxID)
-
-eg.  `SELECT org.hyperledger.composer.system.HistorianRecord  WHERE (transactionType == 'ShipmentReceived') ORDER BY [transactionTimestamp DESC `
 
 
 <a name="ibmcloud"></a>
