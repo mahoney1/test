@@ -1,0 +1,11 @@
+
+Access control and authorization is a very important part of the security architecture of a business network on the blockchain. Hyperledger Composer enables an administrator control what resources or data a participant, or indeed participant role - is authorized to see or do, in a business network.
+
+Specifically, access control rules fall into two main areas: 
+
+- authority to access system, network or administrative resources via System ACLs ;  and 
+- authority to access resources or perform operations (like Create, Read, Update assets) within the business network itself,  via business domain ACLs. 
+
+This tutorial will enable you to use the 'Commodity Trading' sample network in the online Playground to try out some simple and conditional access rules. In doing so, you will interact with the sample network as various identities - ultimately it is the users of the blockchain that we want to control and we'll see how to achieve this in this tutorial.
+
+You can if you wish, implement these same rules in your local Fabric Commodity Trading business network if you wish to apply them there - the online playground is used purely to allow you to keep your local Developer tutorial business network ACL rules intact.
