@@ -13,10 +13,10 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 
 | ~ [**Blockchain Recap**](#recap) | ~ [**ACLs**](#acls)  | ~ [**Authorization Errors**](#authorization) | ~ [**Business Network Cards**](#bizcards) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
-| ~ [**Event Hub Problems**](#event) | ~ [**Debugging**](#debug) | ~ [**Filters**](#filters) | ~ [**Help with IBM Cloud/Kubernetes**](#ibmcloud) | ~ [**Historian**](#historian)
-| ~ [**Modeling**](#model) | ~ [**Multi Org Setup**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) | ~ [**Queries**](#queries)  
-| ~ [**Sample Networks**](#samples) | ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install Help**](#runtime-install) | ~ [**Topic Name**](#bizcards) | 
-| ~ [**Topic Name**](#bizcards) ~ [**Topic Name**](#samples)  | test | test
+| ~ [**Event Hub Problems**](#event) | ~ [**Debugging**](#debug) | ~ [**Filters**](#filters) | ~ [**Help with IBM Cloud/Kubernetes**](#ibmcloud) 
+| ~ [**Historian**](#historian) | ~ [**Modeling**](#model) | ~ [**Multi Org Setup**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) 
+| ~ [**Queries**](#queries)  | ~ [**Sample Networks**](#samples) | ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install Help**](#runtime-install) 
+| ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#bizcards) ~ [**Topic Name**](#samples)  | test | test
 
 ***
 Each topic area has links to suggested solutions (you can open these in a new window) sourced from:
