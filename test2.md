@@ -13,7 +13,7 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 
 | ~ [**Blockchain Recap**](#recap) | ~ [**ACLs**](#acls)  | ~ [**Authorization Errors**](#authorization) | ~ [**Business Network Cards**](#bizcards) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
-| ~ [**Event Hub Problems**](#event) | ~ [**Filters**](#filters) | ~ [**Help with IBM Cloud / Kubernetes**](#ibmcloud) | ~ [**Historian Queries**](#historian)
+| ~ [**Event Hub Problems**](#event) | ~ [**Debugging**](#debug) | ~ [**Filters**](#filters) | ~ [**Help with IBM Cloud / Kubernetes**](#ibmcloud) | ~ [**Historian Queries**](#historian)
 | ~ [**Multi Org Setup**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) | ~ [**Queries**](#queries)  | ~ [**Sample Networks**](#samples) 
 | ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install Help**](#runtime-install) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#samples) 
 | ~ [**Topic Name**](#bizcards) | test | test | test
@@ -128,6 +128,23 @@ We only use the Fabric BYFN network as a means to demonstrate the Multi-Org tuto
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
+
+
+<a name="debug"></a>
+
+
+
+### :information_source:  Code Debugging etc
+
+Resolutions
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+
+| Debug / Logs | https://hyperledger.github.io/composer/problems/diagnostics.html
+| printing to debug console | see S/O: https://stackoverflow.com/questions/47177296/hyperledger-composer-playground-can-you-see-results-of-console-logsomething 
+| Setting Breakpoints (Atom,VSCode) | You can just use the embedded connector  (eg TP functions) to try out / step through each breakpoint - for more info on VSCode  -> https://code.visualstudio.com/docs/editor/debugging and Atom -> https://stackoverflow.com/questions/36964280/how-do-i-set-a-breakpoint-inside-of-atoms-package 
+
 <a name="event"></a>
 
 
