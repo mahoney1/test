@@ -15,8 +15,9 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
 | ~ [**Event Hub Problems**](#event) | ~ [**Debugging**](#debug) | ~ [**Filters**](#filters) | ~ [**IBM Cloud/Kubernetes**](#ibmcloud) 
 | ~ [**Historian**](#historian) | ~ [**Modeling**](#model) | ~ [**Multi Org Setup/BYFN**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) 
-| ~ [**Queries**](#queries)  | ~ [**Sample Networks**](#samples) | ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install Help**](#runtime-install) 
-| ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#bizcards) ~ [**Topic Name**](#samples)  | test | test
+| ~ [**Queries**](#queries)  | ~ [**REST APIs**](#restapis)  | ~ [**REST Server Authentication**](#restauth] | ~ [**Sample Networks**](#samples) 
+| ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install Help**](#runtime-install) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#bizcards) 
+| ~ [**Topic Name**](#samples)  | test | test
 
 ***
 Each topic area has links to suggested solutions (you can open these in a new window) sourced from:
@@ -272,7 +273,37 @@ The following are a selection of answers, to help understand what you may be enc
 #### :card_index: [back to base camp :camping: ](#top)  
 
 
+<a name="restapis"></a>
+
+### :information_source:  REST APIs questions
+
+
+The following are a selection of answers, to help understand what you may be encountering:
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+| REST API return codes | 200 -  eg. a transaction, asset create, etc - means the record/transaction has been committed. The REST API waits for a block notification that says the transaction has been committed before returning 200 to the REST API client.
+
+
+#### :card_index: [back to base camp :camping: ](#top)  
+
+<a name="restauth"></a>
+
+
+### :information_source:  REST Authentication questions
+
+
+The following are a selection of answers, to help understand what you may be encountering:
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+
+
+#### :card_index: [back to base camp :camping: ](#top)  
+
+
 <a name="runtime-install"></a>
+
 
 ### :information_source:  Runtime install errors 
 
