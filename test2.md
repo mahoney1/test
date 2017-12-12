@@ -16,7 +16,7 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 | ~ [**Event Hub Problems**](#event) | ~ [**Debugging**](#debug) | ~ [**Filters**](#filters) | ~ [**IBM Cloud/Kubernetes**](#ibmcloud) 
 | ~ [**Historian**](#historian) | ~ [**Modeling**](#model) | ~ [**Multi Org Setup/BYFN**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) 
 | ~ [**Queries**](#queries)  | ~ [**REST APIs**](#restapis)  | ~ [**REST Server Authentication**](#restauth) | ~ [**Sample Networks**](#samples) 
-| ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install - Composer **](#runtime-install) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#bizcards) 
+| ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install - Composer**](#runtime-install) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#bizcards) 
 | ~ [**Topic Name**](#samples)  | test | test
 
 ***
