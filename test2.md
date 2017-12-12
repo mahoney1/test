@@ -97,7 +97,7 @@ The benefits are that once you export a card, it is a portable card. So it can b
 
 Best practices with cards:
 
-When you create a card **file** (first time) on disk (such as: user4.card, networkAdmin.card) - eg. via CLI, a Playground export or using the APIs) - the file will most likely just have a single-use enrolment id and secret (as opposed to the certificate/key combo present,  when a previously imported business network card gets used). The next task is to import the**new** BN card into the user's wallet (whether, say, its 'admin' or 'user4') in the **user's wallet** - then 'use' it - see summary steps below:
+When you create a card **file** (first time) on disk (such as: user4.card, networkAdmin.card) - eg. via CLI, a Playground export or using the APIs) - the file will most likely just have a single-use enrolment id and secret (as opposed to the certificate/key combo present,  when a previously imported business network card gets used). The next task is to import the **new** BN card into the user's wallet (whether, say, its 'admin' or 'user4') in the **user's wallet** - then 'use' it - see summary steps below:
 
 * Import the card **file** (eg. via Playground, or use the CLI eg. composer card import --file networkAdmin.card` or `composer card import -f user4.card`)` into your wallet (in the CARD STORE). The only means to import a business network card into a user's wallet in the cardstore (wherever that may be)  is to use either the CLI, Playground or the Composer APIs.
 
