@@ -61,7 +61,7 @@ The following are a selection of answers, to help understand what you may be enc
 | :---------------------- | :-----------------------
 | Target multiple txn types **  | see Rocketchat thread for target definition [here](https://chat.hyperledger.org/channel/composer?msg=HaxJg3sHESrPCvzcd)  
 | Minimum ACLs to discover a BN | see Rocketchat thread [here](https://chat.hyperledger.org/channel/composer?msg=8KpBjSfTC9ErtzFtk)
-| What does these ACLs mean? | 1. .system.** -  System ACL to permit all access - access to all operations and commands in the business network, including network access and business access. It is recursive (denoted by .** )
+| What does .** in an ACL or what do these ACLs mean? | 1. .system.** -  System ACL to permit all access - access to all operations and commands in the business network, including network access and business access. It is recursive (denoted by .** )
 |  | 2.  .* means the rule definition is non-recursive
 |  | 3. org.acme.perishable.* - resources under the namespace `perishable` (non-recursive)
 |  | 4. org.acme.perishable.**  all resources and everything under that namespace (recursive)
