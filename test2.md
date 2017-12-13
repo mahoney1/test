@@ -11,7 +11,7 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 ***
 ###  :o: TOPIC INDEX  :o:
 
-| ~ [**Blockchain Recap**](#recap) | ~ [**ACLs**](#acls)  | ~ [**Authorization Errors**](#authorization) | ~ [**Business Network Cards**](#bizcards) 
+| ~ [**ACLs**](#acls) | ~ [**Blockchain Recap**](#recap)  | ~ [**Authorization Errors**](#authorization) | ~ [**Business Network Cards**](#bizcards) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
 | ~ [**Event Hub Problems**](#event) | ~ [**Debugging**](#debug) | ~ [**Filters**](#filters) | ~ [**IBM Cloud/Kubernetes**](#ibmcloud) 
 | ~ [**Historian**](#historian) | ~ [**Modeling**](#model) | ~ [**Multi Org Setup/BYFN**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) 
