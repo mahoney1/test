@@ -61,11 +61,10 @@ The following are a selection of answers, to help understand what you may be enc
 | :---------------------- | :-----------------------
 | Target multiple txn types **  | see Rocketchat thread for target definition [here](https://chat.hyperledger.org/channel/composer?msg=HaxJg3sHESrPCvzcd)  
 | Minimum ACLs to discover a BN | see Rocketchat thread [here](https://chat.hyperledger.org/channel/composer?msg=8KpBjSfTC9ErtzFtk)
-| What does these ACLs mean? | 1. .system.** - recursive System ACL to permit all access - access to all operations and commands in the
-business network, including network access and business access.
-| | 2.  .* is non-recursive.
-| | 3. org.acme.perishable.* - resources under the namespace `perishable`
-| | 4. org.acme.perishable.**  all resources recursively found in the namespace
+| What does these ACLs mean? | 1. .system.** - recursive System ACL to permit all access - access to all operations and commands in the business network, including network access and business access.
+|  | 2.  .* is non-recursive.
+|  | 3. org.acme.perishable.* - resources under the namespace `perishable`
+|  | 4. org.acme.perishable.**  all resources recursively found in the namespace
 
 
 ** in the model, transaction `spTransaction` is `abstract` and `SampleTransaction` and `SampleTransaction2` are `extended` transaction types
@@ -199,8 +198,8 @@ The following are a selection of answers, to help understand what you may be enc
 
 | Message encountered | Resolution 
 | :---------------------- | :----------------------- 
-| '*Error: No valid responses from any peers**'  | *The Fabric is Not Started** - The error has been seen when a Developer's Fabric has not been started (or restarted).  A simple check is the command `docker ps` that will show if the Fabric Containers are running. If the Fabric is not running either run the `startFabric.sh` script under **fabric-tools** or see the entry in this Wiki for Restarting Development Fabric. 
-| **Starting/Stopping Dev Environment Impact / How to retain state **  | The `startFabric.sh` under **fabric-tools** does more than just start the Fabric - it removes existing Fabric Containers and recreates new Containers from the Docker Images.  The impact of this is that you lose all your data and your Business Network from the Fabric.  All Business Network Cards except PeerAdmin@hlfv1 are now useless. If you want to stop and start your Fabric after you have created it, retaining your Business Network and data follow these commands:  * Change to the directory where the `docker-compose.yml` file is (e.g. `/home/_\<user\>_/fabric-tools/fabric-scripts/hlfv1/composer` ) * Run `docker-compose stop` to stop the Fabric Containers   * Run `docker-compose start` to restart from where you left off with the current state of your Fabric.  
+| '**Error: No valid responses from any peers**'  | *The Fabric is Not Started** - The error has been seen when a Developer's Fabric has not been started (or restarted).  A simple check is the command `docker ps` that will show if the Fabric Containers are running. If the Fabric is not running either run the `startFabric.sh` script under **fabric-tools** or see the entry in this Wiki for Restarting Development Fabric. 
+| **Starting/Stopping Dev Environment Impact** / How to retain state **  | The `startFabric.sh` under **fabric-tools** does more than just start the Fabric - it removes existing Fabric Containers and recreates new Containers from the Docker Images.  The impact of this is that you lose all your data and your Business Network from the Fabric.  All Business Network Cards except PeerAdmin@hlfv1 are now useless. If you want to stop and start your Fabric after you have created it, retaining your Business Network and data follow these commands:  * Change to the directory where the `docker-compose.yml` file is (e.g. `/home/_\<user\>_/fabric-tools/fabric-scripts/hlfv1/composer` ) * Run `docker-compose stop` to stop the Fabric Containers   * Run `docker-compose start` to restart from where you left off with the current state of your Fabric.  
 | '**The Fabric is not accessible**' | The error can be seen when the Business Network Card uses IP Names or Addresses for Docker Containers that are not resolveable or accessible.   For instance a Card my refer to Fabric Containers on localhost which work on a Developer's machine, but won't work if a card is passed to another person.  Examine the addresses in the connection.json file to see if they can be reached.  The connection.json file will be located in a folder similar to this example: `/home/_<user\>_/.composer/cards/admin@tutorial-network` 
 
 
