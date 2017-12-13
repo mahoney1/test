@@ -16,7 +16,7 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 | ~ [**Event Hub Problems**](#event) | ~ [**Debugging**](#debug) | ~ [**Filters**](#filters) | ~ [**IBM Cloud/Kubernetes**](#ibmcloud) 
 | ~ [**Historian**](#historian) | ~ [**Modeling**](#model) | ~ [**Multi Org Setup/BYFN**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) 
 | ~ [**Queries**](#queries)  | ~ [**REST APIs**](#restapis)  | ~ [**REST Server Authentication**](#restauth) | ~ [**Sample Networks**](#samples) 
-| ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install - Composer**](#runtime-install) | ~ [**Topic Name**](#bizcards) | ~ [**Topic Name**](#bizcards) 
+| ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install - Composer**](#runtime-install) | ~ [**Transaction Processors**](#transproc) | ~ [**Topic Name**](#bizcards) 
 | ~ [**Topic Name**](#samples)  | test | test
 
 ***
@@ -351,11 +351,32 @@ The link below provides the link to our Sample Networks - to clone it simply do 
 
 #### :card_index: [back to base camp :camping: ](#top)  
 
-#### Creating a problem report (issue)
+
+<a name="transproc"></a>
+
+
+
+#### :information_source: Transaction processor errors
+
+
+The following are a selection of answers, to help understand what you may be encountering:
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+| Transaction rollback - errors in transactions | Changes made by **transactions** are atomic, either the transaction is successful and all changes are applied, or the transaction fails and no changes are applied. Any exceptions thrown from a transaction processor function will cause the entire **transaction** to be rolled back, leaving no changes to the blockchain or world state. So nothing is persisted if a transaction fails, Composer throw an exception and the transaction gets rolled back by Fabric. https://hyperledger.github.io/composer/reference/js_scripts.html
+
+
+
+#### :card_index: [back to base camp :camping: ](#top)  
+
 
 <a name="issue"></a>
 
-### :information_source:  Creating an Issue for a Composer problem
+
+
+#### :information_source:  Creating a problem report (issue)
+
+
 
 The best place to get it answered is actually on [Stack Overflow](https://stackoverflow.com/questions/tagged/hyperledger-composer). 
 
