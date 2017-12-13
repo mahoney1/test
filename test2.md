@@ -117,6 +117,7 @@ Together, both `cards` and `client-data` directories in $HOME/.composer are 
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
 | Authorization errors Playground local | See **answer** at https://stackoverflow.com/questions/47617442/authorization-failure-when-creating-new-business-network-in-local-playground
+| Can't export BN card  in Playground | you're using the 'in-browser' connector (not connected to a running Fabric) - you can only export cards for a runtime Fabric environment
 
 #### :card_index: [back to base camp :camping: ](#top)   
 
