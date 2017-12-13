@@ -91,24 +91,33 @@ Source: http://hyperledger-fabric.readthedocs.io/en/release/ledger.html
 
 jump to [**review card errors / resolutions**](#cardfaq) to see more on current errors & resolutions
 
-A Business Network Card provides the means to connect to a Composer business network which runs in a Composer runtime container. It is only possible to access a Composer business network through a valid Business Network Card. It consists of a connection profile, some metadata for the identity using it, and ultimately, a set of credentials (certificate/private key). An identity (linked to a participant in Composer) can have one or more cards, to connect to one or more business networks.
+A Business Network Card provides the means for a user (such as an application user or identity in Playground) to connect to a Composer business network which runs in its own runtime container. It is only possible to access a Composer business network through a valid Business Network Card. It consists of a connection profile, some metadata for the identity using it, and ultimately, a set of credentials (certificate/private key). An identity (linked to a participant in Composer) can have one or more cards, to connect to one or more business networks.
 
-The benefits are that once you export a card, it is a portable card. So it can be issued to a new user/given to someone (usually that real identity in that Organisation) to then connect and transact on business network, on the blockchain network. Yes, of course - they should be handled with care. We recommend that you only send identity cards that have been encrypted. See separate note on use of cards with a multi-user REST server environment.
+The benefits are that once you export a card, it is a portable card. So it can be issued to a new user or given to someone (usually that real identity in that Organisation) to then connect and transact on business network, on the blockchain network. Yes, of course - they should be handled with care. We recommend that you only send identity cards that have been encrypted. See separate note on use of cards with a multi-user REST server environment.
 
 Best practices with cards:
 
-When you create a card **file** (first time) on disk (such as: user4.card, networkAdmin.card) - eg. via CLI, a Playground export or using the APIs) - the file will most likely just have a single-use enrolment id and secret (as opposed to the certificate/key combo present,  when a previously imported business network card gets used). The next task is to import the **new** BN card into the user's wallet (whether, say, its 'admin' or 'user4') in the **user's wallet** - then 'use' it - see summary steps below:
+* If you issue an identity in Playground (connected to a Fabric): 
+    1. Add it to your wallet (it only has an enroll id / one-time secret at this point)
+    2. Connect to the business network (to download its certificate/key in exchange for secret) then (from My Business Networks screen)
+    3. Export it using the export icon on the identity/card in question.
+    
+* If you create a card on disk (eg exported unused from Playground, using the CLI, or the APIs) - the file will contain the single-use enrol id/secret and needs to be exchanged for certificate/key from the CA server. 
+   1. Import the card (.card file) (either through Playground - choose file, or via CLI import command or APIs) into your Composer wallet
+   2. Either connect (Playground, APIs) or composer ping (CLI the business network using the imported card name eg donald@tutorial-network
+   3. Export the card to a .card file (via Playground, CLI or APIs) - and replace the original .card file (it has redundant enrol info now). That new .card file can now be given to a designated user (eg on another system).
+   
+   That's it.
 
-* Import the card **file** (eg. via Playground, or use the CLI eg. composer card import --file networkAdmin.card` or `composer card import -f user4.card`)` into your wallet (in the CARD STORE). The only means to import a business network card into a user's wallet in the cardstore (wherever that may be)  is to use either the CLI, Playground or the Composer APIs.
-
-* Connect to the business network using that **imported** card either via:  Playground, CLI or using the APIs. From the CLI you can ping it via command line eg. `composer network ping -c admin@tutorial-network` or `composer network ping -c user4@trade-network` so that it gets 'used' and therefore it requests the identity's credentials (certificate/key combo) from the CA server and imports them into the user's wallet in the card store. Once you've done this, then you can export it to a card file (if you want to share).
+* The  CLI command `composer card list --name user4@trade-network` command displays details of a named card, and its state - ie a boolean value at the bottom stating whether **Credentials Set** or **Credentials Not Set** - this indicates whether the Certificates have been downloaded and stored in the wallet (or not - in which case, the id is not yet enrolled with the CA)
 
 
-Important: If you export a Business Network Card that **has never been used** (eg in Playground for example), it will still just contain the one-time enrollment ID and enrollment secret only. The first time that exported card gets used,  it connects with the one-time secret and the identity's certificate/key combo is downloaded to the user's local wallet. You should then export this card to a new file, if you plan on using that user's business network card elsewhere  - ie don't re-use the 'old' / original card file (use the new file !) - otherwise re-using the 'old' will just register a different identity (because it still has an enrol id remember) and this can be a cause of major pain for many (this is how security, identity and certificates work, its not a 'Composer' thing).
+
+Important: If you export a Business Network Card that **has never been used** (eg in Playground for example), it will still just contain the one-time enrollment ID and enrollment secret only. The first time that exported card gets used, wherever that is -  it connects with the one-time secret and the identity's certificate/key combo is downloaded to that user's local wallet. This is a perfectly normal scenario.  If you (or the user) plans on using that card elsewhere (eg another system) - You m**ust export** this card to a new .card file, so it can then beb shared as the original identity (that was registered with the CA earlier). Don't re-use the 'original .card file you may have created once upon a time - otherwise re-using the 'old' will just register a different identity each time (because it still has an enrol id remember) and this can be a cause of major pain for many (this is how security, identity and certificates work, its not a 'Composer' thing).
 
 More technical:
 
-Together, both `cards` and `client-data` directories in $HOME/.composer are an integral part of the whole wallet structure in the card store (credentials vault). `client-data` is where the hlfv1 composer connector will store the identity credentials for a card (either by importing or when it enrolls an identity). eg for `admin@tutorial-network` it will have the usual client crypto artifacts eg. for a user admin it has : 'admin' xx-priv, xx-pub . Meanwhile,an imported card get persisted to the `cards` subdirectory. If that card contains only an enrollment secret, on 'first use' it will retrieve the cert/key combo from the CA server and get stored in`client-data`. If the card is subsequently exported then the certificate/key gets retrieved from `client-data` too and added to the exported card. 
+Together, both `cards` and `client-data` directories in $HOME/.composer are an integral part of the whole wallet structure in the card store (credentials vault). `client-data` is where the hlfv1 composer connector will store the identity credentials for a card (either by importing an existing card or when it has enrolled an identity, eg. connect to the business network). So a card `admin@tutorial-network` it will have the usual client crypto file artifacts such as : 'admin' xx-priv, xx-pub . Meanwhile,an imported card get persisted to the `cards` subdirectory. If that card contains only the initial enrollment secret, on 'first use' it will retrieve the cert/key combo from the CA server and those get stored in`client-data`. If the card in the walet is subsequently exported then the certificate/key gets retrieved from `client-data` too and added to the exported card. 
 
 <a name="cardfaq"></a>
 
@@ -118,6 +127,7 @@ Together, both `cards` and `client-data` directories in $HOME/.composer are 
 | :---------------------- | :-----------------------
 | Authorization errors Playground local | See **answer** at https://stackoverflow.com/questions/47617442/authorization-failure-when-creating-new-business-network-in-local-playground
 | Can't export BN card  in Playground | you're using the 'in-browser' connector (not connected to a running Fabric) - you can only export cards for a runtime Fabric environment
+| How to export from Playground | After issuing the identity/participant, connect to the business network, return to 'My business networks' then click the 'export' icon alongside the card you wish to export (from the list of cards).
 
 #### :card_index: [back to base camp :camping: ](#top)   
 
