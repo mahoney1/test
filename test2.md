@@ -102,10 +102,10 @@ Best practices with cards:
     2. Connect to the business network (to download its certificate/key in exchange for secret) then (from My Business Networks screen)
     3. Export it using the export icon on the identity/card in question.
     
-* If you create a card on disk (eg exported unused from Playground, using the CLI, or the APIs) - the file will contain the single-use enrol id/secret and needs to be exchanged for certificate/key from the CA server. 
+* If you create a card on disk (eg exported unused from Playground, using the CLI, or the APIs) - the file will contain the single-use enrol id/secret and needs to be exchanged for a certificate from the CA server. 
    1. Import the card (.card file) (either through Playground - choose file, or via CLI import command or APIs) into your Composer wallet
-   2. Either connect (Playground, APIs) or composer ping (CLI the business network using the imported card name eg donald@tutorial-network
-   3. Export the card to a .card file (via Playground, CLI or APIs) - and replace the original .card file (it has redundant enrol info now). That new .card file can now be given to a designated user (eg on another system).
+   2. Either connect to it (eg. in Playground, via APIs) or use `composer ping` (eg. via CLI) to ping it using the imported card name eg `composer ping -c donald@tutorial-network`
+   3. Export the card to a .card file (via Playground, CLI or APIs) - and replace the original .card file (it has redundant enrol info now). That new .card file can now be given to a designated user (eg on another system). Obviously, you may wish to keep a 'template' .card file elsewhere if you wish to retain that for future use.
    
    That's it.
 
