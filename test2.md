@@ -21,7 +21,7 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 
 ***
 Each topic area has links to suggested solutions (you can open these in a new window) sourced from:
-
+ 
 * **Documented Resolutions** 
 * **Stack Overflow threads**
 * **Rocketchat threads**
