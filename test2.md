@@ -19,11 +19,10 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 | ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install - Composer**](#runtime-install) | ~ [**Transaction Processors**](#transproc) | ~ [**Topic Name**](#bizcards) 
 | ~ [**Topic Name**](#samples)  | test | test
 
-Fabric Related Topics (ie when used with Composer Development setup)
+Have Fabric Related issues? (ie when used with Composer Dev Env Setup or Tutorials)
 
-| ~ [**Fabric type Issues**](#fabricsetup)  | TBD | TBD
-| :---------------------- | :-----------------------| :----------------------- 
-
+| ~ [**Fabric type Issues**](#fabricsetup)  |
+| :---------------------- | 
 ***
 Each topic area has links to suggested solutions (you can open these in a new window) sourced from:
  
