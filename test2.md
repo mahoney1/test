@@ -11,13 +11,13 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 ***
 ###  :o: TOPIC INDEX  :o:
 
-| ~ [**ACLs**](#acls) | ~ [**Blockchain Recap**](#recap)  | ~ [**Authorization Errors**](#authorization) | ~ [**Business Network Cards**](#bizcards) 
+| ~ [**ACLs**](#acls) | ~ [**Authorization Errors**](#authorization) | ~ [**Blockchain Recap**](#recap)   | ~ [**Business Network Cards**](#bizcards) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
-| ~ [**Event Hub Problems**](#event) | ~ [**Debugging**](#debug) | ~ [**Filters**](#filters) | ~ [**IBM Cloud/Kubernetes**](#ibmcloud) 
-| ~ [**Historian**](#historian) | ~ [**Modeling**](#model) | ~ [**Multi Org Setup/BYFN**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) 
-| ~ [**Queries**](#queries)  | ~ [**REST APIs**](#restapis)  | ~ [**REST Authentication**](#restauth) | ~ [**Sample Networks**](#samples) 
-| ~ [**Upgrading Composer**](#upgrade) | ~ [**Runtime Install - Composer**](#runtime-install) | ~ [**Transaction Processors**](#transproc) | ~ [**Topic Name**](#bizcards) 
-| ~ [**Topic Name**](#samples)  | test | test
+|  ~ [**Debugging**](#debug)  | ~ [**Event Hub Problems**](#event) | ~ [**Filters**](#filters) |) | ~ [**Historian**](#historian)
+| ~ [**IBM Cloud/Kubernetes**](#ibmcloud)  | ~ [**Modeling**](#model) | ~ [**Multi Org Setup/BYFN**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) 
+| ~ [**Queries**](#queries)  | ~ [**REST APIs**](#restapis)  | ~ [**REST Authentication**](#restauth)  | ~ [**Runtime Install - Composer**](#runtime-install)
+| ~ [**Sample Networks**](#samples) | ~ [**Transaction Processors**](#transproc) |  ~ [**Upgrading Composer**](#upgrade) | ~ [**Topic Name**](#bizcards) 
+| ~ [**Topic Name**](#samples)  | ~ [**Topic Name**](#samples)  | 
 
 Have Fabric Related issues? (ie when used with Composer Dev Env Setup or Tutorials)
 
