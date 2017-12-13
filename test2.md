@@ -272,6 +272,21 @@ The following are a selection of answers, to help understand what you may be enc
 
 #### :card_index: [back to base camp :camping: ](#top)  
 
+<a name="queries"></a>
+
+
+
+### :information_source:  Queries and Query support
+
+The following are a selection of answers, to help understand what you may be encountering or need more info on:
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+| Query an array element  | Composer does not yet support queries across/over an array
+
+#### :card_index: [back to base camp :camping: ](#top)  
+
+
 
 <a name="restapis"></a>
 
