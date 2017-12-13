@@ -22,6 +22,7 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 Fabric Related Topics (ie when used with Composer Development setup)
 
 | ~ [**Fabric type Issues**](#fabricsetup)  | test | test
+| :---------------------- | :-----------------------| :----------------------- 
 
 ***
 Each topic area has links to suggested solutions (you can open these in a new window) sourced from:
@@ -176,19 +177,19 @@ See below for suggested resolutions and follow the link in a new window.
 <a name="fabricsetup"></a>
 
 
-### :information_source:  Filters
+### :information_source:  Fabric Issues relating to your Dev Environment setup
 
 The following are a selection of answers, to help understand what you may be encountering. Check also [Runtime Install errors](#runtime-install) for runtime issues.
 
 
-| Message encountered | Resolution 
-| :---------------------- | :-----------------------
-| 'Error: No valid responses from any peers'  | *The Fabric is Not Started** - The error has been seen when a Developer's Fabric has not been started (or restarted).  A simple check is the command `docker ps` that will show if the Fabric Containers are running. If the Fabric is not running either run the `startFabric.sh` script under **fabric-tools** or see the entry in this Wiki for Restarting Development Fabric.
-| Starting/Stopping Dev Environment  | The `startFabric.sh` under **fabric-tools** does more than just start the Fabric - it removes existing Fabric Containers and recreates new Containers from the Docker Images.  The impact of this is that you lose all your data and your Business Network from the Fabric.  All Business Network Cards except PeerAdmin@hlfv1 are now useless.
-If you want to stop and start your Fabric after you have created it, retaining your Business Network and data follow these commands:
+| Message encountered | Resolution |
+| :---------------------- | :----------------------- |
+| **'Error: No valid responses from any peers'**  | *The Fabric is Not Started** - The error has been seen when a Developer's Fabric has not been started (or restarted).  A simple check is the command `docker ps` that will show if the Fabric Containers are running. If the Fabric is not running either run the `startFabric.sh` script under **fabric-tools** or see the entry in this Wiki for Restarting Development Fabric. |
+| **Starting/Stopping Dev Environment**  | The `startFabric.sh` under **fabric-tools** does more than just start the Fabric - it removes existing Fabric Containers and recreates new Containers from the Docker Images.  The impact of this is that you lose all your data and your Business Network from the Fabric.  All Business Network Cards except PeerAdmin@hlfv1 are now useless. If you want to stop and start your Fabric after you have created it, retaining your Business Network and data follow these commands:
 * Change to the directory where the `docker-compose.yml` file is (e.g. `/home/_\<user\>_/fabric-tools/fabric-scripts/hlfv1/composer`)
 * Run `docker-compose stop` to top the Fabric Containers 
-* Run `docker-compose start` to restart where you left off.  
+* Run `docker-compose start` to restart where you left off.  |
+| **The Fabric is not accessible**  | The error can be seen when the Business Network Card uses IP Names or Addresses for Docker Containers that are not resolveable or accessible.   For instance a Card my refer to Fabric Containers on localhost which work on a Developer's machine, but won't work if a card is passed to another person.  Examine the addresses in the connection.json file to see if they can be reached.  The connection.json file will be located in a folder similar to this example: `/home/_\<user\>_/.composer/cards/admin@tutorial-network` |
 
 <a name="filters"></a>
 
