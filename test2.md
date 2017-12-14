@@ -230,7 +230,8 @@ Example of Filter resolve: (meaning: Search on a modeled asset and resolve the d
 
 | Filter goal  | Example
 | :---------------------- | :-----------------------
-| resolve relationships | `{"where":{"":"resource:org.acme.biznet.Commodity#ABC"}, "include":"resolve"}`
+| resolve all relationships | {"include":"resolve"}`
+| resolve specific relationships | `{"where":{"":"resource:org.acme.biznet.Commodity#ABC"}, "include":"resolve"}`
 
 
 
