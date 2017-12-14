@@ -334,7 +334,7 @@ The following are a selection of answers, to help understand what you may be enc
 | ORDER BY (multiple) not working | Not supported presently. Multiple ORDER BY fields is a current limitation of CouchDB see here -> https://github.com/hyperledger/composer/issues/1640 
 | LIMIT/SKIP operators not working | LIMIT/SKIP support is blocked by Fabric presently as described here -> https://github.com/hyperledger/composer/issues/1015
 | Query an array element  | Composer does not yet support queries across/over an array
-
+| Error: Use Serializer.toJSON to convert resources | you need to do serialize the results of a query to work in the TP - see example should help you -> https://stackoverflow.com/questions/46686996/search-for-an-specific-asset-inside-a-transaction
 #### :card_index: [back to base camp :camping: ](#top)  
 
 
