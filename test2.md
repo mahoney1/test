@@ -331,7 +331,7 @@ The following are a selection of answers, to help understand what you may be enc
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
 | ORDER BY (single) not working | for a single `ORDER BY` field you may be hitting this index issue  (you need to define an index) -> https://stackoverflow.com/questions/45919898/order-by-not-working-in-named-query/45966828#45966828 
-| ORDER BY (multiple) not working | Not supported predsently. Multiple ORDER BY fields is a current limitation of CouchDB see here -> https://github.com/hyperledger/composer/issues/1640 
+| ORDER BY (multiple) not working | Not supported presently. Multiple ORDER BY fields is a current limitation of CouchDB see here -> https://github.com/hyperledger/composer/issues/1640 
 | LIMIT/SKIP operators not working | LIMIT/SKIP support is blocked by Fabric presently as described here -> https://github.com/hyperledger/composer/issues/1015
 | Query an array element  | Composer does not yet support queries across/over an array
 
