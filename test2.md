@@ -16,8 +16,8 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 |  ~ [**Debugging**](#debug)  | ~ [**Event Hub Problems**](#event) | ~ [**Filters**](#filters)  | ~ [**Historian**](#historian)
 | ~ [**IBM Cloud/Kubernetes**](#ibmcloud)  | ~ [**Modeling**](#model) | ~ [**Multi Org Setup/BYFN**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) 
 | ~ [**Queries**](#queries)  | ~ [**REST APIs**](#restapis)  | ~ [**REST Authentication**](#restauth)  | ~ [**Runtime Install - Composer**](#runtime-install)
-| ~ [**Sample Networks**](#samples) | ~ [**Transaction Processors**](#transproc) |  ~ [**Upgrading Composer**](#upgrade) | ~ [**Topic Name**](#bizcards) 
-| ~ [**Topic Name**](#samples)  | ~ [**Topic Name**](#samples)  | 
+| ~ [**Sample Networks**](#samples) | ~ [**Transaction Processors**](#transproc) |  ~ [**Upgrading Composer Runtime**](#upgrade) | ~ [**Topic Name**](#bizcards) 
+| ~ [**Unpgrading Business Networks**](#upgradebn)  | ~ [**Topic Name**](#samples)  | 
 
 Have Fabric Related issues? (ie when used with Composer Dev Env Setup or Tutorials)
 
@@ -423,8 +423,42 @@ The following are a selection of answers, to help understand what you may be enc
 | :---------------------- | :-----------------------
 | Transaction rollback - errors in transactions | Changes made by **transactions** are atomic, either the transaction is successful and all changes are applied, or the transaction fails and no changes are applied. Any exceptions thrown from a transaction processor function will cause the entire **transaction** to be rolled back, leaving no changes to the blockchain or world state. So nothing is persisted if a transaction fails, Composer throw an exception and the transaction gets rolled back by Fabric. https://hyperledger.github.io/composer/reference/js_scripts.html
 | Calling a TP function from another | see example below - two parts
-| (1) Calling from main script file - sample callout from script.js: | `var returnVal;     //And now call the function in func2.js var returnVal= sayHello("Yogesh"); 	var code = returnVal.code; var msg= returnVal.message;`
+| (1) Calling from main script file - sample callout from script.js: | `var returnVal;     //And now call the function in func2.js var returnVal= sayHello("Jon Doe"); 	var code = returnVal.code; var msg= returnVal.message;`
 | (2) Called function - defined in script file func2.js |  `function sayHello(name) { retMsg = "hello " + name; return {code: 11, message: retMsg}; }`
+
+
+#### :card_index: [back to base camp :camping: ](#top)  
+
+<a name="upgrade"></a>
+
+
+#### :information_source: Upgrading Composer (eg. Runtime, Modules, Clients, Generators etc)
+
+
+The following are a selection of answers, to help understand what you may be encountering:
+
+| Message encountered | Resolution 
+
+
+#### :card_index: [back to base camp :camping: ](#top)  
+
+<a name="upgradebn"></a>
+
+
+#### :information_source: Updating Business Network definitions
+
+
+The following are a selection of answers, to help understand what you may be encountering:
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+| Controlling authority to update a B N | this is a change management issue (a business network model and definition and a policy for aggregating signatures or authority to be able to update a business network using `composer network update`) . By the time it gets to `composer network update` it seems, its already too late. The Network ACLs in Composer, can restrict who (ie a participant of that network) was allowed to do the network update. Its possible that such a record is only created once all the signatures are collected, as a one-time operation (so that the network update could take place). A sample ACL restriction that could be used is `rule networkControlPermission {
+  description:  "networkControl can access network commands"
+  participant: "org.acme.vehicle.auction.networkControl"
+  operation: all
+  resource: "org.hyperledger.composer.system.Network"
+  action: ALLOW  
+}`
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
