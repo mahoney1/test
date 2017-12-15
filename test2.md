@@ -131,6 +131,14 @@ More technical:
 
 Together, both `cards` and `client-data` directories in $HOME/.composer are an integral part of the whole wallet structure in the card store (credentials vault). `client-data` is where the hlfv1 composer connector will store the identity credentials for a card (either by importing an existing card or when it has enrolled an identity, eg. connect to the business network). So a card `admin@tutorial-network` it will have the usual client crypto file artifacts such as : 'admin' xx-priv, xx-pub . Meanwhile,an imported card get persisted to the `cards` subdirectory. If that card contains only the initial enrollment secret, on 'first use' it will retrieve the cert/key combo from the CA server and those get stored in`client-data`. If the card in the walet is subsequently exported then the certificate/key gets retrieved from `client-data` too and added to the exported card. 
 
+####What is the PeerAdmin Card provided with the Dev environment ?
+
+PeerAdmin card (imported to the wallet/credentials store during the `createPeerAdminCard.sh` step), has 2 roles in our dev fabric server setup. It has the authority to install chaincode onto the peer and it has the authority to instantiate chaincode onto the channel. It's name 'PeerAdmin' is a little confusing. Also in a real world scenario it's highly unlikely you would have a AdminCard for each Peer. What is more likely is you would have a PeerAdmin card for each organisation so you can install chaincode on all Peers in that organisaton. There would then be a separate ChannelAdmin card so that within the Consortium the Composer business network can be started.
+
+#### What is the 'NetworkAdmin' card created in Composer tutorials using the Dev environment (per the Docs site) ?
+
+The Network Admin card is a card, once imported, that provides access to the deployed business network (eg. deployed by PeerAdmin above). The default is that the credentials you supply either by the flags -A/-S or -A/-C (when you deploy or start a business network) is then bound to an instance of the in-built NetworkAdmin Participant type, with a name usually the same as that specified in the -A part. To access a business network as a 'normal' non-admin user,  you have to use an identity that is mapped to a regular participant created as a resource/record in your business network namespace.
+
 <a name="cardfaq"></a>
 
 ### Card Errors / Resolutions
