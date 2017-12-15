@@ -15,7 +15,7 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
 |  ~ [**Debugging**](#debug)  | ~ [**Event Hub Problems**](#event) | ~ [**Filters**](#filters)  | ~ [**Historian**](#historian)
 | ~ [**IBM Cloud/Kubernetes**](#ibmcloud)  | ~ [**Modeling**](#model) | ~ [**Multi Org Setup/BYFN**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) 
-| ~ [**Queries**](#queries)  | ~ [**REST APIs**](#restapis)  | ~ [**REST Authentication**](#restauth)  | ~ [**Runtime Install - Composer**](#runtime-install)
+| ~ [**Queries**](#queries)  | ~ [**REST APIs**](#restapis)  | ~ [**REST Authentication**](#restauth)  | ~ [**Runtime Install Errors**](#runtime-install)
 | ~ [**Sample Networks**](#samples) | ~ [**Transaction Processors**](#transproc) |  ~ [**Upgrading Composer Runtime**](#upgrade) | ~ [**Topic Name**](#bizcards) 
 | ~ [**Updating Biz Networks**](#upgradebn)  | ~ [**Topic Name**](#samples)  | 
 
