@@ -131,7 +131,7 @@ More technical:
 
 Together, both `cards` and `client-data` directories in $HOME/.composer are an integral part of the whole wallet structure in the card store (credentials vault). `client-data` is where the hlfv1 composer connector will store the identity credentials for a card (either by importing an existing card or when it has enrolled an identity, eg. connect to the business network). So a card `admin@tutorial-network` it will have the usual client crypto file artifacts such as : 'admin' xx-priv, xx-pub . Meanwhile,an imported card get persisted to the `cards` subdirectory. If that card contains only the initial enrollment secret, on 'first use' it will retrieve the cert/key combo from the CA server and those get stored in`client-data`. If the card in the walet is subsequently exported then the certificate/key gets retrieved from `client-data` too and added to the exported card. 
 
-####What is the PeerAdmin Card provided with the Dev environment ?
+#### What is the PeerAdmin Card provided with the Dev environment ?
 
 PeerAdmin card (imported to the wallet/credentials store during the `createPeerAdminCard.sh` step), has 2 roles in our dev fabric server setup. It has the authority to install chaincode onto the peer and it has the authority to instantiate chaincode onto the channel. It's name 'PeerAdmin' is a little confusing. Also in a real world scenario it's highly unlikely you would have a AdminCard for each Peer. What is more likely is you would have a PeerAdmin card for each organisation so you can install chaincode on all Peers in that organisaton. There would then be a separate ChannelAdmin card so that within the Consortium the Composer business network can be started.
 
@@ -422,6 +422,18 @@ The following are a selection of answers, to help understand what you may be enc
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
 | Transaction rollback - errors in transactions | Changes made by **transactions** are atomic, either the transaction is successful and all changes are applied, or the transaction fails and no changes are applied. Any exceptions thrown from a transaction processor function will cause the entire **transaction** to be rolled back, leaving no changes to the blockchain or world state. So nothing is persisted if a transaction fails, Composer throw an exception and the transaction gets rolled back by Fabric. https://hyperledger.github.io/composer/reference/js_scripts.html
+| Calling a TP function from another | see example below - two parts
+| Calling from main script file - sample callout (1) | ```Var returnVal;
+    //And now call the function in func2.js
+	var returnVal= sayHello("Yogesh");
+	var code = returnVal.code;
+	var msg= returnVal.message;```
+|Called function - defined in func2.js (2) | ```function sayHello(name) {
+
+    retMsg = "hello " + name;
+    return {code: 11, message: retMsg};
+}
+```
 
 
 
