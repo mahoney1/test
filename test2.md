@@ -148,7 +148,9 @@ The Network Admin card is a card, once imported, that provides access to the dep
 | Authorization errors Playground local | See **answer** at https://stackoverflow.com/questions/47617442/authorization-failure-when-creating-new-business-network-in-local-playground
 | Can't export BN card  in Playground | you're using the 'in-browser' connector (not connected to a running Fabric) - you can only export cards for a runtime Fabric environment
 | How to export from Playground | After issuing the identity/participant, connect to the business network, return to 'My business networks' then click the 'export' icon alongside the card you wish to export (from the list of cards).
-
+|How to switch BN cards using JS APIs | `const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
+  let businessNetworkConnection = new BusinessNetworkConnection();   return businessNetworkConnection.connect('lenny@digitalPropertyNetwork') 
+      .then(() => { .........blah blah } return businessNetworkConnection.disconnect(); `
 #### :card_index: [back to base camp :camping: ](#top)   
 
 
