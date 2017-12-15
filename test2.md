@@ -17,7 +17,7 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 | ~ [**IBM Cloud/Kubernetes**](#ibmcloud)  | ~ [**Modeling**](#model) | ~ [**Multi Org Setup/BYFN**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) 
 | ~ [**Queries**](#queries)  | ~ [**REST APIs**](#restapis)  | ~ [**REST Authentication**](#restauth)  | ~ [**Runtime Install - Composer**](#runtime-install)
 | ~ [**Sample Networks**](#samples) | ~ [**Transaction Processors**](#transproc) |  ~ [**Upgrading Composer Runtime**](#upgrade) | ~ [**Topic Name**](#bizcards) 
-| ~ [**Unpgrading Business Networks**](#upgradebn)  | ~ [**Topic Name**](#samples)  | 
+| ~ [**Updating Biz Networks**](#upgradebn)  | ~ [**Topic Name**](#samples)  | 
 
 Have Fabric Related issues? (ie when used with Composer Dev Env Setup or Tutorials)
 
