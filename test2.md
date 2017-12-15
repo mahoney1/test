@@ -423,19 +423,22 @@ The following are a selection of answers, to help understand what you may be enc
 | :---------------------- | :-----------------------
 | Transaction rollback - errors in transactions | Changes made by **transactions** are atomic, either the transaction is successful and all changes are applied, or the transaction fails and no changes are applied. Any exceptions thrown from a transaction processor function will cause the entire **transaction** to be rolled back, leaving no changes to the blockchain or world state. So nothing is persisted if a transaction fails, Composer throw an exception and the transaction gets rolled back by Fabric. https://hyperledger.github.io/composer/reference/js_scripts.html
 | Calling a TP function from another | see example below - two parts
-| Calling from main script file - sample callout (1) | 
-     Var returnVal;
+
+(1) Calling from main script file - sample callout from script.js:
+     var returnVal;
     //And now call the function in func2.js
 	var returnVal= sayHello("Yogesh");
 	var code = returnVal.code;
-	var msg= returnVal.message;```
-|Called function - defined in func2.js (2) | 
+	var msg= returnVal.message;
+	
+(2) Called function - defined in script file func2.js
     function sayHello(name) {
     retMsg = "hello " + name;
     return {code: 11, message: retMsg};
 }
-|code end |
 
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
