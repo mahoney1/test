@@ -102,6 +102,7 @@ Source: http://hyperledger-fabric.readthedocs.io/en/release/ledger.html
 ### :information_source:  Business Network Cards
 
 jump to [**Review card errors / resolutions**](#cardfaq) to see more on current **Core* card errors & resolutions
+
 jump to [**Review Card APIS issues / resolutions**](#cardapis) to see more on card-related **JS API** errors & resolutions
 
 
@@ -109,7 +110,8 @@ A Business Network Card provides the means for a user (such as an application us
 
 The benefits are that once you export a card, it is a portable card. So it can be issued to a new user or given to someone (usually that real identity in that Organisation) to then connect and transact on business network, on the blockchain network. Yes, of course - they should be handled with care. We recommend that you only send identity cards that have been encrypted. See separate note on use of cards with a multi-user REST server environment.
 
-Best practices with cards:
+
+**Best practices with cards:**
 
 * If you issue an identity in Playground (connected to a Fabric): 
     1. Add it to your wallet (it only has an enroll id / one-time secret at this point)
@@ -145,7 +147,7 @@ The Network Admin card is a card, once imported, that provides access to the dep
 
 ### Card Errors / Resolutions
 
-| Message encountered | Resolution 
+| Message/Issue encountered | Resolution 
 | :---------------------- | :-----------------------
 | Authorization errors Playground local | See **answer** at https://stackoverflow.com/questions/47617442/authorization-failure-when-creating-new-business-network-in-local-playground
 | Can't export BN card  in Playground | you're using the 'in-browser' connector (not connected to a running Fabric) - you can only export cards for a runtime Fabric environment
@@ -155,6 +157,8 @@ The Network Admin card is a card, once imported, that provides access to the dep
 <a name="cardapis"></a>
 ### Card API errors / Resolutions
 
+| Message/Issue encountered | Resolution 
+| :---------------------- | :-----------------------
 | How to export from Playground | After issuing the identity/participant, connect to the business network, return to 'My business networks' then click the 'export' icon alongside the card you wish to export (from the list of cards).
 | How to switch BN cards using JS APIs | `const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;  let businessNetworkConnection = new BusinessNetworkConnection();   return businessNetworkConnection.connect('lenny@digitalPropertyNetwork')  .then(() => { .........blah blah do something ; } return businessNetworkConnection.disconnect(); <switch to next card>`
 | Issue Identity and use Card | Issue identity, import card, connect to the business network using the card ```
