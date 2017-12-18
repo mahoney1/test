@@ -161,20 +161,9 @@ The Network Admin card is a card, once imported, that provides access to the dep
 | :---------------------- | :-----------------------
 | How to export from Playground | After issuing the identity/participant, connect to the business network, return to 'My business networks' then click the 'export' icon alongside the card you wish to export (from the list of cards).
 | How to switch BN cards using JS APIs | `const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;  let businessNetworkConnection = new BusinessNetworkConnection();   return businessNetworkConnection.connect('lenny@digitalPropertyNetwork')  .then(() => { .........blah blah do something ; } return businessNetworkConnection.disconnect(); <switch to next card>`
-| Issue Identity and use Card | Issue identity, import card, connect to the business network using the card ```
-businessNetworkConnection.issueIdentity(NS + '#' + userData.id, userData.user);
-....      
-var userCard = new IdCard({...});
-userCard.setCredentials(credentials);
-...
-adminConnection.importCard(userCardName, userCard);
-....
+| Issue Identity and use Card | Issue identity, import card, connect to the business network using the card `businessNetworkConnection.issueIdentity(NS + '#' + userData.id, userData.user); ....  var userCard = new IdCard({...});  userCard.setCredentials(credentials); ...  adminConnection.importCard(userCardName, userCard); .... .then(() => {     // Connect to the business network using the network admin identity ...     businessNetworkConnection = new BusinessNetworkConnection({ cardStore: cardStore });   businessNetworkConnection.connect(userCardName); } ...
 
-.then(() => {
-    // Connect to the business network using the network admin identity
-    businessNetworkConnection = new BusinessNetworkConnection({ cardStore: cardStore });
-    businessNetworkConnection.connect(userCardName);
-...
+
 #### :card_index: [back to base camp :camping: ](#top)   
 
 
