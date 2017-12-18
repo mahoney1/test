@@ -101,7 +101,9 @@ Source: http://hyperledger-fabric.readthedocs.io/en/release/ledger.html
 
 ### :information_source:  Business Network Cards
 
-jump to [**review card errors / resolutions**](#cardfaq) to see more on current errors & resolutions
+jump to [**Review card errors / resolutions**](#cardfaq) to see more on current **Core* card errors & resolutions
+jump to [**Review Card APIS issues / resolutions**](#cardapis) to see more on card-related **JS API** errors & resolutions
+
 
 A Business Network Card provides the means for a user (such as an application user or identity in Playground) to connect to a Composer business network which runs in its own runtime container. It is only possible to access a Composer business network through a valid Business Network Card. It consists of a connection profile, some metadata for the identity using it, and ultimately, a set of credentials (certificate/private key). An identity (linked to a participant in Composer) can have one or more cards, to connect to one or more business networks.
 
@@ -147,10 +149,28 @@ The Network Admin card is a card, once imported, that provides access to the dep
 | :---------------------- | :-----------------------
 | Authorization errors Playground local | See **answer** at https://stackoverflow.com/questions/47617442/authorization-failure-when-creating-new-business-network-in-local-playground
 | Can't export BN card  in Playground | you're using the 'in-browser' connector (not connected to a running Fabric) - you can only export cards for a runtime Fabric environment
-| How to export from Playground | After issuing the identity/participant, connect to the business network, return to 'My business networks' then click the 'export' icon alongside the card you wish to export (from the list of cards).
-| How to switch BN cards using JS APIs | `const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;  let businessNetworkConnection = new BusinessNetworkConnection();   return businessNetworkConnection.connect('lenny@digitalPropertyNetwork')  .then(() => { .........blah blah do something ; } return businessNetworkConnection.disconnect(); <switch to next card>`
 | |  
   
+
+<a name="cardapis"></a>
+### Card API errors / Resolutions
+
+| How to export from Playground | After issuing the identity/participant, connect to the business network, return to 'My business networks' then click the 'export' icon alongside the card you wish to export (from the list of cards).
+| How to switch BN cards using JS APIs | `const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;  let businessNetworkConnection = new BusinessNetworkConnection();   return businessNetworkConnection.connect('lenny@digitalPropertyNetwork')  .then(() => { .........blah blah do something ; } return businessNetworkConnection.disconnect(); <switch to next card>`
+| Issue Identity and use Card | Issue identity, import card, connect to the business network using the card ```
+businessNetworkConnection.issueIdentity(NS + '#' + userData.id, userData.user);
+....      
+var userCard = new IdCard({...});
+userCard.setCredentials(credentials);
+...
+adminConnection.importCard(userCardName, userCard);
+....
+
+.then(() => {
+    // Connect to the business network using the network admin identity
+    businessNetworkConnection = new BusinessNetworkConnection({ cardStore: cardStore });
+    businessNetworkConnection.connect(userCardName);
+...
 #### :card_index: [back to base camp :camping: ](#top)   
 
 
