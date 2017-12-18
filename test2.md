@@ -149,6 +149,7 @@ The Network Admin card is a card, once imported, that provides access to the dep
 
 | Message/Issue encountered | Resolution 
 | :---------------------- | :-----------------------
+| Cannot access Playground with REST server | The simplest approach to sharing a card inside and outside a container is to replace the 'localhost' with the IP Number of your docker host in the connection.json file of the card you are using. See  https://stackoverflow.com/questions/47804516/hyperledger-composer-cannot-connect-with-dockerized-node-js-app/47818372 | 
 | Authorization errors Playground local | See **answer** at https://stackoverflow.com/questions/47617442/authorization-failure-when-creating-new-business-network-in-local-playground
 | Can't export BN card  in Playground | you're using the 'in-browser' connector (not connected to a running Fabric) - you can only export cards for a runtime Fabric environment
 | |  
@@ -255,7 +256,7 @@ Example of Filter resolve: (meaning: Search on a modeled asset and resolve the d
 | :---------------------- | :-----------------------
 | resolve all relationships | {"include":"resolve"}`
 | resolve specific an asset relationship | `{"where":{"":"resource:org.acme.biznet.Commodity#ABC"}, "include":"resolve"}`
-
+| resolve 'between' ascii sorted - Traders between 1 and 10  | `{"where":{"owner":{"between": ["resource:org.acme.trading.Trader#TRADER1","resource:org.acme.trading.Trader#TRADER10"]}}, "include":"resolve"}`
 
 
 #### :card_index: [back to base camp :camping: ](#top)   
