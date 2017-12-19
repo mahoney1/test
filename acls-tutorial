@@ -151,3 +151,21 @@ We'll use a sample, pre-built business network (`trade-network`)from the Compose
     }
 
 ### Add basic Commodity ownership rules
+
+The standard 'Commodity Trade network' sample network you deployed comes with standard System and Network ACL rules, that govern the administrators of the business network.
+
+But we want to add some Trading-specific access control rules - let's start by defining what we want to achieve first ! The golden rule with ACLs is that resources are by default implicitly 'denied' to Participants inside a business network, unless explicitly ALLOWED.
+
+#### Everyday activities rule objectives:
+
+1. Traders cannot see or change other Trader's assets (Commodities) 
+2. Allow Traders to modify their own assets (Commodities)
+2. Only Participants of type 'Trader' can submit Trade smart contract transactions ie the 'Trade' transactions (there may be several transactions defined, over time in an 'live'/operational business network)
+
+#### Historical records rule objectives:
+
+1. Ensure Traders can only see the history of their own transactions instigated by them.
+2. Allow a Participant of type REG (Regulator)the authority to see the history of all historical transactions committed by Traders
+
+
+3. 
