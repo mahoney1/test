@@ -21,7 +21,7 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 
 Have Fabric Related issues? (ie when used with Composer Dev Env Setup or Tutorials)
 
-| ~ [**Fabric type Issues**](#fabricsetup)  |
+| ~ [**Fabric type Issues**](#fabricsetup)  | [**Misc items**](#misc)
 | :---------------------- | 
 ***
 Each topic area has links to suggested solutions (you can open these in a new window) sourced from:
@@ -317,13 +317,23 @@ Please seek support through the official channels - see link below for more info
 The following are a selection of answers, to help understand what you may be encountering or how to handle certain types from a modeling perspective
 
 
+#### :card_index: [back to base camp :camping: ](#top)  
+
+
+<a name="misc"></a>
+
+
+### :information_source:  Miscellaneous eg. Storing mixed-media files on the blockchain.
+
+
+
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
-| Modeling for images/PDFs/media | see https://stackoverflow.com/questions/47751609/how-to-deal-with-forms-images-videos-of-an-asset-in-hyperledger-composer
+| Modeling for images/PDFs/media | | You can use String and base64 encode it - as a field in an Asset for example, and have responsibility for decoding later etc etc But would you want to store it on the blockchain?
+You decide of course - as opposed to creating/saving a hash and link out of the chain to a URL. If you wanted to you could see an SO thread here https://stackoverflow.com/questions/21878404/how-can-i-convert-mp3-file-to-base64-encoded-string/23665155 or here see https://stackoverflow.com/questions/47751609/how-to-deal-with-forms-images-videos-of-an-asset-in-hyperledger-composer .  Storing images, scans, audio files is not a 'best practice' - rather, a cryptographic hash of it (referenced off-chain) is verifiable proof that the source is the exact image/media file that was 'hashed' at the time the 'transaction' was recorded on the blockchain. Examples may be doctor/patient audio discussions (not least the privacy elements!),  consultation recordings, PDFs, mp3s, image files. Another issue is that an encoded base64 image string will also need to be transmitted to the other peers participating in consensus and written to their copy of the master ledger. It is therefore more efficient, to only share the hash (not the base64 encoded contents with each peer).
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
-
 
 <a name="multiorg"></a>
 
