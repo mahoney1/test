@@ -150,9 +150,19 @@ We'll use a sample, pre-built business network (`trade-network`)from the Compose
 
 ### Create Identities to test ACLs
 
-Next, lets create some trader identities - we need to issue identities for the Traders (1 - 6) so that we can test those identities' access (each being mapped to their respective Trader participant record)
+Next, lets create some trader identities - we need to issue identities for the Traders (TRADER1 - 6) so that we can test those identities' access (each being mapped to their respective Trader participant record)
 
 1. Click on 'admin` (top right) and select 'ID Registry' from the drop-down
+2. Click 'Issue new ID' top right and it will present an 'Issue New Identity' dialog
+3. In the ID Name field - enter `tid1` as the identity we'll use for TRADER1
+4. In the Participant field - enter `TRADER1` to search for the fully-qualified Participant - and select the fully-qualified participant name
+5. Click on 'Create New'  to continue.
+
+Repeat the 'Issue new ID' sequence (step 2 through 5 above) for identities `tid2`, `tid3`, `tid4`, `tid5` and `tid6` respectively, mapping these to their respective TRADER participants.
+  
+ Now we're ready to start creating our access control rules.
+
+
 ### Add basic our Commodity Trading ACL rules
 
 The standard 'Commodity Trade network' sample network you deployed comes with standard System and Network ACL rules, that govern the administrators of the business network.
