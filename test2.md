@@ -272,8 +272,10 @@ Example of Filter resolve: (meaning: Search on a modeled asset and resolve the d
 | Filter goal  | Example
 | :---------------------- | :-----------------------
 | resolve all relationships | `{"include":"resolve"}`
-| resolve specific an asset relationship | `{"where":{"":"resource:org.acme.biznet.Commodity#ABC"}, "include":"resolve"}`
+| resolve specific an asset relationship | `{"where":{"asset_id":"resource:org.acme.biznet.Commodity#ABC"}, "include":"resolve"}`
+| resolve specific asset by id | `{"where":{"shipmentId":1000}, "include":"resolve"}`
 | resolve 'between' ascii sorted - Traders between 1 and 10  | `{"where":{"owner":{"between": ["resource:org.acme.trading.Trader#TRADER1","resource:org.acme.trading.Trader#TRADER10"]}}, "include":"resolve"}`
+
 
 
 #### :card_index: [back to base camp :camping: ](#top)   
