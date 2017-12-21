@@ -388,11 +388,11 @@ The following are a selection of answers, to help understand what you may be enc
 | LIMIT/SKIP operators not working | LIMIT/SKIP support is blocked by Fabric presently as described here -> https://github.com/hyperledger/composer/issues/1015
 | Query an array element  | Composer does not yet support queries across/over an array
 | Error: Use Serializer.toJSON to convert resources | you need to do serialize the results of a query to work in the TP - see example should help you -> https://stackoverflow.com/questions/46686996/search-for-an-specific-asset-inside-a-transaction
-#### :card_index: [back to base camp :camping: ](#top)  
-|CONTAINS Example 1: multi-value| ```SELECT org.acme.sample.TestAsset WHERE (stringArrayValues CONTAINS ["pumpkin", "jello", "candycane"]) ```
-|CONTAINS Example 2: single-value with a Query def | ```query myquery {          description: "Example CONTAINS Query"         statement:             SELECT org.acme.sample.TestAsset WHERE (stringArrayValues CONTAINS (value == "pumpkin"))```
+|CONTAINS Example 1: multi-value | ```SELECT org.acme.sample.TestAsset WHERE (stringArrayValues CONTAINS ["pumpkin", "jello", "candycane"]) ```
+|CONTAINS Example 2: single-value with a Query def | ```query myquery {          description: "Example CONTAINS Query" statement:  SELECT org.acme.sample.TestAsset WHERE (stringArrayValues CONTAINS (value == "pumpkin"))```
 |CONTAINS Example 3 - parameter based  | ```SELECT org.acme.mynetwork.Offer WHERE ( Offers CONTAINS _$offerId) ```
 
+#### :card_index: [back to base camp :camping: ](#top)  
 
 
 <a name="restapis"></a>
