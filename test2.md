@@ -395,14 +395,18 @@ The following are a selection of answers, to help understand what you may be enc
 
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
+| Retrieving a FIELD in an Asset | Not presently supported (retrieves the whole record 
+there is an issue raised https://github.com/hyperledger/composer/issues/3020
 | ORDER BY (single) not working | for a single `ORDER BY` field you may be hitting this index issue  (you need to define an index) -> https://stackoverflow.com/questions/45919898/order-by-not-working-in-named-query/45966828#45966828 
 | ORDER BY (multiple) not working | Not supported presently. Multiple ORDER BY fields is a current limitation of CouchDB see here -> https://github.com/hyperledger/composer/issues/1640 
 | LIMIT/SKIP operators not working | LIMIT/SKIP support is blocked by Fabric presently as described here -> https://github.com/hyperledger/composer/issues/1015
-| Query an array element  |see CONTAINS below
 | Error: Use Serializer.toJSON to convert resources | you need to do serialize the results of a query to work in the TP - see example should help you -> https://stackoverflow.com/questions/46686996/search-for-an-specific-asset-inside-a-transaction
+| Query an array element  |see CONTAINS below - Contains works where you supply value(s) (one of) in the list provided in a StringArray
 |CONTAINS Example 1: multi-value | ```SELECT org.acme.sample.TestAsset WHERE (stringArrayValues CONTAINS ["pumpkin", "jello", "candycane"]) ```
 |CONTAINS Example 2: single-value with a Query def | ```query myquery {          description: "Example CONTAINS Query" statement:  SELECT org.acme.sample.TestAsset WHERE (stringArrayValues CONTAINS (value == "pumpkin"))```
 |CONTAINS Example 3 - parameter based  | ```SELECT org.acme.mynetwork.Offer WHERE ( Offers CONTAINS _$offerId) ```
+
+### Queries - Current issues
 
 #### :card_index: [back to base camp :camping: ](#top)  
 
