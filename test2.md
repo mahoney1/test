@@ -183,7 +183,7 @@ More info on the kinds of debugging, logging and Editor breakpoint setting is sh
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
 | npm install errors on installing Composer | 1. INSTALLING COMPOSER AS A NON-PRIVILEGED USER - IE NON-ROOT.     Ideally, when you install composer modules globally (eg. composer-cli) you should install using a designated, non-root user. If there are issues (eg, on Ubuntu with permissions to write/update node directories located in system directories like /usr/local) - the solution is perform the npm install to a directory you have access to - rather than resort to root or superuser access, as this is not good practice. Here is what to do to set the npm prefix to a given directory, ...
-| ..continued .... | "npm config set prefix /home/myuser/" In this case, global binaries are placed in /home/myuser/bin which is in your PATH, and the modules are placed in /home/myuser/lib ... This is a method to do all the 'global' installs as non-root
+| ..continued .... | `npm config set prefix /home/myuser/` In this case, global binaries are placed in /home/myuser/bin which is in your PATH, and the modules are placed in /home/myuser/lib ... This is a method to do all the 'global' installs as non-root
 
 #### :card_index: [back to base camp :camping: ](#top
 
