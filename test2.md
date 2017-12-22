@@ -489,6 +489,8 @@ The following are a selection of answers, to help understand what you may be enc
 | Calling a TP function from another | see example below - two parts
 | (1) Calling from main script file - sample callout from `script.js`: | `var returnVal;     //And now call the function in func2.js var returnVal= sayHello("Jon Doe"); 	var code = returnVal.code; var msg= returnVal.message; console.log('The returned message and code are: Msg-> ' + msg + ' the code -> ' + code );` // output is "The returned message and code are: Msg -> Hello Jon Doe the code -> 11"
 | (2) Called function - defined in file `func2.js` |  `function sayHello(name) { retMsg = "hello " + name; return {code: 11, message: retMsg}; }` 
+|Catching errors in a JS TP function | sample code is shown (make sure to return a Promise) `return bizNetworkConnection.submitTransaction(transaction).then((result) => {             console.log("Tx Result", result) ; }).catch((exception) => { console.log("error", exception);`
+})
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
