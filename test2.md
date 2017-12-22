@@ -13,7 +13,7 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 
 | ~ [**ACLs**](#acls) | ~ [**Authorization Errors**](#authorization) | ~ [**Blockchain Recap**](#recap)   | ~ [**Business Network Cards**](#bizcards) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
-|  ~ [**Debugging**](#debug)  | ~ [**Events**](#events) | ~ [**Event Hub Problems**](#eventhub) | ~ [**Filters**](#filters)  | ~ [**Historian**](#historian)
+| ~ [**Composer Install Issues**](#installissues) |  ~ [**Debugging**](#debug)  | ~ [**Events**](#events) | ~ [**Event Hub Problems**](#eventhub) | ~ [**Filters**](#filters)  | ~ [**Historian**](#historian)
 | ~ [**IBM Cloud/Kubernetes**](#ibmcloud)  | ~ [**Modeling**](#model) | ~ [**Multi Org Setup/BYFN**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) 
 | ~ [**Queries**](#queries)  | ~ [**REST APIs**](#restapis)  | ~ [**REST Authentication**](#restauth)  | ~ [**Runtime Install Errors**](#runtime-install)
 | ~ [**Sample Networks**](#samples) | ~ [**Transaction Processors**](#transproc) |  ~ [**Upgrading Composer Runtime**](#upgrade) | ~ [**Topic Name**](#bizcards) 
@@ -174,8 +174,20 @@ The Network Admin card is a card, once imported, that provides access to the dep
 
 
 
-<a name="debug"></a>
+<a name="installissues"></a>
 
+### :information_source:  Composer Installation Issues
+
+More info on the kinds of debugging, logging and Editor breakpoint setting is shown below.
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+| npm install errors on installing Composer | 1. INSTALLING COMPOSER AS A NON-PRIVILEGED USER - IE NON-ROOT.     Ideally, when you install composer modules globally (eg. composer-cli) you should install using a designated, non-root user. If there are issues (eg, on Ubuntu with permissions to write/update node directories located in system directories like /usr/local) - the solution is perform the npm install to a directory you have access to - rather than resort to root or superuser access, as this is not good practice. Here is what to do to set the npm prefix to a given directory, ...
+| ..continued .... | "npm config set prefix /home/myuser/" In this case, global binaries are placed in /home/myuser/bin which is in your PATH, and the modules are placed in /home/myuser/lib ... This is a method to do all the 'global' installs as non-root
+
+#### :card_index: [back to base camp :camping: ](#top
+
+<a name="debug"></a>
 
 
 ### :information_source:  Code Debugging etc
