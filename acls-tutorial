@@ -197,7 +197,7 @@ First up - rule to restrict Traders to only see and update their own record.
 4. Paste the following rule in line 1 in your edit session, pasted above the existing 3 'System' and 'Network' system rules:
 
 ```
-rule R1_TraderSeeUpdateThemselvesOnly {
+rule R1a_TraderSeeUpdateThemselvesOnly {
   description: "Trader can see and update their own record only"
   participant(t): "org.acme.trading.Trader"
   operation: READ, UPDATE
@@ -212,13 +212,15 @@ This rule will allow the `current` Participant(t) (mapped to the `current` ident
 
 5. **TEST THE ACL**: Switch user to identity `tid1` (top right, 'ID Registry') and click on the 'Test' tab - check that TRADER1 record only, is visible to this identity.
 
-#### Rule 2 - Trader Asset - rule to update own Assets only
+#### Rule 1b - Trader Asset Ownership - allow update by owners only
 
-By default, a Trader cannot update the Commodities created earlier. We need a rule to enable them to access Commodities for which they are the designated 'owner', as defined in the model.
+By default, a Trader cannot see or update any of the Commodities created earlier. 
+
+We need a rule to enable a Trader access Commodities for which they are the designated 'owner'.
 
 1. Switch identity to `tid1` (click the current identity top right and choose ID Registry, select to 'use now' for `tid`) - and click on the 'Test' tab
 2. Confirm that you do not see any Commodity records.
-3. Switch identity to the 'admin' user (top right, 'ID Registry'), then go to the 'Define'  tab and click on 'Access Control' (`permissions.acl`) on the left.
+3. Switch identity back to the 'admin' user (top right, 'ID Registry'), then go to the 'Define'  tab and click on 'Access Control' (`permissions.acl`) on the left.
 4. Paste the following rule in line 1 in your edit session, pasted above the existing rules:
 
 ```
@@ -240,4 +242,76 @@ This rule will allow the `current` Trader Participant(t) all operations on targe
 
 Implicitly, this Trader TRADER1 has no ability to see or update other Trader's assets (Commodities) at this point - we don't need a rule for this, but there may in the real world be a business policy to allow specific senior Traders to 'see' other Commodities, albeit they are not owners for same.
 
-#### Rule 3 - Trader Asset - rule to update own Assets only
+#### Rule 2 - Restrictive rule: Only 'Trader' participants can submit `Trade` smart contract transactions
+
+By default, a Trader cannot submit a `Trade` transaction (defined in our model and for which we have smart contract logic written in our Script file) to update a Commodity he owns. 
+
+We need a rule to enable a Trader to submit `Trade` transactions for which they are the designated 'owner'. The `Trade` transaction enables the current owner to change the ownership to another Trader.
+
+1. Switch identity to `tid1` (click the current identity top right and choose ID Registry, select to 'use now' for `tid`) - and click on the 'Test' tab
+2. Confirm that you cannot submit a `Trade` transaction ('Submit Transaction') to try change the ownership of a Commodity - you will get a message that you don't not have `CREATE` ability to do submit the transaction.
+3. Switch identity back to the 'admin' user (top right, 'ID Registry'), then go to the 'Define'  tab and click on 'Access Control' (`permissions.acl`) on the left.
+4. Paste the following rule in line 1 in your edit session, pasted above the existing rules:
+
+```
+rule R2_EnableTradeTxn {
+    description: "Enable Traders to submit transactions"
+    participant: "org.acme.trading.Trader"
+    operation: ALL
+    resource: "org.acme.trading.Trade"
+    action: ALLOW
+
+```
+
+Then click on the **UPDATE** button on the bottom left to update the business network. 
+
+That's it. We know already that the participant can only work with their own Commodity(ies). This will allow only Trader participants to submit 
+transactions of type `Trade`.
+
+
+5. **TEST THE ACL**: Switch user to identity `tid1` (top right, 'ID Registry') - the owner of Commodity with id `CC`
+
+a. Click on the 'Test' tab. Submit a `Trade` Transaction copying and pasting this transaction, replacing current contents.
+
+```
+{
+  "$class": "org.acme.trading.Trade",
+  "commodity": "resource:org.acme.trading.Commodity#CC",
+  "newOwner": "resource:org.acme.trading.Trader#TRADER2"
+}
+```
+b. Confirm that the transaction has now been submitted by going to 'All Transactions' (on the left) and the first record in the Historian shows a `TRADE` transaction confirms the transfer. By contrast, a switch to identity `tid2` will reveal it has two Commodity records.
+
+
+#### Rule 3 - Enabling rule: Allow Traders to see their own historical records only
+
+By default, due to the System ACLs (a part of which is the registry for the Historian record), each Trader (eg. tid1, tid2 identities) can see the history of all Transactions - an example is the `UpdateBusinessNetwork` performed by admin.
+
+We will lock down access to the Historian such that Traders only see their own, business-related activities in Historian.
+
+1. Switch identity to `tid3` (click the current identity top right and choose ID Registry, select to 'use now' for `tid`) - and click on the 'Test' tab
+2. Confirm that you can see transactions relating to 'system' activities, but also the other traders (TRADER1 and TRADER2).
+3. Switch identity back to the 'admin' user (top right, 'ID Registry'), then go to the 'Define'  tab and click on 'Access Control' (`permissions.acl`) on the left.
+4. Paste the following rule in line 1 in your edit session, pasted above the existing rules:
+
+```
+rule R3_TradersSeeOwnHistoryOnly {
+  description: "Traders should be able to see the history of their own transactions only"
+  participant(t): "org.acme.trading.Trader"
+  operation: READ
+  resource(v): "org.hyperledger.composer.system.HistorianRecord"
+  condition: (v.participantInvoking.getIdentifier() != t.getIdentifier())
+  action: DENY
+}
+```
+This rule restricts the current Trader participant to seeing only transactions he/she invoked in Composer.
+
+Then click on the **UPDATE** button on the bottom left to update the business network. 
+
+5. **TEST THE ACL**: 
+a. Switch user to identity `tid3` (top right, 'ID Registry') - you will only see 'Identity Activation' type entries but nothing about the history of transactions that were submitted relating to TRADER1 and TRADER2. This is what we would expect. 
+
+b. Next, switch to identity `tid1` - you will see the history of transactions (such as the 'TRADE' transaction) relating to `tid1` only - in particular the transfer of Commodity 'CC' ownership to TRADER2 (Identity `tid2` will likewise see the historial transaction).
+
+a. Click on the 'Test' tab. Submit a `Trade` Transaction copying and pasting this transaction, replacing current contents.
+
