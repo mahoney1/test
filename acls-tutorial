@@ -175,14 +175,66 @@ You will note from ACLs that certain 'system' rules are defined in the ACLs file
 
 #### Everyday activities - rule objectives:
 
-a. Traders cannot see or change other Trader's assets (Commodities in our example) 
-b. Allow Traders to modify their own assets (Commodities)
-c. Only Participants of type 'Trader' can submit Trade smart contract transactions ie the 'Trade' transactions (as there may be several transactions defined, over time in an 'live'/operational business network)
+1a. Traders can see and update their own profile only (participant record)
+1b. Allow Traders access to all operations on their own assets (Commodities)
+1c. Deny Traders ability to see or update other Trader's assets (Commodities) 
+
+2. Restrict Participants of type 'Trader' can submit Trade smart contract transactions ie the 'Trade' transactions (as there may be several transactions defined, over time in an 'live'/operational business network)
 
 #### Historical records  - rule objectives:
 
-a. Ensure Traders can only see the history of their own transactions instigated by them.
-b. Allow a Participant of type REG (Regulator)the authority to see the history of all historical transactions committed by Traders
+3. Ensure Traders can only see the history of their own transactions instigated by them.
+4. Allow a Participant of type REG (Regulator)the authority to see the history of all historical transactions committed by Traders
 
+It is important to note at this point that the namespace `org.acme.trading` (our Commodity Trading business network) has no business network ACLS defined (just system ones) and therefore access to resources are implicity 'denied'.
 
-1. Go to the 'Define'  
+#### Rule 1a - Trader profile restriction rule
+
+First up - rule to restrict Traders to only see and update their own record.
+
+1. Switch identity to `tid1` (click the current identity top right and choose ID Registry, select to 'use now' for `tid`) - and click on the 'Test' tab
+2. Confirm that you do not see any Trader records.
+3. Switch identity to the 'admin' user (top right, 'ID Registry'), then go to the 'Define'  tab and click on 'Access Control' (`permissions.acl`) on the left.
+4. Paste the following rule in line 1 in your edit session, pasted above the existing 3 'System' and 'Network' system rules:
+
+```
+rule R1_TraderSeeUpdateThemselvesOnly {
+  description: "Trader can see and update their own record only"
+  participant(t): "org.acme.trading.Trader"
+  operation: READ, UPDATE
+  resource(v): "org.acme.trading.Trader"
+  condition: (v.getIdentifier() == t.getIdentifier())
+  action: ALLOW
+}
+```
+Then click on the **UPDATE** button on the bottom left to update the business network. 
+
+This rule will allow the `current` Participant(t) (mapped to the `current` identity whether in playground (here) or indeed in your application) to READ and UPDATE their own target Trader record(v).
+
+5. **TEST THE ACL**: Switch user to identity `tid1` (top right, 'ID Registry') and click on the 'Test' tab - check that TRADER1 record only, is visible to this identity.
+
+#### Rule 2 - Trader Asset - rule to update own Assets only
+
+By default, a Trader cannot update the Commodities created earlier. We need a rule to enable them to access Commodities for which they are the designated 'owner', as defined in the model.
+
+1. Switch identity to `tid1` (click the current identity top right and choose ID Registry, select to 'use now' for `tid`) - and click on the 'Test' tab
+2. Confirm that you do not see any Commodity records.
+3. Switch identity to the 'admin' user (top right, 'ID Registry'), then go to the 'Define'  tab and click on 'Access Control' (`permissions.acl`) on the left.
+4. Paste the following rule in line 1 in your edit session, pasted above the existing 3 'System' and 'Network' system rules:
+
+```
+rule R1b_TraderSeeTheirCommodities {
+  description: "Trader can see/work with their own Commodities"
+  participant(t): "org.acme.trading.Trader"
+  operation: ALL
+  resource(c): "org.acme.trading.Commodity"
+  condition: (c.owner.getIdentifier() == t.getIdentifier())
+  action: ALLOW
+}
+
+```
+Then click on the **UPDATE** button on the bottom left to update the business network. 
+
+This rule will allow the `current` Trader Participant(t) all operations on target Commodities(c) resources or record(v) that it 'owns'.
+
+5. **TEST THE ACL**: Switch user to identity `tid1` (top right, 'ID Registry') and click on the 'Test' tab - confirm that there are Commodities owned by TRADER1 participant visible to this identity.
