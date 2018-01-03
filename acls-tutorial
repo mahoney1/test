@@ -311,7 +311,77 @@ Then click on the **UPDATE** button on the bottom left to update the business ne
 5. **TEST THE ACL**: 
 a. Switch user to identity `tid3` (top right, 'ID Registry') - you will only see 'Identity Activation' type entries but nothing about the history of transactions that were submitted relating to TRADER1 and TRADER2. This is what we would expect. 
 
-b. Next, switch to identity `tid1` - you will see the history of transactions (such as the 'TRADE' transaction) relating to `tid1` only - in particular the transfer of Commodity 'CC' ownership to TRADER2 (Identity `tid2` will likewise see the historial transaction).
+b. Next, switch to identity `tid1` - you will see the history of transactions (including the 'TRADE' transaction submitted earlier) relating to `tid1` only - in particular the transfer of Commodity 'CC' ownership to TRADER2 (By contrast, identity `tid2` , the transferee, will not see the historial 'TRADE' transaction submitted by `tid1` - only the Commodity asset, that was transferred).
 
-a. Click on the 'Test' tab. Submit a `Trade` Transaction copying and pasting this transaction, replacing current contents.
 
+#### Rule 4 - Enabling rule: Allow Regulators to see all historical records only
+
+It stands to reason that a regulator would want to review/audit historical transactions carried out. They won't necessarily need access to things like Participants or Assets per se (depending on the use case or policy).
+
+We don't yet have a 'Regulator' in our 'Commodity Trading' business network, so we will add this as a separate type and then proceed to define rules that allow someone that has the regulator 'role' to be able to access historical records. Remember that one or more identities can be mapped to a Participant, and 'Regulator' is a good example of that.
+
+By default, due to the System ACLs (a part of which is the registry for the Historian record), each Trader (eg. tid1, tid2 identities) can see the history of all Transactions - an example is the `UpdateBusinessNetwork` performed by admin.
+
+
+1. Switch identity to `admin` if you haven't already done so and then click on 'Define' (top)
+2. Click on the Model file and add a new Participant type (below `Trader` participant) as follows:
+
+```
+participant Regulator identified by regId {
+    o String regId
+    o String firstName
+    o String lastName
+}
+```
+3. Switch to the 'Test' tab and create a participant Regulator as follows:
+```
+{
+  "$class": "org.acme.trading.Regulator",
+  "regId": "101",
+  "firstName": "Jon",
+  "lastName": "Doe"
+}
+```
+4. Create an Identity (still logged in as admin) in the ID registry  for an identity with ID `reg101` and map it to the Participant regulator '101' created above.
+
+At this point, the Regulator can now see the history of system transactions in Composer. 
+
+5. Add the following rules: The first rule merely allows them to update their own profile record (not totally necessary perhaps)
+
+```
+
+rule 4a_RegulatorSeeThemselves {
+  description: "Regulators can see their own record"
+  participant: "org.acme.trading.Regulator"
+  operation: READ
+  resource: "org.acme.trading.Regulator"
+  action: ALLOW
+}
+
+```
+- siwtch identity to reg101 and go to Historian and check you can see the Historical record and click on view record
+- there's an issue - click on a TRADE transaction - you will not be able to view record 
+- Add the following rule (insert rule) and update
+
+- TEST the ACL - now go to a trade transaction and check you can view the record
+
+This applies to any subsequent identity created for regulator role which is modeled as a participant role in our tutorial.
+
+END of tutorial.
+
+
+#### don't delete this yet
+1. Switch identity to `tid1` (click the current identity top right and choose ID Registry, select to 'use now' for `tid`) - and click on the 'Test' tab
+2. Confirm that you cannot submit a `Trade` transaction ('Submit Transaction') to try change the ownership of a Commodity - you will get a message that you don't not have `CREATE` ability to do submit the transaction.
+3. Switch identity back to the 'admin' user (top right, 'ID Registry'), then go to the 'Define'  tab and click on 'Access Control' (`permissions.acl`) on the left.
+4. Paste the following rule in line 1 in your edit session, pasted above the existing rules:
+
+```
+rule R2_EnableTradeTxn {
+    description: "Enable Traders to submit transactions"
+    participant: "org.acme.trading.Trader"
+    operation: ALL
+    resource: "org.acme.trading.Trade"
+    action: ALLOW
+
+```
