@@ -177,7 +177,6 @@ You will note from ACLs that certain 'system' rules are defined in the ACLs file
 
 1a. Traders can see and update their own profile only (participant record)
 1b. Allow Traders access to all operations on their own assets (Commodities)
-1c. Deny Traders ability to see or update other Trader's assets (Commodities) 
 
 2. Restrict Participants of type 'Trader' can submit Trade smart contract transactions ie the 'Trade' transactions (as there may be several transactions defined, over time in an 'live'/operational business network)
 
@@ -220,7 +219,7 @@ By default, a Trader cannot update the Commodities created earlier. We need a ru
 1. Switch identity to `tid1` (click the current identity top right and choose ID Registry, select to 'use now' for `tid`) - and click on the 'Test' tab
 2. Confirm that you do not see any Commodity records.
 3. Switch identity to the 'admin' user (top right, 'ID Registry'), then go to the 'Define'  tab and click on 'Access Control' (`permissions.acl`) on the left.
-4. Paste the following rule in line 1 in your edit session, pasted above the existing 3 'System' and 'Network' system rules:
+4. Paste the following rule in line 1 in your edit session, pasted above the existing rules:
 
 ```
 rule R1b_TraderSeeTheirCommodities {
@@ -237,4 +236,8 @@ Then click on the **UPDATE** button on the bottom left to update the business ne
 
 This rule will allow the `current` Trader Participant(t) all operations on target Commodities(c) resources or record(v) that it 'owns'.
 
-5. **TEST THE ACL**: Switch user to identity `tid1` (top right, 'ID Registry') and click on the 'Test' tab - confirm that there are Commodities owned by TRADER1 participant visible to this identity.
+5. **TEST THE ACL**: Switch user to identity `tid1` (top right, 'ID Registry') and click on the 'Test' tab - confirm that there is one Commodity owned by TRADER1 participant and is visible/editable (icon) to this identity.
+
+Implicitly, this Trader TRADER1 has no ability to see or update other Trader's assets (Commodities) at this point - we don't need a rule for this, but there may in the real world be a business policy to allow specific senior Traders to 'see' other Commodities, albeit they are not owners for same.
+
+#### Rule 3 - Trader Asset - rule to update own Assets only
