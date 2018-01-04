@@ -122,12 +122,12 @@ The benefits are that once you export a card, it is a portable card. So it can b
     3. Export it using the export icon on the identity/card in question.
     
 * If you [issue an identity](https://hyperledger.github.io/composer/reference/composer.identity.issue.html) from the CLI or via JS APIs (connected to a Fabric): eg. `  composer identity issue -c admin@mynetwork -f JonDoe.card -u jdoe1 -a "resource:net.acme.biz.Person#jondoe1@biznet.org"` where `mynetwork` is the business network name and `net.acme.biz` is the namespace in the model.
-1. Initially, the .card file only has an enroll id / one-time secret at this point - so you need to import it
-2. From the CLI, import (example): `composer card import --file JonDoe.card`
-3. Use it (to download certificate/key to the local wallet and now primed with credentials)  - example is to do a `composer network ping -c JonDoe.card`
-4. Export it ie *from the Composer credentials vault* using `composer card export -f JDoeExport.card --name jdoe1@mynetwork`  
-5. Now as an identity administrator, you can securely share this exported .card file with the real user, so they can interact with the `mynetwork` business network from (say) their Node application, or authenticated via REST in a browser (once imported to their local wallet) etc and so on.
-6. Suggest to remove/delete the 'old' `JonDoe.card` file because it is now redundant (because we have the portable .card file,  complete with credentials)
+    1. Initially, the .card file only has an enroll id / one-time secret at this point - so you need to import it
+    2. From the CLI, import (example): `composer card import --file JonDoe.card`
+    3. Use it (to download certificate/key to the local wallet and now primed with credentials)  - example is to do a `composer network ping -c JonDoe.card`
+    4. Export it ie *from the Composer credentials vault* using `composer card export -f JDoeExport.card --name jdoe1@mynetwork`  
+    5. Now as an identity administrator, you can securely share this exported .card file with the real user, so they can interact with the `mynetwork` business network from (say) their Node application, or authenticated via REST in a browser (once imported to their local wallet) etc and so on.
+    6. Suggest to remove/delete the 'old' `JonDoe.card` file because it is now redundant (because we have the portable .card file,  complete with credentials)
 
 In general:
 
