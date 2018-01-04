@@ -15,7 +15,7 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
 | [**Client APIs Usage**](#clientapis) | [**Composer Install Issues**](#installissues) | [**Debugging**](#debug)  | [**Endorsement Policy**](#endorse) 
 | [**Events**](#events) | [**Event Hub Problems**](#eventhub) | [**Filters**](#filters)  | [**Historian**](#historian) 
-| [**IBM Cloud/Kubernetes**](#ibmcloud)  | [**Modeling**](#model) | [**Multi Org Setup/BYFN**](#multiorg) | [**Passport Strategies**](#passport-strategy) 
+| [**Cloud/Kubernetes envs**](#varcloud)  | [**Modeling**](#model) | [**Miscellaneous Items**](#misccomposer) | [**Multi Org Setup/BYFN**](#multiorg) | [**Passport Strategies**](#passport-strategy) 
 | [**Queries**](#queries)  | [**REST APIs**](#restapis)  | [**REST Authentication**](#restauth)  | [**Runtime Install Errors**](#runtime-install)
 | [**Sample Networks**](#samples) | [**Transaction Processors**](#transproc) | [**Upgrading Composer Runtime**](#upgrade) | [**Updating Biz Networks**](#upgradebn)  
 | [**Topic Name**](#samples)  | [**Topic Name**](#bizcards) 
@@ -351,16 +351,17 @@ Some typical examples of historian queries asked are below (obviously you would 
 
 #### :card_index: [back to base camp :camping: ](#top)  
 
-<a name="ibmcloud"></a>
+<a name="varcloud"></a>
 
 
-### :information_source:  IBM Cloud / Kubernetes Support / IBM Container service
+### :information_source:  Cloud Issues eg. providers like IBM/Azure Cloud / Kubernetes Support / Cloud hosted Container service
 
-Please seek support through the official channels - see link below for more info
+Please seek support through the official channels for the Provider hosting your Hyperledger Fabric/Composer environment. (Composer cannot provide assistance with 3rd party Cloud environments per se, as support in this knowledge base is provided for local Development or local DevTest environments) - see link below for more info
 
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
 | IBM Sandbox / Kubernetes support  |for support with your particular environment on IBM Cloud you should go to this page https://console.bluemix.net/docs/support/index.html#contacting-support
+| Microsoft Azure | See [Microsoft support]() or [here](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azureblockchain) for more information.
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
@@ -378,10 +379,11 @@ The following are a selection of answers, to help understand what you may be enc
 #### :card_index: [back to base camp :camping: ](#top)  
 
 
-<a name="misc"></a>
+<a name="miscfabric"></a>
 
 
-### :information_source:  Miscellaneous Items (Uncategorised)
+
+### :information_source:  Miscellaneous Items - Fabric (Uncategorised)
 
 
 ##### Media/Images/Storage
@@ -389,6 +391,16 @@ The following are a selection of answers, to help understand what you may be enc
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
 | Modeling/Storing images/PDFs/media | You can use String and base64 encode it - as a field in an Asset for example, and have responsibility for decoding later etc etc But would you want to store it on the blockchain? You decide of course.  If you wanted to you could see an SO thread here https://stackoverflow.com/questions/21878404/how-can-i-convert-mp3-file-to-base64-encoded-string/23665155 or here see https://stackoverflow.com/questions/47751609/how-to-deal-with-forms-images-videos-of-an-asset-in-hyperledger-composer .  Storing images, scans, audio files is not a 'best practice' - rather, a cryptographic hash of it (referenced off-chain) is verifiable proof that the source is the exact image/media file that was 'hashed' at the time the 'transaction' was recorded on the blockchain and link out of the chain, to a URL containing the verifiable source (and comparable hash). Examples may be: doctor/patient audio discussions (not least the privacy elements!) & consultation recordings, PDFs, mp3s, image files. Another issue is that an encoded base64 image string (if you chose to encode the media/image file that is) will also need to be transmitted to the other peers participating in consensus and written to their copy of the master ledger. It is therefore more efficient, to only share the hash (not the base64 encoded contents with each peer).
+
+
+#### :card_index: [back to base camp :camping: ](#top)  
+
+<a name="misccomposer"></a>
+
+
+
+### :information_source:  Miscellaneous Items - Composer (Uncategorised)
+
 
 ##### JSON metadata FAQs
 | Message encountered | Resolution 
@@ -399,11 +411,12 @@ The following are a selection of answers, to help understand what you may be enc
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
 | Create archive.....deploy ....use | `composer archive create -t dir -n .` ; `composer runtime install -c PeerAdmin@hlfv1 -n acme-network` ; `composer network start -c PeerAdmin@hlfv1 -A admin -S adminpw -a acme-network.bna -f networkadmin.card` ; `composer card import -f networkadmin.card` ; `composer network ping -c admin@acme-network` ; `composer card export -f nwadmin.card -n admin@acme-network` 
-```
 
 #### :card_index: [back to base camp :camping: ](#top)  
 
 <a name="multiorg"></a>
+
+
 
 ### :information_source:  Multi Org / BYFN Composer tutorial - issues.
 
