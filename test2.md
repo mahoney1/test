@@ -14,7 +14,7 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 | [**ACLs**](#acls) | [**Authorization Errors**](#authorization) | [**Blockchain Recap**](#recap)   | [**Business Network Cards**](#bizcards) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
 | [**Client APIs Usage**](#clientapis) | [**Composer Install Issues**](#installissues) | [**Debugging**](#debug)  | [**Endorsement Policy**](#endorse) 
-| [**Events**](#events) | [**Event Hub Problems**](#eventhub) | ~ [**Filters**](#filters)  | ~ [**Historian**](#historian) 
+| [**Events**](#events) | [**Event Hub Problems**](#eventhub) | [**Filters**](#filters)  | [**Historian**](#historian) 
 | [**IBM Cloud/Kubernetes**](#ibmcloud)  | [**Modeling**](#model) | [**Multi Org Setup/BYFN**](#multiorg) | [**Passport Strategies**](#passport-strategy) 
 | [**Queries**](#queries)  | [**REST APIs**](#restapis)  | [**REST Authentication**](#restauth)  | [**Runtime Install Errors**](#runtime-install)
 | [**Sample Networks**](#samples) | [**Transaction Processors**](#transproc) | [**Upgrading Composer Runtime**](#upgrade) | [**Topic Name**](#bizcards) 
