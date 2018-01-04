@@ -118,9 +118,19 @@ The benefits are that once you export a card, it is a portable card. So it can b
 
 * If you issue an identity in Playground (connected to a Fabric): 
     1. Add it to your wallet (it only has an enroll id / one-time secret at this point)
-    2. Connect to the business network (to download its certificate/key in exchange for secret) then (from My Business Networks screen)
+    2. Connect to the business network (to download its certificate/key in exchange for the one-time secret) then (from 'My Business Networks' in Playground):
     3. Export it using the export icon on the identity/card in question.
     
+* If you [issue an identity](https://hyperledger.github.io/composer/reference/composer.identity.issue.html) from the CLI or via JS APIs (connected to a Fabric): eg. `  composer identity issue -c admin@mynetwork -f JonDoe.card -u jdoe1 -a "resource:net.acme.biz.Person#jondoe1@biznet.org"` where `mynetwork` is the business network name and `net.acme.biz` is the namespace in the model.
+1. Initially, the .card file only has an enroll id / one-time secret at this point - so you need to import it
+2. From the CLI, import (example): `composer card import --file JonDoe.card`
+3. Use it (to download certificate/key to the local wallet and now primed with credentials)  - example is to do a `composer network ping -c JonDoe.card`
+4. Export it `composer card export -f JDoeExport.card --name jdoe1@mynetwork`  
+5. Now as an administrator, you can securely share this .card file with the real user, so they can interact with the `mynetwork` business network from (say) their application, or via REST (once imported to their wallet) etc and so on.
+6. Suggest to remove/delete the 'old' `JonDoe.card` file because it is now redundant (we have the portable .card file,  complete with credentials)
+
+In general:
+
 * If you create a card on disk (eg exported unused from Playground, using the CLI, or the APIs) - the file will contain the single-use enrol id/secret and needs to be exchanged for a certificate from the CA server. 
    1. Import the card (.card file) (either through Playground - choose file, or via CLI import command or APIs) into your Composer wallet
    2. Either connect to it (eg. in Playground, via APIs) or use `composer ping` (eg. via CLI) to ping it using the imported card name eg `composer ping -c donald@tutorial-network`
