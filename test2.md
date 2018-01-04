@@ -361,7 +361,7 @@ Please seek support through the official channels for the Provider hosting your 
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
 | IBM Sandbox / Kubernetes support  |for support with your particular environment on IBM Cloud you should go to this page https://console.bluemix.net/docs/support/index.html#contacting-support
-| Microsoft Azure | See [Microsoft support]() or [here](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azureblockchain) for more information.
+| Microsoft Azure | See [Microsoft support](https://support.microsoft.com/en-us) or [here](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azureblockchain) for more information.
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
