@@ -11,13 +11,13 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 ***
 ###  :o: TOPIC INDEX  :o:
 
-| ~ [**ACLs**](#acls) | ~ [**Authorization Errors**](#authorization) | ~ [**Blockchain Recap**](#recap)   | ~ [**Business Network Cards**](#bizcards) 
+| [**ACLs**](#acls) | [**Authorization Errors**](#authorization) | [**Blockchain Recap**](#recap)   | [**Business Network Cards**](#bizcards) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
 | [**Composer Install Issues**](#installissues) | [**Debugging**](#debug)  | [**Endorsement Policy**](#endorse) | [**Events**](#events) | [**Event Hub Problems**](#eventhub) | ~ [**Filters**](#filters)  | ~ [**Historian**](#historian)
-| ~ [**IBM Cloud/Kubernetes**](#ibmcloud)  | ~ [**Modeling**](#model) | ~ [**Multi Org Setup/BYFN**](#multiorg) | ~ [**Passport Strategies**](#passport-strategy) 
-| ~ [**Queries**](#queries)  | ~ [**REST APIs**](#restapis)  | ~ [**REST Authentication**](#restauth)  | ~ [**Runtime Install Errors**](#runtime-install)
-| ~ [**Sample Networks**](#samples) | ~ [**Transaction Processors**](#transproc) |  ~ [**Upgrading Composer Runtime**](#upgrade) | ~ [**Topic Name**](#bizcards) 
-| ~ [**Updating Biz Networks**](#upgradebn)  | ~ [**Topic Name**](#samples)  | 
+| [**IBM Cloud/Kubernetes**](#ibmcloud)  | [**Modeling**](#model) | [**Multi Org Setup/BYFN**](#multiorg) | [**Passport Strategies**](#passport-strategy) 
+| [**Queries**](#queries)  | [**REST APIs**](#restapis)  | [**REST Authentication**](#restauth)  | [**Runtime Install Errors**](#runtime-install)
+| [**Sample Networks**](#samples) | [**Transaction Processors**](#transproc) | [**Upgrading Composer Runtime**](#upgrade) | [**Topic Name**](#bizcards) 
+| [**Updating Biz Networks**](#upgradebn)  | [**Topic Name**](#samples)  | 
 
 
 Have Fabric Related issues? (ie when used with Composer Dev Env Setup or Tutorials)
@@ -203,6 +203,20 @@ More info on the kinds of debugging, logging and Editor breakpoint setting is sh
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
+
+<a name="endorse"></a>
+
+
+### :information_source:  Endorsement Policy use with Composer etc
+
+More info on troubleshooting or understanding issues related to endorsement of transactions by Fabric and endorsement policy. 
+
+
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+| General Endorsement Troubleshooting | The main caveat to pass on to clients seeking assistance is to remind them that troubleshooting endorsement policy is fundamentally a Hyperledger Fabric issue (may best be asked on #fabric channel on Rocketchat or they can review more on endorsement at the [Fabric docs site](https://hyperledger-fabric.readthedocs.io/en/release/endorsement-policies.html)) - this is because Composer merely passes on the endorsement policy metadata. Important to note that endorsement policies used for a Composer business network must be in the JSON format, as used by the Hyperledger Fabric Node.js SDK (the examples in doc link above will not be in JSON format FYI).
+| ENDORSEMENT_POLICY_FAILURE error seen in Multi-Org tutorial (2 orgs) .. `compareProposalResponseResults - read/writes result sets do not match index=1` |Received proposals back from 2 or more peers, but at least 1 of the proposal results is different from the others. If for example an endorsement policy has stated that all the peers must endorse then it also means that all the peers must agree on the same results. If they don't -  you get an endorsement policy failure ;  because at least 1 peer doesn't agree and so you cannot satisfy the endorsement policy, hence the message.
 
 <a name="events"></a>
 
