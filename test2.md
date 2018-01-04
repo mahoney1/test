@@ -125,16 +125,16 @@ The benefits are that once you export a card, it is a portable card. So it can b
 1. Initially, the .card file only has an enroll id / one-time secret at this point - so you need to import it
 2. From the CLI, import (example): `composer card import --file JonDoe.card`
 3. Use it (to download certificate/key to the local wallet and now primed with credentials)  - example is to do a `composer network ping -c JonDoe.card`
-4. Export it `composer card export -f JDoeExport.card --name jdoe1@mynetwork`  
-5. Now as an administrator, you can securely share this .card file with the real user, so they can interact with the `mynetwork` business network from (say) their application, or via REST (once imported to their wallet) etc and so on.
-6. Suggest to remove/delete the 'old' `JonDoe.card` file because it is now redundant (we have the portable .card file,  complete with credentials)
+4. Export it ie *from the Composer credentials vault* using `composer card export -f JDoeExport.card --name jdoe1@mynetwork`  
+5. Now as an identity administrator, you can securely share this exported .card file with the real user, so they can interact with the `mynetwork` business network from (say) their Node application, or authenticated via REST in a browser (once imported to their local wallet) etc and so on.
+6. Suggest to remove/delete the 'old' `JonDoe.card` file because it is now redundant (because we have the portable .card file,  complete with credentials)
 
 In general:
 
 * If you create a card on disk (eg exported unused from Playground, using the CLI, or the APIs) - the file will contain the single-use enrol id/secret and needs to be exchanged for a certificate from the CA server. 
    1. Import the card (.card file) (either through Playground - choose file, or via CLI import command or APIs) into your Composer wallet
    2. Either connect to it (eg. in Playground, via APIs) or use `composer ping` (eg. via CLI) to ping it using the imported card name eg `composer ping -c donald@tutorial-network`
-   3. Export the card to a .card file (via Playground, CLI or APIs) - and replace the original .card file (it has redundant enrol info now). That new .card file can now be given to a designated user (eg on another system). Obviously, you may wish to keep a 'template' .card file elsewhere if you wish to retain that for future use.
+   3. Export the card *from the Composer credentials vault* to a .card file (via Playground, CLI or APIs) - and replace the original .card file (it has redundant enrol info now). That new .card file can now be given to a designated user (eg on another system). Obviously, you may wish to keep a 'template' .card file elsewhere if you wish to retain that for future use.
    
    That's it.
 
