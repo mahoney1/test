@@ -13,7 +13,8 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 
 | [**ACLs**](#acls) | [**Authorization Errors**](#authorization) | [**Blockchain Recap**](#recap)   | [**Business Network Cards**](#bizcards) 
 | :---------------------- | :-----------------------| :----------------------- | :-------------------- 
-| [**Composer Install Issues**](#installissues) | [**Debugging**](#debug)  | [**Endorsement Policy**](#endorse) | [**Events**](#events) | [**Event Hub Problems**](#eventhub) | ~ [**Filters**](#filters)  | ~ [**Historian**](#historian)
+| [**Client APIs Usage**](#clientapis) | [**Composer Install Issues**](#installissues) | [**Debugging**](#debug)  | [**Endorsement Policy**](#endorse) 
+| [**Events**](#events) | [**Event Hub Problems**](#eventhub) | ~ [**Filters**](#filters)  | ~ [**Historian**](#historian) 
 | [**IBM Cloud/Kubernetes**](#ibmcloud)  | [**Modeling**](#model) | [**Multi Org Setup/BYFN**](#multiorg) | [**Passport Strategies**](#passport-strategy) 
 | [**Queries**](#queries)  | [**REST APIs**](#restapis)  | [**REST Authentication**](#restauth)  | [**Runtime Install Errors**](#runtime-install)
 | [**Sample Networks**](#samples) | [**Transaction Processors**](#transproc) | [**Upgrading Composer Runtime**](#upgrade) | [**Topic Name**](#bizcards) 
@@ -171,6 +172,21 @@ The Network Admin card is a card, once imported, that provides access to the dep
 #### :card_index: [back to base camp :camping: ](#top)   
 
 
+<a name="clientapis"></a>
+
+
+
+### :information_source:  Client API Usage and Guidelines
+
+Below are some generic or specific questions on using client-side JS APIs
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+|AutoGenerate ID, Auto-Increment inside a TP issues | you should generate the autoincrement ID client-side (custom generated, or using UUIDs for example - using uuid on the client side and pass it in as part of the TP payload) and pass that into the Composer APIs. The only safe, deterministic way to "generate" an ID on the 'Blockchain' side in a Composer transaction processor function is to use the transaction ID. You should not generate an autoincrement id within a transaction processor doing so could be non-deterministic and the transaction would be rejected because the results of the transaction processor running on different peers would not match. 
+
+
+
+#### :card_index: [back to base camp :camping: ](#top)  
 
 
 
