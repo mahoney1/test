@@ -80,6 +80,28 @@ We'll use the sample business network (`trade-network`) sourced from the Compose
       "lastName": "Valens"
     }
     
+    {
+      "$class": "org.acme.trading.Trader",
+      "tradeId": "TRADER4",
+      "firstName": "Don",
+      "lastName": "Dolittle"
+    }
+    
+    {
+      "$class": "org.acme.trading.Trader",
+      "tradeId": "TRADER5",
+      "firstName": "Steve",
+      "lastName": "Alonso"
+    }
+    
+    
+    {
+      "$class": "org.acme.trading.Trader",
+      "tradeId": "TRADER6",
+      "firstName": "Lars",
+      "lastName": "Graf"
+    }
+
 ### Create Commodity Assets
 
 1. Still in the 'Test' screen, create some Commodity records by selecting 'Commodity' on the left - the ownership (`owner` field) relates back to the 'Trader' participant for the purposes of this tutorial.
