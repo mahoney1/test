@@ -235,6 +235,8 @@ Then click on the **UPDATE** button on the bottom left to update the business ne
 
 This rule will allow the `current` Participant(t) (mapped to the `current` identity whether in playground (here) or indeed in your application) to READ and UPDATE their own target Trader record(v).
 
+![Define the 'Trader participant can update self' ACL rule](../assets/img/tutorials/acl/define_acl.png)
+
 5. **TEST THE ACL**: Switch user to identity `tid1` (top right, 'ID Registry') and click on the 'Test' tab - check that TRADER1 record only, is visible to this identity.
 
 #### Rule 1b - Trader Asset Ownership - allow update by owners only
