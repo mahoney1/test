@@ -379,9 +379,9 @@ At this point, the Regulator can now see the history of system transactions in C
 ```
 
 rule R4a_RegulatorSeeThemselves {
-  description: "Regulators can see their own record"
+  description: "Regulators can see and update their own record"
   participant: "org.acme.trading.Regulator"
-  operation: READ
+  operation: READ, UPDATE
   resource: "org.acme.trading.Regulator"
   action: ALLOW
 }
@@ -390,7 +390,7 @@ rule R4a_RegulatorSeeThemselves {
 
 This rule rule merely allows a Regulator participant to update their own profile record (should they wish to update it - you can test this out if you wish; we had done something similar earlier).
 
-Then click on the **UPDATE** button on the bottom left to update the business network. 
+Then click on the **UPDATE** button on the bottom left to update the business network with the new rule. 
 
 6. Next, switch identity (in the id Registry) to `regId101` and click 'Use Now'
 
