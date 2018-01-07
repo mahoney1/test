@@ -102,6 +102,9 @@ We'll use the sample business network (`trade-network`) sourced from the Compose
       "lastName": "Graf"
     }
 
+
+![Six Trader records added](../assets/img/tutorials/acl/trader.png)
+
 ### Create Commodity Assets
 
 1. Still in the 'Test' screen, create some Commodity records by selecting 'Commodity' on the left - the ownership (`owner` field) relates back to the 'Trader' participant for the purposes of this tutorial.
@@ -268,10 +271,14 @@ Implicitly, this Trader TRADER1 has no ability to see or update other Trader's a
 
 By default, a Trader cannot submit a `Trade` transaction (defined in our model and for which we have smart contract logic written in our Script file) to update a Commodity he owns. 
 
-We need a rule to enable a Trader to submit `Trade` transactions for which they are the designated 'owner'. The `Trade` transaction enables the current owner to change the ownership to another Trader.
+We need a rule to enable a Trader to submit `Trade` transactions for which they are the designated 'owner'. The `Trade` transaction enables the current owner to change the ownership of a Commodity to another Trader.
 
 1. Switch identity to `tid1` (click the current identity top right and choose ID Registry, select to 'use now' for `tid`) - and click on the 'Test' tab
-2. Confirm that you cannot submit a `Trade` transaction ('Submit Transaction') to try change the ownership of a Commodity - you will get a message that you don't not have `CREATE` ability to do submit the transaction.
+2. Confirm that you cannot submit a `Trade` transaction ('Submit Transaction') to try change the ownership of a Commodity - you will get a message that you do not have `CREATE` ability to do submit the transaction.
+
+![Insufficient authority to submit Trade transactions](../assets/img/tutorials/acl/trade_submit_auth.png)
+
+
 3. Switch identity back to the 'admin' user (top right, 'ID Registry'), then go to the 'Define'  tab and click on 'Access Control' (`permissions.acl`) on the left.
 4. Paste the following rule in line 1 in your edit session, pasted above the existing rules:
 
