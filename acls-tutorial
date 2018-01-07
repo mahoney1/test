@@ -346,7 +346,7 @@ By default, due to the System ACLs (a part of which is the registry for the Hist
 
 
 1. Switch identity to `admin` if you haven't already done so and then click on 'Define' (top)
-2. Click on the Model file and add a new Participant type (below `Trader` participant) as follows:
+2. Click on the Model file and add a new Participant type (add it below the `Trader` participant) as follows:
 
 ```
 participant Regulator identified by regId {
@@ -364,15 +364,14 @@ participant Regulator identified by regId {
   "lastName": "Doe"
 }
 ```
-4. Create an Identity (still logged in as admin) in the ID registry  for an identity with ID `reg101` and map it to the Participant regulator '101' created above.
+4. Create an Identity (still logged in as admin) in the ID registry  for an identity with ID `regId101` and map it to the Participant regulator '101' created above.
 
-At this point, the Regulator can now see the history of system transactions in Composer. 
+At this point, the Regulator can now see the history of system transactions in Composer, due to the system ACL rules defined earlier. But he cannot see his own participant profile.
 
-5. Add the following rules: The first rule merely allows them to update their own profile record (not totally necessary perhaps)
-
+5. Add the following rule:
 ```
 
-rule 4a_RegulatorSeeThemselves {
+rule R4a_RegulatorSeeThemselves {
   description: "Regulators can see their own record"
   participant: "org.acme.trading.Regulator"
   operation: READ
@@ -381,29 +380,39 @@ rule 4a_RegulatorSeeThemselves {
 }
 
 ```
-- siwtch identity to reg101 and go to Historian and check you can see the Historical record and click on view record
-- there's an issue - click on a TRADE transaction - you will not be able to view record 
-- Add the following rule (insert rule) and update
 
-- TEST the ACL - now go to a trade transaction and check you can view the record
+This rule rule merely allows a Regulator participant to update their own profile record (should they wish to update it - you can test this out if you wish; we had done something similar earlier).
 
-This applies to any subsequent identity created for regulator role which is modeled as a participant role in our tutorial.
+Then click on the **UPDATE** button on the bottom left to update the business network. 
 
-END of tutorial.
+6. Next, switch identity (in the id Registry) to `regId101` and click 'Use Now'
 
+7/ Check you can indeed see the Historical records (which shows our previous transactions - then click on 'view record' for any system type transaction activity such as `AddAsset` or `AddParticipant` - as someone that is a Regulator, you should be able to see this activyty.
 
-#### don't delete this yet
-1. Switch identity to `tid1` (click the current identity top right and choose ID Registry, select to 'use now' for `tid`) - and click on the 'Test' tab
-2. Confirm that you cannot submit a `Trade` transaction ('Submit Transaction') to try change the ownership of a Commodity - you will get a message that you don't not have `CREATE` ability to do submit the transaction.
-3. Switch identity back to the 'admin' user (top right, 'ID Registry'), then go to the 'Define'  tab and click on 'Access Control' (`permissions.acl`) on the left.
-4. Paste the following rule in line 1 in your edit session, pasted above the existing rules:
+8. Next click 'view record' for a TRADE transaction- there's an issue - nothing happens. You (regulator) currently do not have authority (via ACLs) able to view the transaction record 
+
+9. Switch identity back to 'admin' as good practice for rule changes.
+
+10. Add the following Regulator authorisation rule (insert the rule in the `permissions.acl` file at the top ): 
 
 ```
-rule R2_EnableTradeTxn {
-    description: "Enable Traders to submit transactions"
-    participant: "org.acme.trading.Trader"
+rule R4b_RegTransView {
+    description: "Grant Regulator full access to Trade Transactions"
+    participant: "org.acme.trading.Regulator"
     operation: ALL
     resource: "org.acme.trading.Trade"
     action: ALLOW
-
+}
 ```
+
+Then click on the **UPDATE** button on the bottom left to update the business network. 
+
+This rule enables a Regulator to access the Trade transaction resources, such that it can view the Trade transactions from Historian's 'view record').
+
+This rule also applies to any subsequent identity mapped to the regulator role and in the Regulator participant registry.
+
+
+11. TEST the ACL - now go to a trade transaction again and check that you can indeed now view the record
+
+End of tutorial - we have shown how Access Control Lists provide authorisation and access control against participants or participant roles over resources that are committed to the blockchain, for a business network.
+
