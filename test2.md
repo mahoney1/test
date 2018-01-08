@@ -67,6 +67,19 @@ The following are a selection of answers, to help understand what you may be enc
 |  | 2.  .* means the rule definition is non-recursive
 |  | 3. org.acme.perishable.* - resources under the namespace `perishable` (non-recursive)
 |  | 4. org.acme.perishable.**  all resources and everything under that namespace (recursive)
+| Controlling access to a particular field |currently not possible for property (field) based access control in ACL runtime -> https://github.com/hyperledger/composer/issues/983 
+| ..(continued ..) | If your singular field control relateds to 'authorisation' (who's allowed to see a particular asset) you can maybe store a hash of the authorised list (of participants allowed) in an array eg. `String[] Authorised optional` then a rule something like 
+```
+
+rule sampleRule {
+   description: "only allowed users"
+   participant(p): "org.acme.model.Participant"
+   operation: ALL
+   resource(r): "org.acme.model.Asset"
+   condition: ( ( r.Authorised.indexOf(hashCode(p.getIdentifier()) > -1 ) || p.getIdentifier() === r.owner.getIdentifier()
+   action: ALLOW
+```
+where `hashCode` is a function defined in a script file in js directory .... and `owner` is a relationship field to the participant
 
 
 ++ in the model, transaction `spTransaction` is `abstract` and `SampleTransaction` and `SampleTransaction2` are `extended` transaction types
