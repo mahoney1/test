@@ -9,11 +9,13 @@ sidebar: sidebars/accordion-toc0.md
 
 # Deploying a {{site.data.conrefs.composer_full}} blockchain business network to {{site.data.conrefs.hlf_full}} (multiple organizations)
 
-This tutorial will demonstrate the steps that administrators in multiple organization scenarios must take to deploy a blockchain business network to an instance of {{site.data.conrefs.hlf_full}}, including how to generate the {{site.data.conrefs.composer_full}} configuration.
+This tutorial will provide a demonstration of  that administrators in multiple organization scenarios must take to deploy a blockchain business network to an instance of {{site.data.conrefs.hlf_full}}, including how to generate the {{site.data.conrefs.composer_full}} configuration.
 
 It is recommended that you first follow the previous tutorial that demonstrates how to deploy a blockchain business network to an instance of {{site.data.conrefs.hlf_full}} for a single organization, as it will explain some of the concepts in more detail.
 
-This tutorial will cover how to deploy a blockchain business network to a {{site.data.conrefs.hlf_full}} network that spans two organizations, `Org1` and `Org2`. The tutorial is presented with different types of steps depending on which organization should follow the step.
+This tutorial describes the process to deploy a blockchain network using  {{site.data.conrefs.hlf_full}}  and which spans two organizations, `Org1` and `Org2`. A Composer business network is deployed to this and the chaincode container for this is instantiated across the multi-organizational blockchain network. 
+
+The blockchain network in this tutorial is configured using docker containers with both Organizations on the same machine (obviously, in the real world, they'll be in separate networks). The tutorial has colour-coded steps for convenience, to indicate 'which organization' should follow a step - or indeed if 'both' need to complete the step.
 
 The first kind of step is for both organizations to follow:
 
@@ -33,23 +35,23 @@ Let's get started!
 
 <h2 class='everybody'>Prerequisites</h2>
 
-If you have installed the development environment, you will need to first stop the {{site.data.conrefs.hlf_full}} provided by the development environment:
+If you have previously installed the Composer IDE / development environment, you will need to first tear down the {{site.data.conrefs.hlf_full}} containers provided by the development environment:
 
     cd ~/fabric-tools
     ./stopFabric.sh
     ./teardownFabric.sh
 
-Clone the following GitHub repository:
+Next, clone the following GitHub Fabric Samples repository (rather than use the samples from the [Fabric site:](http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html) at this point, it needs some changes)
 
     git clone -b issue-6978 https://github.com/sstone1/fabric-samples.git
 
-Follow the [Building Your First Network tutorial](http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html), ensuring that you use the GitHub repository cloned in the previous step. You must not clone and use the Hyperledger Fabric version of the GitHub repository as it is currently missing changes that are required for this tutorial.
+We are using the  [Building Your First Network](http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html) Fabric sample network for this multi-org tutorial. We will refer to this {{site.data.conrefs.hlf_full}} network as the 'BYFN' (Building Your First Network) network henceforth. If you choose to split your organisations across separate physical machines or separate virtual machines running on different IP networks, it is outside the scope of this particular tutorial. You will need to configure the blockchain network (for each org) and check that you can deploy/interact with some Fabric chaincode samples deployed to that network. Furthermore, the container names defined below in the connection profiles are resolved easily on single-machine based tutorial - you will need to ensure your setup is configured for any resolution or routing that is required between the machines.
 
 <h2 class='everybody'>Step One: Starting a {{site.data.conrefs.hlf_full}} network</h2>
 
-In order to follow this tutorial, you must start a {{site.data.conrefs.hlf_full}} network.
+In order to follow this tutorial, you must start up a fresh {{site.data.conrefs.hlf_full}} network.
 
-This tutorial will assume that you use the {{site.data.conrefs.hlf_full}} network provided in the {{site.data.conrefs.hlf_full}} [Building Your First Network tutorial](http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html). We will refer to this {{site.data.conrefs.hlf_full}} network as the BYFN (Building Your First Network) network.
+This tutorial will assume that you use the {{site.data.conrefs.hlf_full}} network provided in the {{site.data.conrefs.hlf_full}} [Building Your First Network tutorial](http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html). 
 
 You can now start the BYFN network. You must specify additional flags that are not specified in the Building Your First Network tutorial. This is because we want to use CouchDB as the world state database, and we want to start a Certificate Authority (CA) for each organization.
 
