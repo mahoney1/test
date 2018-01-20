@@ -49,16 +49,30 @@ We are using the  [Building Your First Network](http://hyperledger-fabric.readth
 
 <h2 class='everybody'>Step One: Starting a {{site.data.conrefs.hlf_full}} network</h2>
 
-In order to follow this tutorial, you must start up a fresh {{site.data.conrefs.hlf_full}} network.
+In order to follow this tutorial, you must start up a fresh {{site.data.conrefs.hlf_full}} network. This tutorial will assume that you use the {{site.data.conrefs.hlf_full}} network provided in the {{site.data.conrefs.hlf_full}} [Building Your First Network tutorial](http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html). 
 
-This tutorial will assume that you use the {{site.data.conrefs.hlf_full}} network provided in the {{site.data.conrefs.hlf_full}} [Building Your First Network tutorial](http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html). 
+1. change directory to `fabric-samples`
 
-You can now start the BYFN network. You must specify additional flags that are not specified in the Building Your First Network tutorial. This is because we want to use CouchDB as the world state database, and we want to start a Certificate Authority (CA) for each organization.
+    cd fabric-samples
+    
+2. Download the platform binaries, including cryptogen :
+  
+    curl -sSL https://goo.gl/6wtTN5 | bash -s 1.1.0-preview
+
+    Verify the list docker images downloaded without issues
+    
+3. change directory into `first-network` sample 
+
+    cd first-network
+
+4. Next, start the BYFN network - additional flags (to the `byfn.sh` script below) must be specified, as we're using CouchDB as the world state database (different to that specified on the Fabric BYFN page) - we also want to start a Certificate Authority (CA) for **each** organization.
+ 
+ 5. Execute the following commands in sequence from the `first-network` directory.
 
     ./byfn.sh -m generate
     ./byfn.sh -m up -s couchdb -a
 
-If the command works successfully, the BYFN network is started, and you will see the following output:
+If the command works successfully, the first command will generate artifacts, then following the second command, the BYFN network is started, and verify that you see the following output before proceeding:
 
     ========= All GOOD, BYFN execution completed ===========
 
@@ -69,18 +83,18 @@ If the command works successfully, the BYFN network is started, and you will see
     | |___  | |\  | | |_| |
     |_____| |_| \_| |____/
 
-Next, delete any business network cards that may exist in your wallet. It is safe to ignore any errors that state that the business network cards cannot be found:
+Next, delete any 'old' business network cards that may exist in your wallet from previous Fabric environments. It is safe to ignore any errors that state that the business network cards cannot be found:
 
     composer card delete -n PeerAdmin@byfn-network-org1
     composer card delete -n PeerAdmin@byfn-network-org2
-    composer card delete -n alice@tutorial-network
-    composer card delete -n bob@tutorial-network
-    composer card delete -n admin@tutorial-network
+    composer card delete -n alice@trade-network
+    composer card delete -n bob@trade-network
+    composer card delete -n admin@trade-network
     composer card delete -n PeerAdmin@fabric-network
 
-However any other types of failure could indicate you have cards in the card store which are from an older version of {{site.data.conrefs.composer_full}} and you will then have to delete your file system card store as follows
+However any other types of failure could indicate you have cards in the card store which are from an older version of {{site.data.conrefs.composer_full}} and you will then have to delete your file system card store in your HOME directory as follows:
 
-    rm -fr ~/.composer
+    rm -fr $HOME/.composer 
 
 <h2 class='everybody'>Step Two: Exploring the {{site.data.conrefs.hlf_full}} network</h2>
 
@@ -283,43 +297,42 @@ We need a base connection profile that describes this fabric network which can t
         }
     }
 
-When working with the certificates it is recommended to create a temporary working directory to create the Composer connection profiles:
+Copy this base file (above) into a file  `byfn-network.json` under the new directory `/tmp/composer`. When working with the certificates, it is recommended to create a temporary working directory to create the Composer connection profiles.  
 
+
+    mkdir -p /tnp/composer
     mkdir -p /tmp/composer/org1
     mkdir -p /tmp/composer/org2
 
-You need to replace all instances of the text `INSERT_ORG1_CA_CERT` with the CA certificate for the peer nodes for `Org1`:
-Use the following command to convert the pem file to something that can be embedded into the above connection profile.
+Open `byfn-network.json` and replace all instances of the text `INSERT_ORG1_CA_CERT` with the CA certificate for the peer nodes for `Org1`: - use the following command to get the certificate from the .pem file so that it can be embedded into the above connection profile.
 
     awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt > /tmp/composer/org1/ca-org1.txt
 
-copy the contents of the file `/tmp/composer/org1/ca-org1.txt` and replace the text `INSERT_ORG1_CA_CERT`. It should now look something like this (but be a single line in the profile file)
+Next, copy the contents of the file `/tmp/composer/org1/ca-org1.txt` and replace the text `INSERT_ORG1_CA_CERT` in the .json file. It should now look something like this (must be a single line in the profile file as shown)
 
 ```
 "pem": "-----BEGIN CERTIFICATE-----\nMIICNTCCAdygAwIBAgIRAMNvmQpnXi7uM19BLdha3MwwCgYIKoZIzj0EAwIwbDEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xFDASBgNVBAoTC2V4YW1wbGUuY29tMRowGAYDVQQDExF0bHNjYS5l\neGFtcGxlLmNvbTAeFw0xNzA2MjYxMjQ5MjZaFw0yNzA2MjQxMjQ5MjZaMGwxCzAJ\nBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJh\nbmNpc2NvMRQwEgYDVQQKEwtleGFtcGxlLmNvbTEaMBgGA1UEAxMRdGxzY2EuZXhh\nbXBsZS5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASJn3QUVcKCp+s6lSPE\nP5KlWmE9rEG0kpECsAfW28vZQSIg2Ez+Tp1alA9SYN/5BtL1N6lUUoVhG3lz8uvi\n8zhro18wXTAOBgNVHQ8BAf8EBAMCAaYwDwYDVR0lBAgwBgYEVR0lADAPBgNVHRMB\nAf8EBTADAQH/MCkGA1UdDgQiBCB7ULYTq3+BQqnzwae1RsnwQgJv/HQ5+je2xcDr\nka4MHTAKBggqhkjOPQQDAgNHADBEAiB2hLiS8B1g4J5Qbxu15dVWAZTAXX9xPAvm\n4l25e1oS+gIgBiU/aBwSxY0uambwMB6xtQz0ZE/D4lyTZZcW9SODlOE=\n-----END CERTIFICATE-----\n"
 ```
 
-You need to replace all instances of the text `INSERT_ORG2_CA_CERT` with the CA certificate for the peer nodes for `Org2`:
-Use the following command to convert the pem file to something that can be embedded into the above connection profile.
+Next, in the same .json file - you need to replace all instances of the text `INSERT_ORG2_CA_CERT` with the CA certificate for the peer nodes for `Org2`:  - use the following command to convert the .pem file to something that can be embedded into the above connection profile.
 
     awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt > /tmp/composer/org2/ca-org2.txt
 
-Copy the contents of the file `/tmp/composer/org2/ca-org2.txt` and replace the text `INSERT_ORG2_CA_CERT`.
+Copy the contents of the file `/tmp/composer/org2/ca-org2.txt` and replace the text called `INSERT_ORG2_CA_CERT`. Once again, all on the same line.
 
-You need to replace all instances of the text `INSERT_ORDERER_CA_CERT` with the CA certificate for the orderer node:
-Use the following command to convert the pem file to something that can be embedded into the above connection profile.
+Next, you need to replace all instances of the text `INSERT_ORDERER_CA_CERT` with the CA certificate for the orderer node:  use the following command to convert the .pem file to something that can be embedded into the above connection profile json file.
 
     awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt > /tmp/composer/ca-orderer.txt
 
 copy the contents of the file `/tmp/composer/ca-orderer.txt` and replace the text `INSERT_ORDERER_CA_CERT`.
 
-Once done, save this file as `/tmp/composer/byfn-network.json`.
+Once done, save this file in your edit sessions as  `/tmp/composer/byfn-network.json`.
 
 This connection profile now describes the fabric network setup, all the peers, orderers and certificate authorities that are part of the network, it defines all the organizations that are participating in the network and also defines the channel's on this network. {{site.data.conrefs.composer_full}} can only interact with a single channel so only one channel should be defined.
 
 <h2 class='alice'>Step Three: Customizing the connection profile for Org1</h2>
 
-This is just a case of now specifying the organization that `alice` belongs to in a client section with optional timeouts, so add the following block into the above connection profile `/tmp/composer/byfn-network.json` after the `version` property and before the `channel` property and save it as `/tmp/composer/org1/byfn-network-org1.json`.
+This is just a case of specifying the organization that `alice` belongs to, in a `client` section with optional timeouts,  add the following block into the above connection profile `/tmp/composer/byfn-network.json` between `version` property and just before the `channel` property - once done, save it as a NEW file called  `/tmp/composer/org1/byfn-network-org1.json`.
 
         "client": {
             "organization": "Org1",
@@ -377,17 +390,44 @@ Repeat the same process for `bob` but this time specify the organization as `Org
         "channel": {
         ...
 
+So the section of the profile should look like
+
+        ...
+        "version": "1.0.0",
+        "client": {
+            "organization": "Org2",
+            "connection": {
+                "timeout": {
+                    "peer": {
+                        "endorser": "300",
+                        "eventHub": "300",
+                        "eventReg": "300"
+                    },
+                    "orderer": "300"
+                }
+            }
+        },
+        "channel": {
+        ...
+
 <h2 class='alice'>Step Five: Locating the certificate and private key for the {{site.data.conrefs.hlf_full}} administrator for Org1</h2>
 
-The administrator for our {{site.data.conrefs.hlf_full}} network is a user called `Admin@org1.example.com`. The certificates and private key files for this user are stored in the directory:
+The administrator for our {{site.data.conrefs.hlf_full}} Org1 network is a user called `Admin@org1.example.com`. The certificates and private key files for this user are stored in the directory:
 
     crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
 
+You can set this directory as a variable to use for copying the certificate and key: 
+    
 You must first locate the certificate file for this user. The certificate is the public part of the identity. The certificate file can be found in the `signcerts` subdirectory and is named `Admin@org1.example.com-cert.pem`.
 
 Next, you must locate the private key file for this user. The private key is used to sign transactions as this identity. The private key file can be found in the `keystore` subdirectory. The name of the private key file is a long hexadecimal string, with a suffix of `_sk`, for example `78f2139bfcfc0edc7ada0801650ed785a11cfcdef3f9c36f3c8ca2ebfa00a59c_sk`. The name will change every time the configuration is generated.
 
-Remember the path to both of these files, or copy them into the same directory as the connection profile file `/tmp/composer/org1/byfn-network-org1.json` that you created in step three. You will need these files in the next steps.
+Remember the path to both of these files - or copy them into the same directory as the connection profile file `/tmp/composer/org1/byfn-network-org1.json` that you created in step three. You will need these files in the next steps. Use the following commands to do this:
+
+
+    export ORG1=crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+    cp -p $ORG1/signcerts/A*.pem /tmp/composer/org1
+    cp -p $ORG1/keystore/*_sk /tmp/composer/org1
 
 <h2 class='bob'>Step Six: Locating the certificate and private key for the {{site.data.conrefs.hlf_full}} administrator for Org2</h2>
 
@@ -400,6 +440,13 @@ You must first locate the certificate file for this user. The certificate is the
 Next, you must locate the private key file for this user. The private key is used to sign transactions as this identity. The private key file can be found in the `keystore` subdirectory. The name of the private key file is a long hexadecimal string, with a suffix of `_sk`, for example `d4889cb2a32e167bf7aeced872a214673ee5976b63a94a6a4e61c135ca2f2dbb_sk`. The name will change every time the configuration is generated.
 
 Remember the path to both of these files, or copy them into the same directory as the connection profile file `/tmp/composer/byfn-network-org2.json` that you created in step four. You will need these files in the next steps.
+
+Use the following commands to do this:
+
+
+    export ORG2=crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+    cp -p $ORG2/signcerts/A*.pem /tmp/composer/org2
+    cp -p $ORG2/keystore/*_sk /tmp/composer/org2
 
 <h2 class='alice'>Step Seven: Creating business network cards for the {{site.data.conrefs.hlf_full}} administrator for Org1</h2>
 
@@ -441,13 +488,15 @@ If the command works successfully, a business network card called `PeerAdmin@byf
 
 Run the `composer runtime install` command to install the {{site.data.conrefs.composer_full}} runtime onto all of the {{site.data.conrefs.hlf_full}} peer nodes for `Org1` that you specified in the connection profile file you created in step three:
 
-    composer runtime install -c PeerAdmin@byfn-network-org1 -n tutorial-network
+    composer runtime install -c PeerAdmin@byfn-network-org1 -n trade-network
 
 <h2 class='bob'>Step Twelve: Installing the {{site.data.conrefs.composer_full}} runtime onto the {{site.data.conrefs.hlf_full}} peer nodes for Org2</h2>
 
 Run the `composer runtime install` command to install the {{site.data.conrefs.composer_full}} runtime onto all of the {{site.data.conrefs.hlf_full}} peer nodes for `Org2` that you specified in the connection profile file you created in step four:
 
-    composer runtime install -c PeerAdmin@byfn-network-org2 -n tutorial-network
+    composer runtime install -c PeerAdmin@byfn-network-org2 -n trade-network
+
+As you can see from the above, we are using sample Composer business network called `trade-network` to test our multi-org environment. You will need a file `trade-network.bna` business network archive to do the test. If you don't have this, go to https://composer-playground.mybluemix.net/ and deploy the `trade-network` sample connect to it, then export it to the current directory as `trade-network.bna` . If you have are planning on using the Composer tutorial network `tutorial-network` as your network,  you would need to use that in the `runtime install` command above and further down this tutorial).
 
 <h2 class='everybody'>Step Thirteen: Defining the endorsement policy for the business network</h2>
 
@@ -524,7 +573,7 @@ The certficates will be placed into a directory called `bob` in the current work
 
 Run the `composer network start` command to start the business network. Only `Org1` needs to perform this operation. This command uses the `/tmp/composer/endorsement-policy.json` file created in step thirteen, and the `admin-pub.pem` files created by both Alice and Bob in step fifteen and step sixteen, so you must ensure that all of these files are accessible to this command:
 
-    composer network start -c PeerAdmin@byfn-network-org1 -a tutorial-network@0.0.1.bna -o endorsementPolicyFile=/tmp/composer/endorsement-policy.json -A alice -C alice/admin-pub.pem -A bob -C bob/admin-pub.pem
+    composer network start -c PeerAdmin@byfn-network-org1 -a trade-network.bna -o endorsementPolicyFile=/tmp/composer/endorsement-policy.json -A alice -C alice/admin-pub.pem -A bob -C bob/admin-pub.pem
 
 Once this command completes, the business network will have been started. Both Alice and Bob will be able to access the business network, start to set up the business network, and onboard other participants from their respective organizations. However, both Alice and Bob must create new business network cards with the certificates that they created in the previous steps so that they can access the business network.
 
@@ -532,15 +581,15 @@ Once this command completes, the business network will have been started. Both A
 
 Run the `composer card create` command to create a business network card that Alice, the business network administrator for `Org1`, can use to access the business network:
 
-    composer card create -p /tmp/composer/org1/byfn-network-org1.json -u alice -n tutorial-network -c alice/admin-pub.pem -k alice/admin-priv.pem
+    composer card create -p /tmp/composer/org1/byfn-network-org1.json -u alice -n trade-network -c alice/admin-pub.pem -k alice/admin-priv.pem
 
 Run the `composer card import` command to import the business network card that you just created:
 
-    composer card import -f alice@tutorial-network.card
+    composer card import -f alice@trade-network.card
 
 Run the `composer network ping` command to test the connection to the blockchain business network:
 
-    composer network ping -c alice@tutorial-network
+    composer network ping -c alice@trade-network
 
 If the command completes successfully, then you should see the fully qualified participant identifier `org.hyperledger.composer.system.NetworkAdmin#alice` in the output from the command. You can now use this business network card to interact with the blockchain business network and onboard other participants in your organization.
 
@@ -548,15 +597,15 @@ If the command completes successfully, then you should see the fully qualified p
 
 Run the `composer card create` command to create a business network card that Bob, the business network administrator for `Org2`, can use to access the business network:
 
-    composer card create -p /tmp/composer/org1/byfn-network-org2.json -u bob -n tutorial-network -c bob/admin-pub.pem -k bob/admin-priv.pem
+    composer card create -p /tmp/composer/org1/byfn-network-org2.json -u bob -n trade-network -c bob/admin-pub.pem -k bob/admin-priv.pem
 
 Run the `composer card import` command to import the business network card that you just created:
 
-    composer card import -f bob@tutorial-network.card
+    composer card import -f bob@trade-network.card
 
 Run the `composer network ping` command to test the connection to the blockchain business network:
 
-    composer network ping -c bob@tutorial-network
+    composer network ping -c bob@trade-network
 
 If the command completes successfully, then you should see the fully qualified participant identifier `org.hyperledger.composer.system.NetworkAdmin#bob` in the output from the command. You can now use this business network card to interact with the blockchain business network and onboard other participants in your organization.
 
