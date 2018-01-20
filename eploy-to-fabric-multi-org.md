@@ -15,7 +15,7 @@ It is recommended that you first follow the previous tutorial that demonstrates 
 
 This tutorial describes the process to deploy a blockchain network using  {{site.data.conrefs.hlf_full}}  and which spans two organizations, `Org1` and `Org2`. A Composer business network is deployed to this and the chaincode container for this is instantiated across the multi-organizational blockchain network. 
 
-The blockchain network in this tutorial is configured using docker containers with both Organizations on the same machine (obviously, in the real world, they'll be in separate networks). The tutorial has colour-coded steps for convenience, to indicate 'which organization' should follow a step - or indeed if 'both' need to complete the step.
+The blockchain network in this tutorial is configured using docker containers with both Organizations on the same machine (obviously, in the real world, they'll be in separate IP networks). The tutorial has colour-coded steps for convenience, to indicate 'which organization' should follow a particular step or sequence - or indeed, if steps are needed for both Orgs.
 
 The first kind of step is for both organizations to follow:
 
