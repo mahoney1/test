@@ -59,7 +59,7 @@ In order to follow this tutorial, you must start up a fresh {{site.data.conrefs.
   
     curl -sSL https://goo.gl/6wtTN5 | bash -s 1.1.0-preview
 
-    Verify the list docker images downloaded without issues
+    Verify the list of docker images downloaded without issues
     
 3. change directory into `first-network` sample 
 
@@ -67,7 +67,7 @@ In order to follow this tutorial, you must start up a fresh {{site.data.conrefs.
 
 4. Next, start the BYFN network - additional flags (to the `byfn.sh` script below) must be specified, as we're using CouchDB as the world state database (different to that specified on the Fabric BYFN page) - we also want to start a Certificate Authority (CA) for **each** organization.
  
- 5. Execute the following commands in sequence from the `first-network` directory.
+5. Execute the following commands in sequence from the `first-network` directory:
 
     ./byfn.sh -m generate
     ./byfn.sh -m up -s couchdb -a
