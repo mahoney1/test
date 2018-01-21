@@ -593,6 +593,29 @@ Run the `composer network ping` command to test the connection to the blockchain
 
 If the command completes successfully, then you should see the fully qualified participant identifier `org.hyperledger.composer.system.NetworkAdmin#alice` in the output from the command. You can now use this business network card to interact with the blockchain business network and onboard other participants in your organization.
 
+Lets create a participant, issue an identity (mapped to that participant) and create an asset on the blockchain network as that identity.
+
+Run the `composer participant add` command below, copying it to the command line to execute:
+
+    composer participant add -c alice@trade-network -d '{"$class":"org.acme.trading.Trader","tradeId":"trader1-org1", "firstName":"Jo","lastName":"Doe"}'
+    
+Next create the identity for `trader1-org1` with the `composer issue identity` command below:
+
+    composer identity issue -c alice@trade-network -f jo.card -u jdoe -a "resource:org.acme.trading.Trader#trader1-org1"
+
+Import the card and test it
+
+    composer card import -f jo.card 
+    composer network ping -c jdoe@trade-network
+    
+Lastly, submit a transaction as `jdoe` identity using the following sequence (or create a Commodity asset using playground if you have installed it) - the sequence below creates a Commodity asset
+
+    composer transaction submit --card jdoe@trade-network -d '{"$class": "org.hyperledger.composer.system.AddAsset","registryType": "Asset","registryId": "org.acme.trading.Commodity", "targetRegistry" : "resource:org.hyperledger.composer.system.AssetRegistry#org.acme.trading.Commodity", "resources": [{"$class": "org.acme.trading.Commodity","tradingSymbol":"EMA", "description":"Corn commodity","mainExchange":"EURONEXT", "quantity":"10","owner":"resource:org.acme.trading.Trader#trader-org1"}]}'
+
+Finally, do a `composer network list` to confirm the generated artifacts in the business network:
+
+    composer network list -c jdoe@trade-network
+
 <h2 class='bob'>Step Nineteen: Creating a business network card to access the business network as Org2</h2>
 
 Run the `composer card create` command to create a business network card that Bob, the business network administrator for `Org2`, can use to access the business network:
@@ -607,8 +630,32 @@ Run the `composer network ping` command to test the connection to the blockchain
 
     composer network ping -c bob@trade-network
 
-If the command completes successfully, then you should see the fully qualified participant identifier `org.hyperledger.composer.system.NetworkAdmin#bob` in the output from the command. You can now use this business network card to interact with the blockchain business network and onboard other participants in your organization.
+If the command completes successfully, then you should see the fully qualified participant identifier `org.hyperledger.composer.system.NetworkAdmin#bob` in the output from the command. Let's onboard another Trader, this time for Org 2:
 
+Once again, create a participant, issue an identity (mapped to that participant) - as we already have an asset on the blockchain network, we will use a transaction to change the ownership (from Org1 trader to an Org2 trader):
+
+Run the `composer participant add` command below, copying it to the command line to execute:
+
+    composer participant add -c bob@trade-network -d '{"$class":"org.acme.trading.Trader","tradeId":"trader1-org2", "firstName":"Dave","lastName":"Lowe"}'
+    
+Next create the identity for `trader12org2` with the `composer issue identity` command below:
+
+    composer identity issue -c bobtrade-network -f dave.card -u dlowe -a "resource:org.acme.trading.Trader#trader2-org2"
+
+Import the card and test it
+
+    composer card import -f dave.card 
+    composer network ping -c dlowe@trade-network
+    
+Lastly, submit a transaction to change ownership of the Commodity asset created earlier. We will submit the transaction as the asset owner Jon Doe and transfer it to trader 'Dave Lowe'. We will then verify the ownership change has occurred as the Org 2 trader participant mapped to the `dlowe` identity: Perform the step below.
+
+    composer transaction submit --card jdoe@trade-network -d '{"$class":"org.acme.trading.Trade","commodity":"resource:org.acme.trading.Commodity#EMA","newOwner":"resource:org.acme.trading.Trader#trader-org2"}'
+
+
+Finally, do a `composer network list` as the Org 2 trader participant to confirm the change of ownership on the asset:
+
+    composer network list -c dlowe@trade-network
+    
 <h2 class='everybody'>Conclusion</h2>
 
-In this tutorial you have seen how to configure {{site.data.conrefs.composer_full}} with all of the information required to connect to a {{site.data.conrefs.hlf_full}} network that spans multiple organizations, and how to deploy a blockchain business network that spans all of the organizations in that {{site.data.conrefs.hlf_full}} network.
+In this tutorial you have seen how to configure {{site.data.conrefs.composer_full}} with all of the information required to connect to a {{site.data.conrefs.hlf_full}} network that spans multiple organizations, and how to deploy a business network to that blockchain network and perform some simple transactions as participants in each organization, using identities that were issued by the Certificate of Authorities in either organization.
