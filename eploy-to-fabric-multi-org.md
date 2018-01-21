@@ -612,7 +612,7 @@ Import the card and test it
     
 Lastly, submit a transaction as `jdoe` identity using the following sequence (or create a Commodity asset using playground if you have installed it) - the sequence below creates a Commodity asset
 
-    composer transaction submit --card jdoe@trade-network -d '{"$class": "org.hyperledger.composer.system.AddAsset","registryType": "Asset","registryId": "org.acme.trading.Commodity", "targetRegistry" : "resource:org.hyperledger.composer.system.AssetRegistry#org.acme.trading.Commodity", "resources": [{"$class": "org.acme.trading.Commodity","tradingSymbol":"EMA", "description":"Corn commodity","mainExchange":"EURONEXT", "quantity":"10","owner":"resource:org.acme.trading.Trader#trader-org1"}]}'
+    composer transaction submit --card jdoe@trade-network -d '{"$class": "org.hyperledger.composer.system.AddAsset","registryType": "Asset","registryId": "org.acme.trading.Commodity", "targetRegistry" : "resource:org.hyperledger.composer.system.AssetRegistry#org.acme.trading.Commodity", "resources": [{"$class": "org.acme.trading.Commodity","tradingSymbol":"EMA", "description":"Corn commodity","mainExchange":"EURONEXT", "quantity":"10","owner":"resource:org.acme.trading.Trader#trader1-org1"}]}'
 
 Finally, do a `composer network list` to confirm the generated artifacts in the business network:
 
@@ -638,7 +638,7 @@ Once again, create a participant, issue an identity (mapped to that participant)
 
 Run the `composer participant add` command below, copying it to the command line to execute:
 
-    composer participant add -c bob@trade-network -d '{"$class":"org.acme.trading.Trader","tradeId":"trader1-org2", "firstName":"Dave","lastName":"Lowe"}'
+    composer participant add -c bob@trade-network -d '{"$class":"org.acme.trading.Trader","tradeId":"trader2-org2", "firstName":"Dave","lastName":"Lowe"}'
     
 Next create the identity for `trader12org2` with the `composer issue identity` command below:
 
@@ -651,7 +651,7 @@ Import the card and test it
     
 Lastly, submit a transaction to change ownership of the Commodity asset created earlier. We will submit the transaction as the asset owner Jon Doe and transfer it to trader 'Dave Lowe'. We will then verify the ownership change has occurred as the Org 2 trader participant mapped to the `dlowe` identity: Perform the step below.
 
-    composer transaction submit --card jdoe@trade-network -d '{"$class":"org.acme.trading.Trade","commodity":"resource:org.acme.trading.Commodity#EMA","newOwner":"resource:org.acme.trading.Trader#trader-org2"}'
+    composer transaction submit --card jdoe@trade-network -d '{"$class":"org.acme.trading.Trade","commodity":"resource:org.acme.trading.Commodity#EMA","newOwner":"resource:org.acme.trading.Trader#trader2-org2"}'
 
 
 Finally, do a `composer network list` as the Org 2 trader participant to confirm the change of ownership on the asset:
