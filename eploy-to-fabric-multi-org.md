@@ -652,7 +652,7 @@ Run the `composer participant add` command below, copying it to the command line
     
 Next create the identity for `trader2-org2` with the `composer issue identity` command below:
 
-    composer identity issue -c bobtrade-network -f dave.card -u dlowe -a "resource:org.acme.trading.Trader#trader2-org2"
+    composer identity issue -c bob@trade-network -f dave.card -u dlowe -a "resource:org.acme.trading.Trader#trader2-org2"
 
 Import the card and test it
 
