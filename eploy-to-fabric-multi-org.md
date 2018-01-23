@@ -466,7 +466,7 @@ In this step you will create business network cards for the administrator to use
 
 Run the `composer card create` command to create a business network card using the connection profile for `Org2`. You must specify the path to all three files that you either created or located in the previous steps:
 
-    composer card create -p /tmp/composer/org1/byfn-network-org2.json -u PeerAdmin -c /tmp/composer/org2/Admin@org2.example.com-cert.pem -k /tmp/composer/org2/*_sk -r PeerAdmin -r ChannelAdmin -f PeerAdmin@byfn-network-org2.card
+    composer card create -p /tmp/composer/org2/byfn-network-org2.json -u PeerAdmin -c /tmp/composer/org2/Admin@org2.example.com-cert.pem -k /tmp/composer/org2/*_sk -r PeerAdmin -r ChannelAdmin -f PeerAdmin@byfn-network-org2.card
 
 If the command works successfully, a business network card file called `PeerAdmin@byfn-network-org2.card` will have been written to the current directory.
 
@@ -622,7 +622,7 @@ Finally, do a `composer network list` to confirm the generated artifacts in the 
 
 Run the `composer card create` command to create a business network card that Bob, the business network administrator for `Org2`, can use to access the business network:
 
-    composer card create -p /tmp/composer/org1/byfn-network-org2.json -u bob -n trade-network -c bob/admin-pub.pem -k bob/admin-priv.pem
+    composer card create -p /tmp/composer/org2/byfn-network-org2.json -u bob -n trade-network -c bob/admin-pub.pem -k bob/admin-priv.pem
 
 Run the `composer card import` command to import the business network card that you just created:
 
