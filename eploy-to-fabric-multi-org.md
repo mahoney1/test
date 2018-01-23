@@ -72,6 +72,7 @@ In order to follow this tutorial, you must start up a fresh {{site.data.conrefs.
 5. Execute the following commands in sequence from the `first-network` directory:
 
     ./byfn.sh -m generate
+    
     ./byfn.sh -m up -s couchdb -a
 
 If the command works successfully, the first command will generate artifacts, then following the second command, the BYFN network is started, and verify that you see the following output before proceeding:
@@ -302,8 +303,8 @@ We need a base connection profile that describes this fabric network which can t
 Copy this base file (above) into a file  `byfn-network.json` under the new directory `/tmp/composer`. When working with the certificates, it is recommended to create a temporary working directory to create the Composer connection profiles.  
 
 
-    mkdir -p /tnp/composer
     mkdir -p /tmp/composer/org1
+    
     mkdir -p /tmp/composer/org2
 
 Open `byfn-network.json` and replace all instances of the text `INSERT_ORG1_CA_CERT` with the CA certificate for the peer nodes for `Org1`: - use the following command to get the certificate from the .pem file so that it can be embedded into the above connection profile.
@@ -498,7 +499,7 @@ Run the `composer runtime install` command to install the {{site.data.conrefs.co
 
     composer runtime install -c PeerAdmin@byfn-network-org2 -n trade-network
 
-As you can see from the above, we are using sample Composer business network called `trade-network` to test our multi-org environment. You will need a file `trade-network.bna` business network archive to do the test. If you don't have this, go to https://composer-playground.mybluemix.net/ and deploy the `trade-network` sample in Playground, then connect to it, and finally export it to the current directory as `trade-network.bna` . (Note: If you are planning on using a different network, like the Composer tutorial network `tutorial-network` as your business network,  you would need to use that in the `runtime install` command above and thereafter, as the network name thereafter in this tutorial).
+As you can see from the above, we are using sample Composer business network called `trade-network` to test our multi-org environment. You will need a file `trade-network.bna` business network archive to do the test. If you don't have this, go to https://composer-playground.mybluemix.net/ and deploy the `trade-network` sample in Playground, then connect to it, and finally export it to the current directory as `trade-network.bna` . (Note: If you are planning on using a different network, such as the Composer tutorial network `tutorial-network` as your business network,  you would need to use that name in the `runtime install` command above and thereafter, as the network name in this tutorial).
 
 <h2 class='everybody'>Step Thirteen: Defining the endorsement policy for the business network</h2>
 
@@ -610,7 +611,7 @@ Import the card and test it
     composer card import -f jo.card 
     composer network ping -c jdoe@trade-network
     
-Lastly, submit a transaction as `jdoe` identity using the following sequence (or create a Commodity asset using playground if you have installed it) - the sequence below creates a Commodity asset
+Lastly, submit a transaction as `jdoe` identity using the following sequence (or create a Commodity asset using playground if you have installed it) - the sequence below creates a Commodity asset:
 
     composer transaction submit --card jdoe@trade-network -d '{"$class": "org.hyperledger.composer.system.AddAsset","registryType": "Asset","registryId": "org.acme.trading.Commodity", "targetRegistry" : "resource:org.hyperledger.composer.system.AssetRegistry#org.acme.trading.Commodity", "resources": [{"$class": "org.acme.trading.Commodity","tradingSymbol":"EMA", "description":"Corn commodity","mainExchange":"EURONEXT", "quantity":"10","owner":"resource:org.acme.trading.Trader#trader1-org1"}]}'
 
@@ -640,7 +641,7 @@ Run the `composer participant add` command below, copying it to the command line
 
     composer participant add -c bob@trade-network -d '{"$class":"org.acme.trading.Trader","tradeId":"trader2-org2", "firstName":"Dave","lastName":"Lowe"}'
     
-Next create the identity for `trader12org2` with the `composer issue identity` command below:
+Next create the identity for `trader2-org2` with the `composer issue identity` command below:
 
     composer identity issue -c bobtrade-network -f dave.card -u dlowe -a "resource:org.acme.trading.Trader#trader2-org2"
 
