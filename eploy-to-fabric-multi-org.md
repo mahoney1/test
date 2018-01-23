@@ -422,7 +422,7 @@ You can set this directory as a variable to use for copying the certificate and 
     
 You must first locate the certificate file for this user. The certificate is the public part of the identity. The certificate file can be found in the `signcerts` subdirectory and is named `Admin@org1.example.com-cert.pem`.
 
-Next, you must locate the private key file for this user. The private key is used to sign transactions as this identity. The private key file can be found in the `keystore` subdirectory. The name of the private key file is a long hexadecimal string, with a suffix of `_sk`, for example `78f2139bfcfc0edc7ada0801650ed785a11cfcdef3f9c36f3c8ca2ebfa00a59c_sk`. The name will change every time the configuration is generated.
+Next, you must locate the private key file for this user. The private key is used to sign transactions as this identity. The private key file can be found in the `keystore` subdirectory. The name of the private key file is a long hexadecimal string, with a suffix of `_sk`, for example: `78f2139bfcfc0edc7ada0801650ed785a11cfcdef3f9c36f3c8ca2ebfa00a59c_sk`. The name will change every time the configuration is generated, hence the wildcard below.
 
 Remember the path to both of these files - or copy them into the same directory as the connection profile file `/tmp/composer/org1/byfn-network-org1.json` that you created in step three. You will need these files in the next steps. Use the following commands to do this:
 
@@ -498,7 +498,7 @@ Run the `composer runtime install` command to install the {{site.data.conrefs.co
 
     composer runtime install -c PeerAdmin@byfn-network-org2 -n trade-network
 
-As you can see from the above, we are using sample Composer business network called `trade-network` to test our multi-org environment. You will need a file `trade-network.bna` business network archive to do the test. If you don't have this, go to https://composer-playground.mybluemix.net/ and deploy the `trade-network` sample connect to it, then export it to the current directory as `trade-network.bna` . If you have are planning on using the Composer tutorial network `tutorial-network` as your network,  you would need to use that in the `runtime install` command above and further down this tutorial).
+As you can see from the above, we are using sample Composer business network called `trade-network` to test our multi-org environment. You will need a file `trade-network.bna` business network archive to do the test. If you don't have this, go to https://composer-playground.mybluemix.net/ and deploy the `trade-network` sample in Playground, then connect to it, and finally export it to the current directory as `trade-network.bna` . (Note: If you are planning on using a different network, like the Composer tutorial network `tutorial-network` as your business network,  you would need to use that in the `runtime install` command above and thereafter, as the network name thereafter in this tutorial).
 
 <h2 class='everybody'>Step Thirteen: Defining the endorsement policy for the business network</h2>
 
