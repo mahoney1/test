@@ -366,6 +366,7 @@ This rule restricts the current Trader participant to seeing only transactions h
 Then click on the **UPDATE** button on the bottom left to update the business network. 
 
 5. **TEST THE ACL**: 
+
 a. Switch user to identity `tid3` (top right, 'ID Registry') - you will only see 'Identity Activation' type entries but nothing about the history of transactions that were submitted relating to TRADER1 and TRADER2. This is what we would expect. 
 
 b. Next, switch to identity `tid1` - you will see the history of transactions (including the 'TRADE' transaction submitted earlier) relating to `tid1` only - in particular the transfer of Commodity 'CC' ownership to TRADER2 (By contrast, identity `tid2` , the transferee, will not see the historial 'TRADE' transaction submitted by `tid1` - only the Commodity asset, that was transferred).
