@@ -55,7 +55,7 @@ We'll use the sample business network (`trade-network`) sourced from the Compose
 
 2. Click on `Trader` on the left - Create New Participant (top right) as follows - the example below is 'TRADER1':
 
-
+1st record:
 
     {
           "$class": "org.acme.biznet.Trader",
@@ -68,14 +68,16 @@ We'll use the sample business network (`trade-network`) sourced from the Compose
     
 3. Repeat step 2 and create 5 additional `Trader` participants ('TRADER2' through 'TRADER6') using the sample data above (change the names as appropriate). We have provided 'TRADER2', and 'TRADER3' as an example below.
 
-    
+
+Remaining records:
+
     {
         "$class": "org.acme.biznet.Trader",
         "tradeId": "TRADER2",
         "firstName": "Jack",
         "lastName": "Sock"
     }
-      
+
     {
       "$class": "org.acme.biznet.Trader",
       "tradeId": "TRADER3",
@@ -243,6 +245,8 @@ First up - rule to restrict Traders to only see and update their own record.
 4. Paste the following rule in line 1 in your edit session, pasted above the existing 3 'System' and 'Network' system rules:
 
 
+Rule:
+
     rule R1a_TraderSeeUpdateThemselvesOnly {
       description: "Trader can see and update their own record only"
       participant(t): "org.acme.biznet.Trader"
@@ -269,6 +273,7 @@ We need a rule to enable a Trader access Commodities for which they are the desi
 3. Switch identity back to the 'admin' user (top right, 'ID Registry'), then go to the 'Define'  tab and click on 'Access Control' (`permissions.acl`) on the left.
 4. Paste the following rule in line 1 in your edit session, pasted above the existing rules:
 
+Rule:
 
     rule R1b_TraderSeeTheirCommodities {
       description: "Trader can see/work with their own Commodities"
@@ -298,6 +303,7 @@ We need a rule to enable a Trader to submit `Trade` transactions for which they 
 1. Switch identity to `tid1` (click the current identity top right and choose ID Registry, select to 'use now' for `tid1`) - and click on the 'Test' tab
 2. Confirm that you cannot submit a `Trade` transaction ('Submit Transaction' - copy and paste the transaction below) to try change the ownership of a Commodity - you will get a message that you do not have `CREATE` ability to do submit the transaction.
 
+JSON to copy:
 
     {
       "$class": "org.acme.biznet.Trade",
@@ -312,6 +318,7 @@ We need a rule to enable a Trader to submit `Trade` transactions for which they 
 3. Switch identity back to the 'admin' user (top right, 'ID Registry'), then go to the 'Define'  tab and click on 'Access Control' (`permissions.acl`) on the left.
 4. Paste the following rule in line 1 in your edit session, pasted above the existing rules:
 
+Rule:
 
     rule R2_EnableTradeTxn {
         description: "Enable Traders to submit transactions"
@@ -331,6 +338,7 @@ That's it. We know already that the participant can only work with their own Com
 
 a. Click on the 'Test' tab. Submit a `Trade` Transaction copying and pasting this transaction, replacing current contents with the transaction provided below:
 
+JSON to copy:
 
     {
       "$class": "org.acme.biznet.Trade",
@@ -353,6 +361,8 @@ We will lock down access to the Historian such that Traders only see their own, 
 3. Switch identity back to the 'admin' user (top right, 'ID Registry'), then go to the 'Define'  tab and click on 'Access Control' (`permissions.acl`) on the left.
 4. Paste the following rule in line 1 in your edit session, pasted above the existing rules:
 
+
+Rule:
 
     rule R3_TradersSeeOwnHistoryOnly {
       description: "Traders should be able to see the history of their own transactions only"
@@ -384,6 +394,7 @@ We don't yet have a 'Regulator' in our 'Commodity Trading' business network mode
 1. Switch identity to `admin` if you haven't already done so and then click on 'Define' (top)
 2. Click on the Model file and add a new Participant type (add it below the `Trader` participant) as follows:
 
+Model:
 
     participant Regulator identified by regId {
         o String regId
@@ -392,6 +403,9 @@ We don't yet have a 'Regulator' in our 'Commodity Trading' business network mode
     }
 
 3. Switch to the 'Test' tab and create a participant Regulator as follows:
+
+Create the record:
+
 
     {
       "$class": "org.acme.biznet.Regulator",
@@ -408,6 +422,8 @@ Then click on the **UPDATE** button on the bottom left to update the business ne
 At this point, the Regulator can now see the history of system transactions in Composer's Historian, due to the system ACL rules defined earlier. But at this point, he cannot see his own participant profile.
 
 5. Add the following rule:
+
+Rule: 
 
 
     rule R4a_RegulatorSeeThemselves {
@@ -434,6 +450,8 @@ Then click on the **UPDATE** button on the bottom left to update the business ne
 
 10. Add the following Regulator authorisation rule (insert the rule in the `permissions.acl` file at the top ): 
 
+Rule:
+
 
     rule R4b_RegTransView {
         description: "Grant Regulator full access to Trade Transactions"
@@ -451,6 +469,6 @@ This rule enables a Regulator to access the Trade transaction resources, such th
 This rule also applies to any subsequent identity mapped to the regulator role and in the Regulator participant registry.
 
 
-11. TEST the ACL - now go to a trade transaction again and check that you can indeed now view the record
+11. **TEST the ACL** - now go to a trade transaction again and check that you can indeed now view the record
 
 End of tutorial - we have shown how ACL rules provide authorisation and access control against participants or participant roles over resources that are committed to the blockchain, for a particular business network.
