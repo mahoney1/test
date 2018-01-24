@@ -225,7 +225,7 @@ Before we begin, we will need to remove one 'global' rule in `permissions.acl` f
     }
 
 
-Having removed this from the `permissions.acl` file (leaving the 'system' or 'administrator' rules behind, click on the UPDATE button (bottom left) for the changes to take effect.
+Having removed this from the `permissions.acl` file (leaving the 'system' or 'administrator' rules behind, click on the **UPDATE** button (bottom left) for the changes to take effect.
 
 In terms of our rule objectives - these are the policies we want to apply:
 
