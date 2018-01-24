@@ -58,10 +58,10 @@ We'll use the sample business network (`trade-network`) sourced from the Compose
 
 
     {
-      "$class": "org.acme.biznet.Trader",
-      "tradeId": "TRADER1",
-      "firstName": "Jenny",
-      "lastName": "Jones"
+          "$class": "org.acme.biznet.Trader",
+          "tradeId": "TRADER1",
+          "firstName": "Jenny",
+          "lastName": "Jones"
     }
     
     
