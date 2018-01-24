@@ -69,7 +69,7 @@ We'll use the sample business network (`trade-network`) sourced from the Compose
 3. Repeat step 2 and create 5 additional `Trader` participants ('TRADER2' through 'TRADER6') using the sample data above (change the names as appropriate). We have provided 'TRADER2', and 'TRADER3' as an example below.
 
 
-Remaining records:
+2nd record:
 
     {
         "$class": "org.acme.biznet.Trader",
@@ -77,6 +77,8 @@ Remaining records:
         "firstName": "Jack",
         "lastName": "Sock"
     }
+    
+3rd record:
 
     {
       "$class": "org.acme.biznet.Trader",
@@ -85,6 +87,8 @@ Remaining records:
       "lastName": "Valens"
     }
     
+4th record:
+ 
     {
       "$class": "org.acme.biznet.Trader",
       "tradeId": "TRADER4",
@@ -92,6 +96,9 @@ Remaining records:
       "lastName": "Dolittle"
     }
     
+  
+5th record:
+
     {
       "$class": "org.acme.biznet.Trader",
       "tradeId": "TRADER5",
@@ -99,7 +106,8 @@ Remaining records:
       "lastName": "Alonso"
     }
     
-    
+6th record:
+
     {
       "$class": "org.acme.biznet.Trader",
       "tradeId": "TRADER6",
