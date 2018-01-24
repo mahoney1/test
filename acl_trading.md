@@ -53,7 +53,7 @@ We'll use the sample business network (`trade-network`) sourced from the Compose
 
 1. Click on the 'Test' tab near the top of the screen. This is where we create sample Trader participants. 
 
-2. Click on `Trader` on the left - Create New Participant (top right) as follows - the example below is 'TRADER1', '
+2. Click on `Trader` on the left - Create New Participant (top right) as follows - the example below is 'TRADER1':
 
     {
       "$class": "org.acme.biznet.Trader",
@@ -68,13 +68,12 @@ We'll use the sample business network (`trade-network`) sourced from the Compose
 
     
     {
-      "$class": "org.acme.biznet.Trader",
-      "tradeId": "TRADER2",
-      "firstName": "Jack",
-      "lastName": "Sock"
+        "$class": "org.acme.biznet.Trader",
+        "tradeId": "TRADER2",
+        "firstName": "Jack",
+        "lastName": "Sock"
     }
-  
-    
+      
     {
       "$class": "org.acme.biznet.Trader",
       "tradeId": "TRADER3",
