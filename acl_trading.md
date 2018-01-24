@@ -55,6 +55,16 @@ We'll use the sample business network (`trade-network`) sourced from the Compose
 
 2. Click on `Trader` on the left - Create New Participant (top right) as follows - the example below is 'TRADER1':
 
+
+    {
+      "$class": "org.acme.biznet.Commodity",
+      "tradingSymbol": "EMA",
+      "description": "Corn",
+      "mainExchange": "EURONEXT",
+      "quantity": 10,
+      "owner": "resource:org.acme.biznet.Trader#TRADER1"
+    }
+    
     {
       "$class": "org.acme.biznet.Trader",
       "tradeId": "TRADER1",
