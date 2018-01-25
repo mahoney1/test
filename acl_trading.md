@@ -13,7 +13,7 @@ excerpt: "The ACL tutorial enables you to get familiar with Access Control rules
 
 Access control and authorization are a very important part of {{site.data.conrefs.composer_full}} and the security architecture of a business network shared by member organisations on the blockchain. {{site.data.conrefs.composer_full}} enables an administrator control what resources or data a participant, or indeed participant role - is authorized to see or do, in a business network. These participants will typically operate or transact from inside their respective member organisations and each will have their own access control requirements on the ledger, whilst at the same time allowing controlled access to shared data or data that may be common to all member organisations - or specific members interacting on the same business network.  
 
-This tutorial explores one such business network - the Commodity Trading network seen elsewhere in our tutorials and shows examples of ACLs in action.
+This tutorial explores one such business network - the Commodity Trading network - seen elsewhere in our tutorials and [sample networks](https://github.com/hyperledger/composer-sample-networks/tree/master/packages/trade-network) and shows examples of ACLs in action in this sample network.
 
 
 ![Overview of Commodity Trading Rules](../assets/img/tutorials/acl1/define_acl.png)
