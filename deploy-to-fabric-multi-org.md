@@ -17,7 +17,7 @@ Once the blockchain network is configured, we show how to deploy a business netw
 
 It is recommended that you first follow the accompanying singie organization tutorial first ; this tutorial demonstrates how to deploy a blockchain network to an instance of {{site.data.conrefs.hlf_full}} for a single organization, and will explain some of the concepts in more detail.
 
-The {site.data.conrefs.hlf_full}} blockchain network (for two organizations) in this tutorial is configured using docker containers,  with both organizations's fabric networks on the same machine - obviously, in the real world, they'll be in separate IP networks or domains. 
+The {site.data.conrefs.hlf_full}} blockchain network (for two organizations) in this tutorial is configured using docker containers,  with both organizations' fabric networks, on the same machine - obviously, in the real world, they'll be in separate IP networks or domains, or secure Cloud environments. 
 
 The tutorial has colour-coded steps for convenience, to indicate 'which organization' should follow a particular step or sequence - or indeed, if steps are needed for both Orgs.
 
@@ -620,9 +620,22 @@ Import the card and test it
     
     composer network ping -c jdoe@trade-network
     
-Lastly, submit a transaction as `jdoe` identity using the following sequence (or create a Commodity asset using playground if you have installed it) - the sequence below creates a Commodity asset:
+Next we will create an asset - From the command line, submit a transaction to create a Commodity asset, as participant `jdoe` (or alternatively, if you already have Composer Playground installed, connect as `jdoe@trade-network` to `trade-network` to create the asset 'EMA' - the JSON snippet is shown below ).
+
+To create the asset using the CLI - copy the `transaction submit` sequence below - it creates a Commodity asset for you:
 
     composer transaction submit --card jdoe@trade-network -d '{"$class": "org.hyperledger.composer.system.AddAsset","registryType": "Asset","registryId": "org.acme.trading.Commodity", "targetRegistry" : "resource:org.hyperledger.composer.system.AssetRegistry#org.acme.trading.Commodity", "resources": [{"$class": "org.acme.trading.Commodity","tradingSymbol":"EMA", "description":"Corn commodity","mainExchange":"EURONEXT", "quantity":"10","owner":"resource:org.acme.trading.Trader#trader1-org1"}]}'
+
+Or alternatively, to create in Playground - copy the following:
+
+    {
+      "$class": "org.acme.trading.Commodity",
+      "tradingSymbol": "EMA",
+      "description": "Corn commodity",
+      "mainExchange": "EURONEXT",
+      "quantity": 10,
+      "owner": "resource:org.acme.trading.Trader#trader1-org1"
+    }
 
 Finally, do a `composer network list` to confirm the generated artifacts in the business network:
 
