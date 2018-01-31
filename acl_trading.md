@@ -478,4 +478,4 @@ This rule also applies to any subsequent identity mapped to the regulator role a
 
 12. **TEST the ACL** - now go to a trade transaction again and check that you can indeed now view the record
 
-End of tutorial - we have shown how ACL rules provide authorisation and access control against participants or participant roles over resources that are committed to the blockchain, for a particular business network.
+End of tutorial - we have shown how ACL rules provide authorisation and access control against participants (or indeed participant roles) over resources that are committed to the ledger, in this case for a Commodity Trading business network.
