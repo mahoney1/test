@@ -3,7 +3,7 @@ layout: default
 title: Access Control Tutorial - Commodity Trading
 category: tutorials
 section: tutorials
-index-order: 306
+index-order: 307
 sidebar: sidebars/accordion-toc0.md
 excerpt: "The ACL tutorial enables you to get familiar with Access Control rules in {{site.data.conrefs.composer_full}}."
 ---
@@ -21,12 +21,12 @@ This tutorial explores one such business network - the Commodity Trading network
 
 Access control rules (the language that defines ACLs) fall into two main areas: 
 
-- authority to access system, network or administrative resources and operations via System ACLs ;  and 
-- authority to access resources or perform operations (like Create, Read, Update assets) within the business network itself,  via business domain ACLs. 
+- authority to access system, network or administrative resources and operations in the System namespace (governing Network and System operations) ;  and 
+- authority to access resources or perform operations **within** a given business network itself (like Create, Read, Update assets),  via domain specific business network ACLs. 
 
 The tutorial uses the online Playground to try out some simple and conditional access rules. In doing so, you will interact with the sample network as various identities - ultimately,  it is the users of the blockchain that we want to apply access control to. We'll also see how a Participant role can be used to control access, where multiple identities can be mapped to a designated Participant role (such as a Regulator). Its important to note that in a real blockchain network, all operations, whether from a Node JS application, CLI or indeed REST operations are subject to and controlled by the ACLs that govern a business network. Accountability is seen at an identity level.
 
-If you wish, you can also apply the rules in this tutorial against an existing v1 Fabric. You just need to grab and deploy the sample Commodity Trading business network used in the [Developer Tutorial](https://hyperledger.github.io/composer/tutorials/developer-tutorial.html) - remembering to remove the global trading network ACL rule mentioned earlier - and you're ready to start working with that environment.
+If you wish, you can also apply the rules in this tutorial against an existing {{site.data.conrefs.composer_full}} you've deployed. You just need to grab and deploy the sample Commodity Trading business network used in the [Developer Tutorial](https://hyperledger.github.io/composer/tutorials/developer-tutorial.html) - remembering to remove the global trading network ACL rule mentioned earlier - and you're ready to start working with that environment.
 
 
 ## Prerequisites
@@ -196,18 +196,18 @@ Next, let's create some trader identities - we need to issue identities for the 
 1. Click on `admin` (top right) and select 'ID Registry' from the drop-down
 2. Click 'Issue new ID' top right and it will present an 'Issue New Identity' dialog
 3. In the ID Name field - enter `tid1` as the identity we'll use for TRADER1
-4. In the Participant field - enter `TRADER1` to search for the fully-qualified Participant - and select the fully-qualified participant name
+4. In the Participant field - enter `TRADER1` to search for the Participant - and select the fully-qualified participant name
 5. Click on 'Create New'  to continue.
 
 Repeat the 'Issue new ID' sequence (step 2 through 5 above) for identities `tid2`, `tid3`, `tid4`, `tid5` and `tid6` respectively, mapping these to their respective TRADER participants.
   
  Now we're ready to start creating our access control rules.
 
-**Important**: if you are issuing new identities for a Fabric-based environment (as opposed to the online environment), be sure to add each issued identity to your wallet using the'Add to Wallet' option.
+**Important**: if you are issuing new identities for a {{site.data.conrefs.composer_full}} based environment (as opposed to the online environment), be sure to add each issued identity to your wallet using the 'Add to Wallet' option.
 
 ### Add Commodity Trading network access control rules
 
-The standard 'Commodity Trade network' sample network you deployed comes with standard System and Network ACL rules, that govern the administrators of the business network.
+The standard 'Commodity Trade network' sample network you deployed comes with standard System and Network ACL rules, that govern the participants of the business network to enable accessing registries like asset registries or ability to reviewing historical records in the ledger.
 
 But we want to add some Trading-specific access control rules - let's start by defining what we want to achieve first ! The golden rule with ACLs is that access to resources inside a business network are by default implicitly 'DENIED' to Participants, unless explicitly ALLOWED.
 
@@ -232,13 +232,14 @@ In terms of our rule objectives - these are the policies we want to apply:
 #### Everyday activities - rule objectives:
 
 1a. Traders can see and update their own profile only (participant record)
+
 1b. Allow Traders access to all operations on their own assets (Commodities)
 
 2. Restrict Participants of type 'Trader' such that only they can submit `Trade` transactions (as there may be several transactions defined in the model, over time, in an 'live'/operational business network)
 
 #### Historical records  - rule objectives:
 
-3. Ensure Traders can only see the history of their own transactions instigated by them.
+3. Ensure Traders can only see the history of transactions they have created.
 4. Allow a Participant of type REG (Regulator) the authority to see the history of all historical transactions committed by Traders (as well as working with their own participant profile) - there are two rule subsets for this - 4a and 4b.
 
 It is important to note at this point that the namespace `org.acme.trading` (our Commodity Trading business network) has no business network ACLS defined (just has system ones) and therefore access to resources inside that business network are implicity 'denied' by default.
@@ -266,7 +267,7 @@ Rule:
 
 Then click on the **UPDATE** button on the bottom left to update the business network. 
 
-This rule will allow the `current` Participant(t) (mapped to the `current` identity whether in playground (here) or indeed in your application) to READ and UPDATE their own target Trader record(v).
+This rule will allow the `current` Trader Participant (mapped to the `current` identity whether in playground (here) or indeed in your application) to READ and UPDATE their own target Trader record.
 
 5. **TEST THE ACL**: Switch user to identity `tid1` (top right, 'ID Registry') and click on the 'Test' tab - check that TRADER1 record only, is visible to this identity.
 
@@ -296,7 +297,7 @@ Rule:
 
 Then click on the **UPDATE** button on the bottom left to update the business network. 
 
-This rule will allow the `current` Trader Participant(t) all operations on target Commodities(c) resources or record(v) that it 'owns'.
+This rule will allow the `current` Trader Participant all operations on target Commodity resources that it 'owns'.
 
 5. **TEST THE ACL**: Switch user to identity `tid1` (top right, 'ID Registry') and click on the 'Test' tab - confirm that there is one Commodity owned by TRADER1 participant and is visible/editable (icon) to this identity.
 
@@ -362,7 +363,7 @@ b. Confirm that the transaction has now been submitted by going to 'All Transact
 
 By default, due to the System ACLs (a part of which is the registry for the Historian records), each Trader (eg. and related `tid1`, `tid2` etc identities) can see the history of all Transactions - an example is the `UpdateBusinessNetwork` performed by admin.
 
-We will lock down access to the Historian such that Traders only see their own, business-related activities in Historian.
+We will lock down access to the Historian such that Traders only see transactions they submitted in Historian.
 
 1. Switch identity to `tid3` (click the current identity top right and choose ID Registry, select to 'use now' for `tid3`) - and click on the 'Test' tab
 2. Confirm that you can see transactions relating to 'system' activities, but also the other traders (TRADER1 and TRADER2).
@@ -419,12 +420,12 @@ Create the record:
 
     {
       "$class": "org.acme.trading.Regulator",
-      "regId": "101",
+      "regId": "Reg101",
       "firstName": "Jon",
       "lastName": "Doe"
     }
 
-5. Create an Identity in the ID registry  for an identity with ID `regId101` and map it to the Participant regulator '101' created above.
+5. Create an Identity in the ID registry  for an identity with ID `101` and map it to the Participant regulator 'Reg101' created above.
 
 At this point, the Regulator can now see the history of system transactions in Composer's Historian, due to the system ACL rules defined earlier. But at this point, he cannot see his own participant profile.
 
@@ -447,7 +448,7 @@ This rule merely allows a Regulator participant to update their own profile reco
 
 Then click on the **UPDATE** button on the bottom left to update the business network with the new rule. 
 
-7. Next, switch identity (in the id Registry) to  the identity `regId101` and click 'Use Now'
+7. Next, switch identity (in the Id Registry) to  the Regulator identity `101` and click 'Use Now'
 
 8. Check you can indeed see the Historical records (which shows our previous transactions - then click on 'view record' for any system type transaction activity such as `AddAsset` or `AddParticipant` - as someone that is a Regulator, you should be able to see this activity.
 
@@ -478,4 +479,4 @@ This rule also applies to any subsequent identity mapped to the regulator role a
 
 12. **TEST the ACL** - now go to a trade transaction again and check that you can indeed now view the record
 
-End of tutorial - we have shown how ACL rules provide authorisation and access control against participants (or indeed participant roles) over resources that are committed to the ledger, in this case for a Commodity Trading business network.
+In this tutorial, you have experimented with creating ACL rules incrementally, only permitting the requisite access controls that should be accorded to participants of this example Commodity Trading business network.  We have seen how ACL rules provide authorisation and access control to resources as applied to participants (or indeed participant roles). ACLs govern the access control to resources and transactions, whether that's the ability to create, delete or update resources or execute transactions. We have also the power of the Access Control Language and rules, in defining the conditions or criteria as to: 'who' has the ability to do 'what' on the ledger.
