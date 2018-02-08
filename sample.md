@@ -7,9 +7,36 @@
 
 
 
-| Release Stream | Github Repo | Docs Link | Current Version | Jump to Release Notes 
+| Release Stream | Release Notes |Github link | Docs Site |  Current Version 
 | :---------------------- | :----------------------- |:----------------------- |:-----------------|:----------------
-| v0.16.x | [**latest**](#16.x)  | [**Github link**](https://github.com/hyperledger/composer) |[**here**](https://hyperledger.github.io/composer/next/) | 0.17.4 | 
+| v0.16.x | [**latest**](#16.x)  | [**Github link**](https://github.com/hyperledger/composer) |[**here**](https://hyperledger.github.io/composer/next/) | 0.17.4 |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
