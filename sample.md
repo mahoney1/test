@@ -7,10 +7,10 @@
 
 
 
-| Release Stream | Release Notes |Github link | Docs Site |  Current Version 
+| Release Stream | Release Notes Link  |Rlease Github link | Docs Site |  Current Version | Fabric Release
 | :---------------------- | :----------------------- |:----------------------- |:-----------------|:----------------
-| v0.16.x | [**latest**](#16x)  | [**Github link**](https://github.com/hyperledger/composer) |[**here**](https://hyperledger.github.io/composer/next/) | 0.17.4 |
-| v0.17.x | [**latest**](#17x)  | [**Github link**](https://github.com/hyperledger/composer) |[**here**](https://hyperledger.github.io/composer/next/) | 0.17.4 |
+| v0.16.x | [**latest**](#16x)  | [**Github link**](https://github.com/hyperledger/composer) |[**here**](https://hyperledger.github.io/composer/next/) | 0.17.4 |  Fabric 1.0.4 ('latest')
+| v0.17.x | [**next**](#17x)  | [**Github link**](https://github.com/hyperledger/composer) |[**here**](https://hyperledger.github.io/composer/next/) | 0.17.4 | Fabric 1.1- alpha ('next')
 
 
 
