@@ -126,7 +126,29 @@ Let’s now confirm that environment variables are indeed set by checking a coup
 
     echo $COMPOSER_CONFIG
     echo $COMPOSER_ENROLLMENT_ID
-    
+
+### Deploy our sample Commodities Trading Business network to query from REST client
+
+If you've not already done so - download the `trade-network.bna` for the Trade-network from https://composer-playground.mybluemix.net/
+
+(In Playground, connect to the network as `admin` and export the trade-network.bna to your home directory
+
+To deploy it, run the following sequence:
+
+composer runtime install -c PeerAdmin@hlfv1 trade-network
+
+composer network start -c PeerAdmin@hlfv1 -A admin -S adminpw -a trade-network.bna -f  networkadmin.card
+
+You should get confirmation that the Commodities Trading Business Network has been started and an 'admin' networkadmin.card file has been created and you're all set
+
+Next import and download the certs for the admin card:
+
+composer card import -f networkadmin.card
+
+composer network ping -c admin@trade-network
+
+You should get confirmation that the connectivity was successfully tested. We're now ready to work with the business network.
+
     
 ###  Create the REST server administrator for the Composer REST server instance 
 
@@ -135,7 +157,7 @@ First, we need to create our REST adninistrator identity and business network ca
 
     composer participant add -c admin@trade-network -d '{"$class":"org.hyperledger.composer.system.NetworkAdmin", "participantId":"restadmin"}'
 
-     composer identity issue -c admin@tradenetwork -f restadmin.card -u restadmin -a "resource:org.hyperledger.composer.system.NetworkAdmin#restadmin"
+     composer identity issue -c admin@trade-network -f restadmin.card -u restadmin -a "resource:org.hyperledger.composer.system.NetworkAdmin#restadmin"
     
     composer card import -f  restadmin.card
 
