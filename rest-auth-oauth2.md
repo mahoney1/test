@@ -83,7 +83,7 @@ INFO: Don’t worry about seeing the 'npm warn messages' as shown on the console
 
 Create a file called `envvars.txt` in your $HOME directory and paste in the following configuration settings:
 
-    COMPOSER_CARD=restadmin@digitalproperty-network
+    COMPOSER_CARD=restadmin@trade-network
     COMPOSER_NAMESPACES=never
     COMPOSER_AUTHENTICATION=true
     COMPOSER_MULTIUSER=true
@@ -114,4 +114,172 @@ The environment variables defined here will indicate that we want a multi user s
 The first line indicates the name of the business network card we will start the network with - a specific REST Administrator against a defined business network. You will also see that in this configuration we also define the data source the REST server will use and the authentication provider we are using. These can be seen with the COMPOSER_DATASOURCES and COMPOSER_PROVIDERS variables respectively.
 
 
-#
+### Load environment variables in current terminal and launch the persistent REST Server instance
+
+From the same directory as the `envvars.txt` file you created containing the environment variables, run the following command:
+
+     source envvars.txt
+     
+INFO	No output from command? - this is expected. If you did have a syntax error in your `envvars.txt` file then this will be indicated by an error, after running this command.
+
+Let’s now confirm that environment variables are indeed set by checking a couple of them using “echo” command as shown below
+
+    echo $COMPOSER_CONFIG
+    echo $COMPOSER_ENROLLMENT_ID
+    
+    
+###  Create the REST server administrator for the Composer REST server instance 
+
+
+First, we need to create our REST adninistrator identity and business network card - used to launch the REST server later.
+
+    composer participant add -c admin@trade-network -d '{"$class":"org.hyperledger.composer.system.NetworkAdmin", "participantId":"restadmin"}'
+
+     composer identity issue -c admin@tradenetwork -f restadmin.card -u restadmin -a "resource:org.hyperledger.composer.system.NetworkAdmin#restadmin"
+    
+    composer card import -f  restadmin.card
+
+    composer network ping -c restadmin@trade-network
+
+Because we are hosting our REST server in another location with its own specific network IP information, we need to update the connection.json - so that the docker hostnames (from within the persistent REST server instance) can resolve each other's IP addresses.
+
+The one liner below will substitute the 'localhost' addresses with docker hostnames and create a new connection.json - which goes into the card of our REST administrator. We will also use this custom connection.json file for our 'test' authenticated user later on in the OAUTH2 REST authentication sequence nearer the end of this tutorial. To quickly change the hostnames - copy-and-paste then run this one-liner (below) in the command line from the $HOME directory..
+
+sed -e 's/localhost:/orderer.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/ca.org1.example.com:/'  < $HOME/.composer/cards/restadmin@trade-network/connection.json  > connection.json && cp -p connection.json $HOME/.composer/cards/restadmin@trade-network/
+    
+###  Launch the persistent REST server instance 
+    
+Next, run the following docker command to launch a REST server instance (with the `restadmin` business network card)    
+
+    docker run \
+    -d \
+    -e COMPOSER_CONNECTION_PROFILE=${COMPOSER_CONNECTION_PROFILE} \
+    -e COMPOSER_BUSINESS_NETWORK=${COMPOSER_BUSINESS_NETWORK} \
+    -e COMPOSER_ENROLLMENT_ID=${COMPOSER_ENROLLMENT_ID} \
+    -e COMPOSER_ENROLLMENT_SECRET=${COMPOSER_ENROLLMENT_SECRET} \
+    -e COMPOSER_NAMESPACES=${COMPOSER_NAMESPACES} \
+    -e COMPOSER_AUTHENTICATION=${COMPOSER_AUTHENTICATION} \
+    -e COMPOSER_MULTIUSER=${COMPOSER_MULTIUSER} \
+    -e COMPOSER_CONFIG="${COMPOSER_CONFIG}" \
+    -e COMPOSER_DATASOURCES="${COMPOSER_DATASOURCES}" \
+    -e COMPOSER_PROVIDERS="${COMPOSER_PROVIDERS}" \
+    --name rest \
+    --network composer_default \
+    -p 3000:3000 \
+    myorg/composer-rest-server
+    
+
+This will output the ID of the Docker container eg . 690f2a5f10776c15c11d9def917fc64f2a98160855a1697d53bd46985caf7934 and confirm that the REST server has been indeed started. You can see that it is running using the following command:
+
+    docker ps |grep rest
+    
+
+### Test the REST APIs for the business network
+
+Open a browser window and launch the REST API explorer by going to to http://localhost:3000/explorer to view and use the available APIs.
+
+INFO	Admin identity `restadmin` is used as an initial default - The REST server uses “restadmin” identity until a specific identity e.g. trader1 is set as a default identity in the REST client wallet
+
+Go to the “System: general business network methods” section
+
+Go to the “/system/historian” API and click on “Try it out!” button as shown below:
+
+<need image>
+
+
+You should get an Authorized error. In the next Section, you will notice that the extent of records that are visible in Composer's Historian are granted by granular ACL rules. By default, ACLs work such that all records in a business network are denied due to the secured REST server restrictions.
+
+### Create some Participants and Identities for testing OAUTH2 authentication
+
+Next, you will need to create a participant and issue an identity for them. This is because when the REST server is configured to allow multiple REST client users and allow authentication with their different IDs at the REST client
+
+
+We will be using the composer CLI commands to add participants and identities.
+
+    composer participant add -c admin@trade-network -d '{"$class":"org.acme.trading.Trader","tradeId":"trader1", "firstName":"Jo","lastName":"Doe"}
+    
+    composer identity issue -c admin@trade-network -f trader1.card -u tid1 -a "resource:org.hyperledger.composer.system.NetworkAdmin#trader1"
+ 
+    composer card import -f trader1.card 
+
+    composer network ping -c trader@trade-network
+    
+Once again, because we will use this identity to test inside the persistent REST docker container - we will need to change the hostnames to represent the docker resolvable hostnames - once again run this one-liner to carry out those changes quickly:
+
+    sed -e 's/localhost:/orderer.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/ca.org1.example.com:/'  < $HOME/.composer/cards/trader1@trade-network/connection.json  > connection.json && cp -p connection.json $HOME/.composer/cards/trader1@trade-network/
+    
+ Lastly, we want to export the card - to use for import on a 'remote application' - this is the card that we will use to authenticate to the REST server (ie if it was located remote to the REST server)
+
+     composer card export -f trader1.card -n trader1@trade-network
+
+This card can now be used in the REST client
+
+
+### Authenticating from the REST API Explorer and testing using specific identities 
+
+You need to add an identity to a REST client wallet and then set this identity as the default one to use for making API calls.
+
+Go to http://localhost:3000/auth/google - this will direct you to the Google Authentication consent screen. 
+
+Login using the following credentials: (example - as advised, you should set up your own per the instructions in the appendix):
+
+Email: blockchainworkshop1@gmail.com
+Password: bcworkshop123
+
+You will now be redirected back to the secured REST server (http://localhost:3000/explorer) which shows the access token message as follows: 
+
+<need image>
+
+While we have authenticated to Google - we have not actually set any cards as default in our wallet, to interact with our business network - we will do that next using the new identity we created earlier
+
+### Retrieve the Default Wallet and Import the card and set a default Identity
+
+There is a default wallet that is already create, which we will use to add our identity to
+
+Call the REST endpoint under Wallets:
+
+    GET /wallets
+ 
+It should show a default Wallet and return a Wallet ID in JSON form (and which changes for each use). Copy the **ID** field value / contents **only** (ie the alpha-numeric code inside the quotes) and go to the following REST API endpoint:
+
+    POST /wallets/{id}/identities
+
+In the authenticated browser - go to the POST system operation under /Wallets - its called /Wallets/Import endpoint
+
+Choose to import the file trader1.card  - and provide the name of the card as trader1@trade-network  and click 'Try it Out'
+
+You should you should get an HTTP Status code 204 (request was successful) 
+
+Next, go back to 
+
+    GET /wallets
+    
+You should see that trader1@trade-network is imported into the wallet. - Next let's set this as the default identity (all we've done so far is Import the business network card)
+
+Go to the POST endpoint for  /Wallets{name}/setDefault and use  trader1@trade-network as the default card and click on Try It Out
+
+You should get an HTTP Status code 204 (request was successful)
+
+Revisting the GET  /Wallet operation  - you should see that trader1@trade-network is now set as the default user ('true'))
+    
+Then paste the wallet ID parameter (from earlier) in the 'id' field and click on 'Try it Out'
+
+### Test interaction with the Business Network as the default ID
+
+Go to System REST API  Methods section and expand the /GET System/Historian section
+
+Click on 'Try It Out' - you should now see results from the Historian Registry, as the blockchain identity 'trader1'
+
+Go to the Person methods and expand the /GET Person endpoint
+
+You should now be able to see the results of the participants that user 'trader1' is allowed to see in that participant Registry, which is subject to any ACLs that have been set. 'Trader1' can only see and edit their own participant records (according to the ACLs) - this merely shows that the REST APIs are subject to access control like any other operation.
+
+<image>
+ 
+
+
+    
+    
+    
+
+
