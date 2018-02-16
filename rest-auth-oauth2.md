@@ -273,7 +273,7 @@ It should show a default Wallet and return a Wallet ID in JSON form (and which c
 
 In the authenticated browser - go to the POST system operation under /Wallets - its called /Wallets/Import endpoint
 
-Choose to import the file trader1.card  - and provide the name of the card as trader1@trade-network  and click 'Try it Out'
+Choose to import the file jdoe.card  - and provide the name of the card as jdoe@trade-network  and click 'Try it Out'
 
 You should you should get an HTTP Status code 204 (request was successful) 
 
@@ -281,13 +281,13 @@ Next, go back to
 
     GET /wallets
     
-You should see that trader1@trade-network is imported into the wallet. - Next let's set this as the default identity (all we've done so far is Import the business network card)
+You should see that jdoe@trade-network is imported into the wallet. - Next let's set this as the default identity (all we've done so far is Import the business network card)
 
-Go to the POST endpoint for  /Wallets{name}/setDefault and use  trader1@trade-network as the default card and click on Try It Out
+Go to the POST endpoint for  /Wallets{name}/setDefault and use  jdoe@trade-network as the default card and click on Try It Out
 
 You should get an HTTP Status code 204 (request was successful)
 
-Revisting the GET  /Wallet operation  - you should see that trader1@trade-network is now set as the default user ('true'))
+Revisting the GET  /Wallet operation  - you should see that jdoe@trade-network is now set as the default user ('true'))
     
 Then paste the wallet ID parameter (from earlier) in the 'id' field and click on 'Try it Out'
 
