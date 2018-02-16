@@ -91,12 +91,12 @@ Create a file called `envvars.txt` in your $HOME directory and paste in the foll
     COMPOSER_MULTIUSER=true
     COMPOSER_PROVIDERS='{
     "google": {
-	    "provider": "google",
+	    "provider": "google_oauth2",
 	    "module": "passport-google-oauth2",
 	    "clientID": "854054453281-uc8lnej4bmkqstbcubhcvbt305677ee6.apps.googleusercontent.com",
 		    "clientSecret": "jTINazEegjuRBn4fbNNYC5NP9d",
-		    "authPath": "/auth/google",
-		    "callbackURL": "/auth/google/callback",
+		    "authPath": "auth/google_oauth2"",
+		    "callbackURL": "auth/google_oauth2"/callback",
 		    "scope": "https://www.googleapis.com/auth/plus.login",
 		    "successRedirect": "/",
 		    "failureRedirect": "/"
@@ -231,7 +231,7 @@ We will be using the composer CLI commands to add participants and identities.
     
 Once again, because we will use this identity to test inside the persistent REST docker container - we will need to change the hostnames to represent the docker resolvable hostnames - once again run this one-liner to carry out those changes quickly:
 
-     sed -e 's/localhost:/orderer.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/ca.org1.example.com:/'  < $HOME/.composer/cards/jdoe@trade-network/connection.json  > /tmp/connection.json && cp -p /tmp/connection.json $HOME/.composer/cards/jdoe@trade-network/
+      sed -e 's/localhost:/orderer.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/ca.org1.example.com:/'  < $HOME/.composer/cards/jdoe@trade-network/connection.json  > /tmp/connection.json && cp -p /tmp/connection.json $HOME/.composer/cards/jdoe@trade-network
     
  Lastly, we want to export the card - to use for import on a 'remote application' - this is the card that we will use to authenticate to the REST server (ie if it was located remote to the REST server)
 
