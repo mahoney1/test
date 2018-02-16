@@ -244,12 +244,14 @@ This card can now be used in the REST client
 
 You need to add an identity to a REST client wallet and then set this identity as the default one to use for making API calls.
 
-Go to http://localhost:3000/auth/google - this will direct you to the Google Authentication consent screen. 
+Go to http://localhost:3000/auth/google_oauth2 - this will direct you to the Google Authentication consent screen. 
 
 Login using the following credentials: (example - as advised, you should set up your own per the instructions in the appendix):
 
-Email: blockchainworkshop1@gmail.com
-Password: bcworkshop123
+Email: composeruser01@gmail.com
+Password: composer00
+
+You will be authenticated by Google.
 
 You will now be redirected back to the secured REST server (http://localhost:3000/explorer) which shows the access token message as follows: 
 
