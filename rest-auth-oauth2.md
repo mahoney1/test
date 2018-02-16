@@ -93,8 +93,8 @@ Create a file called `envvars.txt` in your $HOME directory and paste in the foll
     "google": {
 	    "provider": "google",
 	    "module": "passport-google-oauth2",
-	    "clientID": "854054473281-uc8lnej4bmkqstbcubhcvbt305677ee6.apps.googleusercontent.com",
-		    "clientSecret": "jTINazEjuRBn4fbNNYC5NP9d",
+	    "clientID": "854054453281-uc8lnej4bmkqstbcubhcvbt305677ee6.apps.googleusercontent.com",
+		    "clientSecret": "jTINazEegjuRBn4fbNNYC5NP9d",
 		    "authPath": "/auth/google",
 		    "callbackURL": "/auth/google/callback",
 		    "scope": "https://www.googleapis.com/auth/plus.login",
@@ -137,17 +137,17 @@ If you've not already done so - download the `trade-network.bna` for the Trade-n
 
 To deploy it, run the following sequence:
 
-composer runtime install -c PeerAdmin@hlfv1 trade-network
+    composer runtime install -c PeerAdmin@hlfv1 trade-network
 
-composer network start -c PeerAdmin@hlfv1 -A admin -S adminpw -a trade-network.bna -f  networkadmin.card
+    composer network start -c PeerAdmin@hlfv1 -A admin -S adminpw -a trade-network.bna -f  networkadmin.card
 
 You should get confirmation that the Commodities Trading Business Network has been started and an 'admin' networkadmin.card file has been created and you're all set
 
 Next import and download the certs for the admin card:
 
-composer card import -f networkadmin.card
+    composer card import -f networkadmin.card
 
-composer network ping -c admin@trade-network
+    composer network ping -c admin@trade-network
 
 You should get confirmation that the connectivity was successfully tested. We're now ready to work with the business network.
 
@@ -161,6 +161,7 @@ First, we need to create our REST adninistrator identity and business network ca
 
      composer identity issue -c admin@trade-network -f restadmin.card -u restadmin -a "resource:org.hyperledger.composer.system.NetworkAdmin#restadmin"
     
+    
     composer card import -f  restadmin.card
 
     composer network ping -c restadmin@trade-network
@@ -169,7 +170,7 @@ Because we are hosting our REST server in another location with its own specific
 
 The one liner below will substitute the 'localhost' addresses with docker hostnames and create a new connection.json - which goes into the card of our REST administrator. We will also use this custom connection.json file for our 'test' authenticated user later on in the OAUTH2 REST authentication sequence nearer the end of this tutorial. To quickly change the hostnames - copy-and-paste then run this one-liner (below) in the command line from the $HOME directory..
 
-sed -e 's/localhost:/orderer.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/ca.org1.example.com:/'  < $HOME/.composer/cards/restadmin@trade-network/connection.json  > connection.json && cp -p connection.json $HOME/.composer/cards/restadmin@trade-network/
+sed -e 's/localhost:/orderer.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/ca.org1.example.com:/'  < $HOME/.composer/cards/restadmin@trade-network/connection.json  > /tmp/connection.json && cp -p /tmp/connection.json $HOME/.composer/cards/restadmin@trade-network/
     
 ###  Launch the persistent REST server instance 
     
@@ -221,20 +222,20 @@ Next, you will need to create a participant and issue an identity for them. This
 We will be using the composer CLI commands to add participants and identities.
 
     composer participant add -c admin@trade-network -d '{"$class":"org.acme.trading.Trader","tradeId":"trader1", "firstName":"Jo","lastName":"Doe"}
-    
-    composer identity issue -c admin@trade-network -f trader1.card -u tid1 -a "resource:org.hyperledger.composer.system.NetworkAdmin#trader1"
- 
-    composer card import -f trader1.card 
+     
+    composer identity issue -c admin@trade-network -f jdoe.card -u jdoe -a "resource:org.acme.trading.Trader#trader1"
 
-    composer network ping -c trader@trade-network
+    composer card import -f jdoe.card 
+
+    composer network ping -c jdoe@trade-network
     
 Once again, because we will use this identity to test inside the persistent REST docker container - we will need to change the hostnames to represent the docker resolvable hostnames - once again run this one-liner to carry out those changes quickly:
 
-    sed -e 's/localhost:/orderer.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/ca.org1.example.com:/'  < $HOME/.composer/cards/trader1@trade-network/connection.json  > connection.json && cp -p connection.json $HOME/.composer/cards/trader1@trade-network/
+    sed -e 's/localhost:/orderer.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/ca.org1.example.com:/'  < $HOME/.composer/cards/jdoe@trade-network/connection.json  > /tmp/connection.json && cp -p /tmp/connection.json $HOME/.composer/cards/jdoe@trade-network/
     
  Lastly, we want to export the card - to use for import on a 'remote application' - this is the card that we will use to authenticate to the REST server (ie if it was located remote to the REST server)
 
-     composer card export -f trader1.card -n trader1@trade-network
+     composer card export -f jdoe.card -n jdoe@trade-network
 
 This card can now be used in the REST client
 
