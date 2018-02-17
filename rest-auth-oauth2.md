@@ -116,12 +116,12 @@ Create a file called `envvars.txt` in your $HOME directory and paste in the foll
     COMPOSER_MULTIUSER=true
     COMPOSER_PROVIDERS='{
     "google": {
-	    "provider": "google_oauth2",
+	    "provider": "google",
 	    "module": "passport-google-oauth2",
-	    "clientID": "854054453281-uc8lnej4bmkqstbcubhcvbt305677ee6.apps.googleusercontent.com",
-		    "clientSecret": "jTINazEegjuRBn4fbNNYC5NP9d",
-		    "authPath": "auth/google_oauth2"",
-		    "callbackURL": "auth/google_oauth2"/callback",
+	    "clientID": "312039026929-t6i81ijh35ti35jdinhcodl80e87htni.apps.googleusercontent.com",
+		    "clientSecret": "Q4i_CqpqChCzbE-u3Wsd_tF0",
+		    "authPath": "auth/google"",
+		    "callbackURL": "auth/google/callback",
 		    "scope": "https://www.googleapis.com/auth/plus.login",
 		    "successRedirect": "/",
 		    "failureRedirect": "/"
@@ -395,7 +395,7 @@ The OAuth consent screen is what a user will see when they are authenticating th
 
 ![Consent Name for Authentication](../assets/img/tutorials/auth/google/product-name.png)
 
-### Create OAuth Client ID credentials for the Credentials service
+### Create OAuth 2.0 Client ID credentials for the Credentials service
 
 Go back to the ‘Credentials’ tab and click the ‘Create Credentials’ dropdown and select ‘OAuth Client ID’.
 
@@ -403,10 +403,16 @@ Choose 'Web Application' and give it a simple name like 'Web Client 1'
 
 We will need to add 'Authorized Redirect URIs' at the bottom - this is where the authenticated session is redirected back to after getting consent by the Google+ OAUTH2 authentication servic. The callback will match what we will configured in our Composer REST Server environment variables (specifically the variable `COMPOSER_PROVIDERS`, that was set in our `envvars.txt` file earlier in the main tutorial.
 
-Under 'Authorized Redirect URIs' add the following URI as an authorised URI. Note: it is best to paste in the whole URI in (copied from here) - as the URI line editor can sometimes truncate your entry, if you happen to pause when typing the URI.
+Under the 'Authorised Javascript Origins' section add a line with the following URI - this is the client application (the REST Server):
 
+    http://localhost:3000
 
-<need definitive URI>
+Under 'Authorized Redirect URIs' add the following URIs as authorised URIs that can be redirected to (one for authentication and one for callback). Note: it is best to copy/paste each URI below, then hit ENTER in the browser after each line entry- as the URI line editor can sometimes truncate your entry whilst typing .e.g. if you happen to pause when typing the URI.
+
+    http://localhost:3000/auth/google
+    http://localhost:3000/auth/google/callback
+
+Then click on the 'Save' button at the bottom.
 	
 ![Create Client ID](../assets/img/tutorials/auth/google/create_client_id.png)
 
