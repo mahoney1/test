@@ -25,11 +25,11 @@ You should carry out this tutorial as a non-privileged user (sudo or elevated pr
 
 When an application (like the REST server) uses OAuth 2.0 for authorization, it acts on a user's behalf to request an OAuth 2.0 access token for access to a resource, which it identifies by one or more scope strings. Normally, of course - the user is asked to approve the access.
 
-When an admin grants access to the app for a particular scope, in Google at least, a project-level product 'branding'is setup in the Google API Console - see Appendix for more details. Therefore, Google considers that when an admin (through the Google account he/she has set up) has granted access to a particular scope to any client ID (set up in the Google API console) in a project (also configured in the Google API setup), the grant indicates the admin's trust in the whole application - for that scope.
+When a user (eg. an admin) grants access to the app for a particular scope, in Google at least, a project-level consent 'branding'is setup in the Google API Console to challenge for the initial consent - see Appendix for more details. Thereafter, once consented,  Google considers that user (through the Google account he/she has set up) has granted access to a particular scope to any configured client IDs (these are set up in the Google API console - see Appendix) in a API+ project ; the grant indicates the user's trust in the whole application - for the scope as defined in the Google+ API configuration.
 
-The effect is that the admin should not be prompted to approve access to any resource more than once for the same logical application, such as the REST server.
+The effect is that the user is not be prompted to approve access to any resource more than once for the same logical client application, such as the REST server.
 
-Fortunately, the Google authorization infrastructure can use information about user approvals for a client ID within a given project set up in Google API console,  when evaluating whether to authorize others in the same project. It also requires you to set up the authorized URIs that can be granted consent (such as the REST server explorer URI).
+Fortunately, the Google authorization infrastructure can use information about user approvals for a client ID within a given project set up in Google API console,  when evaluating whether to authorize others in the same project. It also requires you to set up the authorized URIs that can be granted consent (such as the call back URL after successful authentication).
 
 The Google Authorization module will observe that the calling REST server and the web client ID are in the same project, and without user approval, return an ID token to the app, signed by Google. The ID token will contain several data fields, of which the following are particularly relevant:
 
