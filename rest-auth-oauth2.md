@@ -158,13 +158,21 @@ Let’s now confirm that environment variables are indeed set by checking a coup
 
 If you've not already done so - download the `trade-network.bna` for the Trade-network from https://composer-playground.mybluemix.net/
 
-(In Playground, connect to the network as `admin` and export the trade-network.bna to your home directory
+(In Playground, connect to the network as `admin` and export the trade-network.bna  and copy it to your **home directory**.
+
+
+![Export BNA file](../assets/img/tutorials/auth/download-bna.png)
+
 
 To deploy it, run the following sequence:
 
     composer runtime install -c PeerAdmin@hlfv1 trade-network
 
     composer network start -c PeerAdmin@hlfv1 -A admin -S adminpw -a trade-network.bna -f  networkadmin.card
+
+
+![Deploy Business Network](../assets/img/tutorials/auth/deploy-network.png)
+
 
 You should get confirmation that the Commodities Trading Business Network has been started and an 'admin' networkadmin.card file has been created and you're all set
 
