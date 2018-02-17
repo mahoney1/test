@@ -230,11 +230,14 @@ Open a browser window and launch the REST API explorer by going to http://localh
 
 INFO	Admin identity `restadmin` is used as an initial default - The REST server uses `restadmin` identity until a specific identity e.g. `jdoe` is set as a default identity in the REST client wallet.
 
+
 Go to the “System: general business network methods” section
+
+
+![REST Server](../assets/img/tutorials/auth/rest-server-launch.png)
 
 Go to the “/system/historian” API and click on “Try it out!” button as shown below:
 
-<need image>
 ![Authorization error](../assets/img/tutorials/auth/authorization-error.png)
 
 You should get an Authorized error. In the next Section, you will notice that the extent of records that are visible in Composer's Historian are granted by granular ACL rules. By default, ACLs work such that all records in a business network are denied due to the secured REST server restrictions.
