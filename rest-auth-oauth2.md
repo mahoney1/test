@@ -291,24 +291,29 @@ Password: composer00
 
 You will be authenticated by Google and be redirected back to the secured REST server (http://localhost:3000/explorer) which shows the access token message in the top left-hand corner - click on 'Show' to view the token.
 
-![REST Server](../assets/img/tutorials/auth/rest-server-launch.png)
+![REST Server with Access Token](../assets/img/tutorials/auth/rest-server-token.png)
 
 
-While our REST server have authenticated to Google OAUTH2 service defined by its project/client scope - we have not actually done anything yet, in terms of blockchain identity and using business network cards to interact with our Trade Commodity business network - we will do that next,  using the new identity we created earlier.
+While our REST server has authenticated to Google OAUTH2 service defined by its project/client scope (using the client credentials set up in the Appendix for our Google API+ service) - we have not actually done anything yet, in terms of blockchain identity and using business network cards to interact with our Trade Commodity business network - we will do that next,  using the new identity we created earlier.
 
 ### Retrieve the Default Wallet and Import the card and set a default Identity
 
 There is a default wallet (restadmin) that is already created, which we will use to add our identity to
 
-Firstly, go to the REST endpoint under Wallets and do a GET operation (and 'Try it Out'):
+Firstly, go to the REST endpoint under Wallets and do a GET operation (and 'Try it Out') to get the Wallet ID:
 
     GET /wallets
  
 It should show a default Wallet and return a Wallet ID in JSON form (and which changes for each use). Copy the **ID** field value / contents **only** (ie the alpha-numeric code inside the quotes) and go to the following REST API endpoint:
 
     POST /wallets/{id}/identities
+    
+    
+Paste the wallet ID parameter (from earlier) in the 'id' field and click on 'Try it Out' 
 
-In the authenticated browser - go to the POST system operation under /Wallets - its called /Wallets/Import endpoint
+![Wallet](../assets/img/tutorials/auth/get_wallets.png)
+
+In the authenticated browser - go to the POST system operation under /Wallets - its called the `/Wallets/Import` endpoint
 
 Choose to import the file jdoe.card  - and provide the name of the card as jdoe@trade-network  and click 'Try it Out'
 
@@ -320,13 +325,14 @@ Next, go back to
     
 You should see that `jdoe@trade-network` is imported into the wallet. - Next let's set this as the default identity (all we've done so far is Import the business network card)
 
-Go to the POST endpoint for  /Wallets{name}/setDefault and use  jdoe@trade-network as the default card and click on Try It Out
+Go to the POST endpoint for  /Wallets{name}/setDefault and use  `jdoe@trade-network` as the default card and click on Try It Out
+
 
 You should get an HTTP Status code 204 (request was successful)
 
-Revisting the GET  /Wallet operation  - you should see that jdoe@trade-network is now set as the default user ('true'))
+Revisiting the GET  /Wallet operation  - you should see that `jdoe@trade-network` is now set as the default user ('true'))
     
-Then paste the wallet ID parameter (from earlier) in the 'id' field and click on 'Try it Out'
+
 
 ### Test interaction with the Business Network as the default ID
 
@@ -334,16 +340,79 @@ Go to System REST API  Methods section and expand the /GET System/Historian sect
 
 Click on 'Try It Out' - you should now see results from the Historian Registry, as the blockchain identity 'jdoe'
 
-Go to the Person methods and expand the /GET Person endpoint then click 'Try it Out'
+Go to the `Trader` methods and expand the /GET `Trader` endpoint then click 'Try it Out'
 
-You should now be able to see the results of the participants that user 'jdoe' is allowed to see in that participant Registry, which is subject to any ACLs that have been set. the Identity 'jdoe' (mapped to Participant 'Trader1') can only see and edit their own participant records (according to the Commodity Trading ACLs) - this merely shows that the REST APIs are subject to access control - like any other interaction with the busness network (such as Playground, JS APIs, CLI etc).
+You should now be able to see the results of the Trader participants that user 'jdoe' is allowed to see in that participant Registry, which is subject to any ACLs that have been set. the Identity 'jdoe' (mapped to Participant 'Trader1') can only see and edit their own participant records (according to the Commodity Trading ACLs) - this merely shows that the REST APIs are subject to access control - like any other interaction with the business network (such as Playground, JS APIs, CLI etc).
 
 <image>
- 
+	
+
+## Appendix - Google Authentication Configuration & Setup
+
+The appendix below describes how to create an OAUTH2 authentication service for authenticating client applications.
+
+### Visit the Google APIs homepage
+
+Login to you Google account - if you don't have one - create one at google.com and **sign in to Google**
+
+Link for the page https://console.developers.google.com/apis/ 
+
+You should see the following page on arrival. Search for ‘Google+’ in the search bar and select the Google+ APIs icon when presented.
+
+![Google+ APIs](../assets/img/tutorials/auth/google/google_apis.png)
+
+Once selected - click to Enable the Google+ APIs - it is important that you do this.
+
+As you don’t have a 'project' yet, you will be prompted to create a project as it is needed to enable the APIs. Click ‘Create Project’
+
+You will be prompted to give it a name - call it 'GoogleAuth' and **take a note of the Project ID** in our case it is shown as `proven-caster-195417` - this will be used later on.
+
+After creating the project, you will be redirected to the Google+ API page again. You should now see the project name selected and the option to ‘Enable’ the service. Click ‘Enable’.
+
+### Create the Credentials
+
+Once you have enabled the service you will be prompted to create credentials so that you can use the service.  Click ‘Create Credentials’.
+
+You will be asked a series of questions to determine what kind of credentials you will need. Give the answers shown in the screenshot below. Choose 'Google API+'  for the API, Web Server (e.g. Node js, Tomcat) and Application data and 'No' for the Engine question at the bottom.
 
 
-    
-    
-    
+![Setup Credentials](../assets/img/tutorials/auth/google/setup_credentials.png)
 
+Next, setup a Credentials service account - with the name 'GoogleAuthService' - a Role of `Owner` and a type of JSON and click on 'Get your Credentials' - it should download (or prompt to download) the service credentials in JSON format - save these to a safe location.
+
+
+![Setup Credentials](../assets/img/tutorials/auth/google/credentials_svc_acc.png)
+
+![Download Credentials](../assets/img/tutorials/auth/google/download-service-creds.png)
+    
+After downloading the credentials, the site will take you back to the credentials homepage and you will see a new service account key.
+    
+![Credentials Service Keys](../assets/img/tutorials/auth/google/credentials-service.png)
+
+Go to the ‘OAuth consent screen' tab = you will neeed to give a 'product name that is shown when consent to authenticate is prompted (when we test it on the REST server authentication), click ‘Save’. 
+
+The OAuth consent screen is what a user will see when they are authenticating themselves for the REST Google Auth REST Service
+
+![Consent Name for Authentication](../assets/img/tutorials/auth/google/product-name.png)
+
+### Create OAuth Client ID credentials for the Credentials service
+
+Go back to the ‘Credentials’ tab and click the ‘Create Credentials’ dropdown and select ‘OAuth Client ID’.
+
+Choose 'Web Application' and give it a simple name like 'Web Client 1' 
+
+We will need to add 'Authorized Redirect URIs' at the bottom - this is where the authenticated session is redirected back to after getting consent by the Google+ OAUTH2 authentication servic. The callback will match what we will configured in our Composer REST Server environment variables (specifically the variable `COMPOSER_PROVIDERS`, that was set in our `envvars.txt` file earlier in the main tutorial.
+
+Under 'Authorized Redirect URIs' add the following URI as an authorised URI. Note: it is best to paste in the whole URI in (copied from here) - as the URI line editor can sometimes truncate your entry, if you happen to pause when typing the URI.
+
+
+<need definitive URI>
+	
+![Create Client ID](../assets/img/tutorials/auth/google/create_client_id.png)
+
+Next click on 'Create' and you will be prompted to save the Client ID and Client Secret - copy these two and save these for later.
+
+![Client ID and Secret](../assets/img/tutorials/auth/google/client-keys.png)
+
+You're all set - you can now return to the main tutorial to set up your REST Server Authentication using Google's OAUTH2 client authentication service.
 
