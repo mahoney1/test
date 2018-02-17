@@ -19,8 +19,33 @@ Note that for a production environment goes, an organisation would typically dep
 
 Once authenticated, application users obtain an access token and, once defined as a participant in the business network, can consume the REST APIs. As a Blockchain developer, you wouldn't ordinarily be required to do this, but gives the developer an insight into how application users can be authenticated and from there,how to transact on the blockchain using their blockchain identity.
 
-You should carry out this tutorial as a non-privileged user (sudo or root privileges are not required)
+You should carry out this tutorial as a non-privileged user (sudo or elevated privileges are not required)
 
+### A word on Google Authentication OAUTH2 setup and scope of Authentication
+
+When an application (like the REST server) uses OAuth 2.0 for authorization, it acts on a user's behalf to request an OAuth 2.0 access token for access to a resource, which it identifies by one or more scope strings. Normally, of course - the user is asked to approve the access.
+
+When an admin grants access to the app for a particular scope, in Google at least, a project-level product 'branding'is setup in the Google API Console - see Appendix for more details. Therefore, Google considers that when an admin (through the Google account he/she has set up) has granted access to a particular scope to any client ID (set up in the Google API console) in a project (also configured in the Google API setup), the grant indicates the admin's trust in the whole application - for that scope.
+
+The effect is that the admin should not be prompted to approve access to any resource more than once for the same logical application, such as the REST server.
+
+Fortunately, the Google authorization infrastructure can use information about user approvals for a client ID within a given project set up in Google API console,  when evaluating whether to authorize others in the same project. It also requires you to set up the authorized URIs that can be granted consent (such as the REST server explorer URI).
+
+The Google Authorization module will observe that the calling REST server and the web client ID are in the same project, and without user approval, return an ID token to the app, signed by Google. The ID token will contain several data fields, of which the following are particularly relevant:
+
+    iss: always accounts.google.com
+
+    aud: the client ID and secret of the web component of the project
+
+    email: the email that identifies the user requesting the token
+
+This ID token is designed to be transmitted over HTTPS. Before using it, the web component must do the following:
+
+Validate the cryptographic signature. Because the token takes the form of a JSON web token or JWT and there are libraries to validate JWTs available in most popular programming languages, this is straightforward and efficient.
+
+Ensure that the value of the `aud` field is identical to its own client ID.
+
+Once this is accomplished, the REST server can have a high degree of certainty that - the token was issued by Google. 
 
 ### Set up the persistence DB Credentials Store using MongoDB
 
@@ -194,23 +219,23 @@ Next, run the following docker command to launch a REST server instance (with th
     myorg/composer-rest-server
     
 
-This will output the ID of the Docker container eg . 690f2a5f10776c15c11d9def917fc64f2a98160855a1697d53bd46985caf7934 and confirm that the REST server has been indeed started. You can see that it is running using the following command:
+This will output the ID of the Docker container eg . `690f2a5f10776c15c11d9def917fc64f2a98160855a1697d53bd46985caf7934` and confirm that the REST server has been indeed started. You can see that it is running using the following command:
 
     docker ps |grep rest
     
 
 ### Test the REST APIs for the business network
 
-Open a browser window and launch the REST API explorer by going to to http://localhost:3000/explorer to view and use the available APIs.
+Open a browser window and launch the REST API explorer by going to http://localhost:3000/explorer to view and use the available APIs.
 
-INFO	Admin identity `restadmin` is used as an initial default - The REST server uses “restadmin” identity until a specific identity e.g. trader1 is set as a default identity in the REST client wallet
+INFO	Admin identity `restadmin` is used as an initial default - The REST server uses `restadmin` identity until a specific identity e.g. `jdoe` is set as a default identity in the REST client wallet.
 
 Go to the “System: general business network methods” section
 
 Go to the “/system/historian” API and click on “Try it out!” button as shown below:
 
 <need image>
-
+![Authorization error](../assets/img/tutorials/auth/authorization-error.png)
 
 You should get an Authorized error. In the next Section, you will notice that the extent of records that are visible in Composer's Historian are granted by granular ACL rules. By default, ACLs work such that all records in a business network are denied due to the secured REST server restrictions.
 
@@ -237,7 +262,7 @@ Once again, because we will use this identity to test inside the persistent REST
 
      composer card export -f jdoe.card -n jdoe@trade-network
 
-This card can now be used in the REST client
+This card can now be used in the REST client (the browser).
 
 
 ### Authenticating from the REST API Explorer and testing using specific identities 
@@ -246,24 +271,25 @@ You need to add an identity to a REST client wallet and then set this identity a
 
 Go to http://localhost:3000/auth/google_oauth2 - this will direct you to the Google Authentication consent screen. 
 
-Login using the following credentials: (example - as advised, you should set up your own per the instructions in the appendix):
+![Google Authentication](../assets/img/tutorials/auth/google_auth.png)
+
+Login using the following credentials: (example - as advised, you should set up your own per the instructions in the appendix section of this tutorial):
 
 Email: composeruser01@gmail.com
 Password: composer00
 
-You will be authenticated by Google.
+You will be authenticated by Google and be redirected back to the secured REST server (http://localhost:3000/explorer) which shows the access token message in the top left-hand corner - click on 'Show' to view the token.
 
-You will now be redirected back to the secured REST server (http://localhost:3000/explorer) which shows the access token message as follows: 
+![REST Server](../assets/img/tutorials/auth/rest-server-launch.png)
 
-<need image>
 
-While we have authenticated to Google - we have not actually set any cards as default in our wallet, to interact with our business network - we will do that next using the new identity we created earlier
+While our REST server have authenticated to Google OAUTH2 service defined by its project/client scope - we have not actually done anything yet, in terms of blockchain identity and using business network cards to interact with our Trade Commodity business network - we will do that next,  using the new identity we created earlier.
 
 ### Retrieve the Default Wallet and Import the card and set a default Identity
 
-There is a default wallet that is already create, which we will use to add our identity to
+There is a default wallet (restadmin) that is already created, which we will use to add our identity to
 
-Call the REST endpoint under Wallets:
+Firstly, go to the REST endpoint under Wallets and do a GET operation (and 'Try it Out'):
 
     GET /wallets
  
@@ -281,7 +307,7 @@ Next, go back to
 
     GET /wallets
     
-You should see that jdoe@trade-network is imported into the wallet. - Next let's set this as the default identity (all we've done so far is Import the business network card)
+You should see that `jdoe@trade-network` is imported into the wallet. - Next let's set this as the default identity (all we've done so far is Import the business network card)
 
 Go to the POST endpoint for  /Wallets{name}/setDefault and use  jdoe@trade-network as the default card and click on Try It Out
 
@@ -295,11 +321,11 @@ Then paste the wallet ID parameter (from earlier) in the 'id' field and click on
 
 Go to System REST API  Methods section and expand the /GET System/Historian section
 
-Click on 'Try It Out' - you should now see results from the Historian Registry, as the blockchain identity 'trader1'
+Click on 'Try It Out' - you should now see results from the Historian Registry, as the blockchain identity 'jdoe'
 
-Go to the Person methods and expand the /GET Person endpoint
+Go to the Person methods and expand the /GET Person endpoint then click 'Try it Out'
 
-You should now be able to see the results of the participants that user 'trader1' is allowed to see in that participant Registry, which is subject to any ACLs that have been set. 'Trader1' can only see and edit their own participant records (according to the ACLs) - this merely shows that the REST APIs are subject to access control like any other operation.
+You should now be able to see the results of the participants that user 'jdoe' is allowed to see in that participant Registry, which is subject to any ACLs that have been set. the Identity 'jdoe' (mapped to Participant 'Trader1') can only see and edit their own participant records (according to the Commodity Trading ACLs) - this merely shows that the REST APIs are subject to access control - like any other interaction with the busness network (such as Playground, JS APIs, CLI etc).
 
 <image>
  
