@@ -23,32 +23,6 @@ Once authenticated, application users obtain an access token and, once defined a
 
 You should carry out this tutorial as a non-privileged user (sudo or elevated privileges are not required)
 
-### A word on Google Authentication OAUTH2 setup and scope of Authentication
-
-When an application uses OAuth 2.0 for authorization, it acts on a user's behalf to request an OAuth 2.0 access token for access to a resource, which it identifies by one or more scope strings. Normally, of course - the user itself is asked to approve the access.
-
-When a user (eg. an admin) grants access to the app for a particular scope, in Google at least, a project-level consent 'branding'is setup in the Google API Console to challenge for the initial consent - see Appendix for more details. Thereafter, once consented,  Google considers that user (through the Google account he/she has set up) has granted access to a particular scope to any configured client IDs (these are set up in the Google API console - see Appendix) in a API+ project ; the grant indicates the trust in the whole application - for the scope as defined in the Google+ API configuration.
-
-The effect is that the application provider is not be prompted to approve access to any resource more than once for the same logical client application.
-
-Fortunately, the Google authorization infrastructure can use information about user approvals for a client ID within a given project set up in Google API console,  when evaluating whether to authorize others in the same project. It also requires you to set up the authorized URIs that can be granted consent (such as the application call back URL after successful authentication).
-
-The Google Authorization module will observe that the calling application and the web client ID are in the same project, and without user approval, return an ID token to the application, signed by Google. The ID token will contain several data fields, of which the following are particularly relevant:
-
-    iss: always accounts.google.com
-
-    aud: the client ID and secret of the web component of the project
-
-    email: the email that identifies the user requesting the token
-
-This ID token is designed to be transmitted over HTTPS. Before using it, the web component must do the following:
-
-Validate the cryptographic signature. Because the token takes the form of a JSON web token or JWT and there are libraries to validate JWTs available in most popular programming languages, this is straightforward and efficient.
-
-Ensure that the value of the `aud` field is identical to its own client ID.
-
-Once this is accomplished, the REST server can have a high degree of certainty that - the token was issued by Google. 
-
 ### Set up the persistence DB Credentials Store using MongoDB
 
 As mentioned, we will store credentials in a persistent data store once the appropriate business network cards are imported to the REST Wallet. 
@@ -196,7 +170,6 @@ First, we need to create our REST adninistrator identity and business network ca
 
      composer identity issue -c admin@trade-network -f restadmin.card -u restadmin -a "resource:org.hyperledger.composer.system.NetworkAdmin#restadmin"
     
-    
     composer card import -f  restadmin.card
 
     composer network ping -c restadmin@trade-network
@@ -264,8 +237,6 @@ We will be using the composer CLI commands to add participants and identities.
     composer identity issue -c admin@trade-network -f jdoe.card -u jdoe -a "resource:org.acme.trading.Trader#trader1"
 
     composer card import -f jdoe.card 
-
-    composer network ping -c jdoe@trade-network
     
 Once again, because we will use this identity to test inside the persistent REST docker container - we will need to change the hostnames to represent the docker resolvable hostnames - once again run this one-liner to carry out those changes quickly:
 
@@ -275,14 +246,27 @@ Once again, because we will use this identity to test inside the persistent REST
 
      composer card export -f jdoe_exp.card -n jdoe@trade-network ; rm jdoe.card
 
-This card can now be used in the REST client (the browser) in the next section.
+Repeat the above steps for participant Ken Coe (`kcoe`) - creating a `trader2` participant and issuing identity - the sequence of commands are:
+
+composer participant add -c admin@trade-network -d '{"$class":"org.acme.trading.Trader","tradeId":"trader1", "firstName":"Jo","lastName":"Doe"}'
+     
+    composer identity issue -c admin@trade-network -f kcoe.card -u kcoe -a "resource:org.acme.trading.Trader#trader2"
+
+    composer card import -f kcoe.card 
+
+    sed -e 's/localhost:/orderer.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/ca.org1.example.com:/'  < $HOME/.composer/cards/kcoe@trade-network/connection.json  > /tmp/connection.json && cp -p /tmp/connection.json $HOME/.composer/cards/kcoe@trade-network
+    
+    composer card export -f kcoe_exp.card -n kcoe@trade-network ; rm kcoe.card
+
+    
+These cards can now be used (imported) in the REST client (the browser) in the next section.
 
 
 ### Authenticating from the REST API Explorer and testing using specific identities 
 
 
 
-Go to http://localhost:3000/auth/google_oauth2 - this will direct you to the Google Authentication consent screen. 
+Go to http://localhost:3000/auth/google - this will direct you to the Google Authentication consent screen. 
 
 ![Google Authentication](../assets/img/tutorials/auth/google_auth.png)
 
@@ -312,9 +296,9 @@ Go to the POST system operation under /Wallets - its called the `/Wallets/Import
 
 Choose to import the file jdoe.card  - and provide the name of the card as jdoe@trade-network  and click 'Try it Out'
 
-![Import Wallet](../assets/img/tutorials/auth/import-jdoe-wallet.png)
+![Import jdoe Wallet](../assets/img/tutorials/auth/import-jdoe-wallet.png)
 
-You should you should get an HTTP Status code 204 (request was successful) 
+Scroll down - you should you should get an HTTP Status code 204 (request was successful) 
 
 Next, go back to 
 
@@ -330,28 +314,31 @@ You should see that `jdoe@trade-network` is imported into the wallet. Note also 
 
 Go to System REST API  Methods section and expand the /GET System/Historian section
 
+![System Historian /GET](../assets/img/tutorials/auth/get-historian.png)
+
 Click on 'Try It Out' - you should now see results from the Historian Registry, as the blockchain identity 'jdoe' and a set of transactions
 
 
+![Get Auth Historian Listing](../assets/img/tutorials/auth/get-historian-listing.png)
 
-![Get Wallet Listing](../assets/img/tutorials/auth/historian-listing.png)
-
-
-Go to the `Trader` methods and expand the /POST `Trader` endpoint  and add the following record:
-
-    {
-        "$class": "org.acme.trading.Trader",
-        "tradeId": "frich",
-        "firstName": "Fred",
-        "lastName": "Rich"
-    }
-
-
-then click 'Try it Out'
 
 Go to the `Trader` methods and expand the /GET `Trader` endpoint then click 'Try it Out'
 
 You should now be able to see the results of the Trader participants that user 'jdoe' is allowed to see in that participant Registry, which is subject to any ACLs that have been set. the Identity 'jdoe' (mapped to Participant 'Trader1') can only see and edit their own participant records (according to the Commodity Trading ACLs) - this merely shows that the REST APIs are subject to access control - like any other interaction with the business network (such as Playground, JS APIs, CLI etc).
+
+
+Next, return to the `POST /wallet/import` operation and import the card file `kcoe.card` with the card name set to `kcoe@trade-network` and click on '`Try it Out`to import it - it should return a successful (204) response. 
+
+![Import kcoe to Wallet](../assets/img/tutorials/auth/import-kcoe-wallet.png)
+
+However, to use this card, we need to set it as the default card name in our Wallet - go to the `POST /wallet/name/setDefault/` method and choose `kcoe@trade-network` as the default card name and click on `Try it Out`. This is now the default card.
+
+!Set new Default identity](../assets/img/tutorials/auth/set-default-kcoe.png)
+
+Return to the `Trader` methods and expand the /GET `Trader` endpoint then click 'Try it Out' . It should confirm that we are now using a different card name and still be able to interact with the REST Server as we are still authenticated.
+
+![Get Trader Listing](../assets/img/tutorials/auth/get-trader-resp.png)
+
 
 This concludes the tutorial section - you've seen how Google's OAUTH2.0 service can be used to authenticate client applications, like the Composer REST Server and provide consent to interact with the REST Server without the need to provide additional consent. The REST Server is running in multi-user mode and allows multiple blockchain identities to interact with the business network, without requiring additional consent (while at the same time authenticating requests to use it).
 
@@ -432,4 +419,32 @@ Next click on 'Create' and you will be prompted to save the Client ID and Client
 ![Client ID and Secret](../assets/img/tutorials/auth/google/client-keys.png)
 
 You're all set - you can now return to the main tutorial to set up your REST Server Authentication using Google's OAUTH2 client authentication service.
+
+### A word on Google Authentication OAUTH2 setup and scope of Authentication
+
+When an application uses OAuth 2.0 for authorization, it acts on a user's behalf to request an OAuth 2.0 access token for access to a resource, which it identifies by one or more scope strings. Normally, of course - the user itself is asked to approve the access.
+
+When a user (eg. an admin) grants access to the app for a particular scope, in Google at least, a project-level consent 'branding'is setup in the Google API Console to challenge for the initial consent - see Appendix for more details. Thereafter, once consented,  Google considers that user (through the Google account he/she has set up) has granted access to a particular scope to any configured client IDs (these are set up in the Google API console - see Appendix) in a API+ project ; the grant indicates the trust in the whole application - for the scope as defined in the Google+ API configuration.
+
+The effect is that the application provider is not be prompted to approve access to any resource more than once for the same logical client application.
+
+Fortunately, the Google authorization infrastructure can use information about user approvals for a client ID within a given project set up in Google API console,  when evaluating whether to authorize others in the same project. It also requires you to set up the authorized URIs that can be granted consent (such as the application call back URL after successful authentication).
+
+The Google Authorization module will observe that the calling application and the web client ID are in the same project, and without user approval, return an ID token to the application, signed by Google. The ID token will contain several data fields, of which the following are particularly relevant:
+
+    iss: always accounts.google.com
+
+    aud: the client ID and secret of the web component of the project
+
+    email: the email that identifies the user requesting the token
+
+This ID token is designed to be transmitted over HTTPS. Before using it, the web component must do the following:
+
+Validate the cryptographic signature. Because the token takes the form of a JSON web token or JWT and there are libraries to validate JWTs available in most popular programming languages, this is straightforward and efficient.
+
+Ensure that the value of the `aud` field is identical to its own client ID.
+
+Once this is accomplished, the REST server can have a high degree of certainty that - the token was issued by Google. 
+
+
 
