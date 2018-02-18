@@ -207,7 +207,7 @@ This will output the ID of the Docker container eg . `690f2a5f10776c15c11d9def91
     docker ps |grep rest
     
 
-### Test the REST APIs for the business network
+### Test the REST APIs are  for the business network
 
 Open a browser window and launch the REST API explorer by going to http://localhost:3000/explorer to view and use the available APIs.
 
@@ -223,14 +223,15 @@ Go to the “/system/historian” API and click on “Try it out!” button as s
 
 ![Authorization error](../assets/img/tutorials/auth/authorization-error.png)
 
-You should get an Authorized error. In the next Section, you will notice that the extent of records that are visible in Composer's Historian are granted by granular ACL rules. By default, ACLs work such that all records in a business network are denied due to the secured REST server restrictions.
+You should get an Authorized error and that is because we have configured a Google passport OAUTH2.0 authentication strategy to protect access to the REST server. Once authentication via the OAUTH2 authentication pa has been achieved, the REST APIs in the browser can interact with the Trade Commodity business network (ie. once a business card has been imported).
+
 
 ### Create some Participants and Identities for testing OAUTH2 authentication
 
-Next, you will need to create a participant and issue an identity for them. This is because when the REST server is configured to allow multiple REST client users and allow authentication with their different IDs at the REST client
+Next, you need to create a set participant and identities for testing you can interact with the business network. This is because the REST server can handle multiple REST clients in multi-user mode.
 
 
-We will be using the composer CLI commands to add participants and identities.
+We will be using the composer CLI commands to add participants and identities as follows:
 
     composer participant add -c admin@trade-network -d '{"$class":"org.acme.trading.Trader","tradeId":"trader1", "firstName":"Jo","lastName":"Doe"}'
      
@@ -242,13 +243,13 @@ Once again, because we will use this identity to test inside the persistent REST
 
     sed -e 's/localhost:/orderer.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/ca.org1.example.com:/'  < $HOME/.composer/cards/jdoe@trade-network/connection.json  > /tmp/connection.json && cp -p /tmp/connection.json $HOME/.composer/cards/jdoe@trade-network
     
- Lastly, we want to export the card to a file - to use for import elsewhere  - this is in fact the card that we will use to import then  authenticate to the REST server (ie if it was located remote to the REST server) and we can discard the initial enrolment based business network card file.
+ Lastly, we want to export the card to a file - to use for import elsewhere  - ie the card that we will use to import to the wallet in our browser client - and thefore at this point, we can discard the initial business network card file for `jdoe`.
 
      composer card export -f jdoe_exp.card -n jdoe@trade-network ; rm jdoe.card
 
-Repeat the above steps for participant Ken Coe (`kcoe`) - creating a `trader2` participant and issuing identity - the sequence of commands are:
+Repeat the above steps for participant Ken Coe (`kcoe`) - creating a `trader2` participant and issuing the identity `kcoe` - the sequence of commands are:
 
-composer participant add -c admin@trade-network -d '{"$class":"org.acme.trading.Trader","tradeId":"trader1", "firstName":"Jo","lastName":"Doe"}'
+    composer participant add -c admin@trade-network -d '{"$class":"org.acme.trading.Trader","tradeId":"trader1", "firstName":"Jo","lastName":"Doe"}'
      
     composer identity issue -c admin@trade-network -f kcoe.card -u kcoe -a "resource:org.acme.trading.Trader#trader2"
 
