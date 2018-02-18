@@ -39,10 +39,10 @@ As mentioned, we will store credentials in a persistent data store once the appr
  
  1. In your $HOME directory, create a docker file `Dockerfile` in an editor and paste into the following sequence (including special characters below):
  
-     FROM hyperledger/composer-rest-server:next
-RUN npm install --production loopback-connector-mongodb passport-google-oauth2 && \
-    npm cache clean –force && \
-    ln -s node_modules .node_modules
+      FROM hyperledger/composer-rest-server:next
+      RUN npm install --production loopback-connector-mongodb passport-google-oauth2 && \
+      npm cache clean –force && \
+      ln -s node_modules .node_modules
     
 This Docker file will pull the Docker image located at /hyperledger/composer-rest-server and additionally install two more npm modules:
 
