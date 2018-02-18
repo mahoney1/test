@@ -3,7 +3,7 @@ layout: default
 title: Configuring OAUTH2 Authentication with a persistent Composer REST server instance
 category: tutorials
 section: tutorials
-index-order: 307
+index-order: 308
 sidebar: sidebars/accordion-toc0.md
 ---
 
