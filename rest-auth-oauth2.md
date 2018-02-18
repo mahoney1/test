@@ -325,6 +325,10 @@ Click on 'Try It Out' - you should now see results from the Historian Registry, 
 
 Go to the `Trader` methods and expand the /GET `Trader` endpoint then click 'Try it Out'
 
+It should confirm that we are able to interact with the REST Server as `jdoe` in our authenticated session.
+
+![Get Trader Listing](../assets/img/tutorials/auth/get-trader-resp.png)
+
 You should now be able to see the results of the Trader participants that user 'jdoe' is allowed to see in that participant Registry, which is subject to any ACLs that have been set. the Identity 'jdoe' (mapped to Participant 'Trader1') can only see and edit their own participant records (according to the Commodity Trading ACLs) - this merely shows that the REST APIs are subject to access control - like any other interaction with the business network (such as Playground, JS APIs, CLI etc).
 
 
@@ -334,7 +338,7 @@ Next, return to the `POST /wallet/import` operation and import the card file `kc
 
 However, to use this card, we need to set it as the default card name in our Wallet - go to the `POST /wallet/name/setDefault/` method and choose `kcoe@trade-network` as the default card name and click on `Try it Out`. This is now the default card.
 
-!Set new Default identity](../assets/img/tutorials/auth/set-default-kcoe.png)
+![Set new Default identity](../assets/img/tutorials/auth/set-default-kcoe.png)
 
 Return to the `Trader` methods and expand the /GET `Trader` endpoint then click 'Try it Out' . It should confirm that we are now using a different card name and still be able to interact with the REST Server as we are still authenticated.
 
