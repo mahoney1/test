@@ -15,7 +15,7 @@ When an application in the browser wants to allow users to authenticate using th
 
 The REST Server is configured to persist the business network cards (required to connect to the network) and the OAUTH 2.0 user authentication tokens using MongoDB store. Administrators of any REST server must select Passport strategies to authenticate clients such as applications etc in multi user mode (there are a wide range of strategies (300+ at the time of writing). 
 
-In a business organisational sense, enterprise  strategies such as SAML, JSON Web Tokens (JWT) or LDAP are more appropriate obviously, a classic example for the latter being authentication to an organisational Active Directory server. We use Google as the authentication provider for this tutorial, as its easy for anyone to setup a Google account (see Appendix on how to achieve this) and carry out the tutorial without worrying about prereqs to be installed.
+In a business organisational sense, enterprise  strategies such as SAML, JSON Web Tokens (JWT) or LDAP are more appropriate obviously, a classic example for the latter being authentication to an organisational Active Directory server. We use Google as the authentication provider for this tutorial, as its easy for anyone to setup a Google account (see Appendix on how to achieve this) and carry out the tutorial without worrying about middleware prereqs to be installed or configured.
 
 Note that for a production environment goes, an organisation would typically deploy multiple instances of a REST server to increase resiliency of the system. When doing this, all instances would share a data source (eg. network storage) so that the user doesn’t have to be authenticated on each individual instance.
 
@@ -25,15 +25,15 @@ You should carry out this tutorial as a non-privileged user (sudo or elevated pr
 
 ### A word on Google Authentication OAUTH2 setup and scope of Authentication
 
-When an application (like the REST server) uses OAuth 2.0 for authorization, it acts on a user's behalf to request an OAuth 2.0 access token for access to a resource, which it identifies by one or more scope strings. Normally, of course - the user is asked to approve the access.
+When an application uses OAuth 2.0 for authorization, it acts on a user's behalf to request an OAuth 2.0 access token for access to a resource, which it identifies by one or more scope strings. Normally, of course - the user itself is asked to approve the access.
 
-When a user (eg. an admin) grants access to the app for a particular scope, in Google at least, a project-level consent 'branding'is setup in the Google API Console to challenge for the initial consent - see Appendix for more details. Thereafter, once consented,  Google considers that user (through the Google account he/she has set up) has granted access to a particular scope to any configured client IDs (these are set up in the Google API console - see Appendix) in a API+ project ; the grant indicates the user's trust in the whole application - for the scope as defined in the Google+ API configuration.
+When a user (eg. an admin) grants access to the app for a particular scope, in Google at least, a project-level consent 'branding'is setup in the Google API Console to challenge for the initial consent - see Appendix for more details. Thereafter, once consented,  Google considers that user (through the Google account he/she has set up) has granted access to a particular scope to any configured client IDs (these are set up in the Google API console - see Appendix) in a API+ project ; the grant indicates the trust in the whole application - for the scope as defined in the Google+ API configuration.
 
-The effect is that the user is not be prompted to approve access to any resource more than once for the same logical client application, such as the REST server.
+The effect is that the application provider is not be prompted to approve access to any resource more than once for the same logical client application.
 
-Fortunately, the Google authorization infrastructure can use information about user approvals for a client ID within a given project set up in Google API console,  when evaluating whether to authorize others in the same project. It also requires you to set up the authorized URIs that can be granted consent (such as the call back URL after successful authentication).
+Fortunately, the Google authorization infrastructure can use information about user approvals for a client ID within a given project set up in Google API console,  when evaluating whether to authorize others in the same project. It also requires you to set up the authorized URIs that can be granted consent (such as the application call back URL after successful authentication).
 
-The Google Authorization module will observe that the calling REST server and the web client ID are in the same project, and without user approval, return an ID token to the app, signed by Google. The ID token will contain several data fields, of which the following are particularly relevant:
+The Google Authorization module will observe that the calling application and the web client ID are in the same project, and without user approval, return an ID token to the application, signed by Google. The ID token will contain several data fields, of which the following are particularly relevant:
 
     iss: always accounts.google.com
 
