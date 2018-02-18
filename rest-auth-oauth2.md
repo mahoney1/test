@@ -269,16 +269,16 @@ Once again, because we will use this identity to test inside the persistent REST
 
     sed -e 's/localhost:/orderer.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/peer0.org1.example.com:/' -e 's/localhost:/ca.org1.example.com:/'  < $HOME/.composer/cards/jdoe@trade-network/connection.json  > /tmp/connection.json && cp -p /tmp/connection.json $HOME/.composer/cards/jdoe@trade-network
     
- Lastly, we want to export the card - to use for import on a 'remote application' - this is the card that we will use to authenticate to the REST server (ie if it was located remote to the REST server)
+ Lastly, we want to export the card to a file - to use for import elsewhere  - this is in fact the card that we will use to import then  authenticate to the REST server (ie if it was located remote to the REST server) and we can discard the initial enrolment based business network card file.
 
-     composer card export -f jdoe.card -n jdoe@trade-network
+     composer card export -f jdoe_exp.card -n jdoe@trade-network ; rm jdoe.card
 
-This card can now be used in the REST client (the browser).
+This card can now be used in the REST client (the browser) in the next section.
 
 
 ### Authenticating from the REST API Explorer and testing using specific identities 
 
-You need to add an identity to a REST client wallet and then set this identity as the default one to use for making API calls.
+
 
 Go to http://localhost:3000/auth/google_oauth2 - this will direct you to the Google Authentication consent screen. 
 
@@ -289,33 +289,28 @@ Login using the following credentials: (example - as advised, you should set up 
 Email: composeruser01@gmail.com
 Password: composer00
 
-You will be authenticated by Google and be redirected back to the secured REST server (http://localhost:3000/explorer) which shows the access token message in the top left-hand corner - click on 'Show' to view the token.
+You will be authenticated by Google and be redirected back to the REST server (http://localhost:3000/explorer) which shows the access token message in the top left-hand corner - click on 'Show' to view the token.
 
 ![REST Server with Access Token](../assets/img/tutorials/auth/rest-server-token.png)
 
 
-While our REST server has authenticated to Google OAUTH2 service defined by its project/client scope (using the client credentials set up in the Appendix for our Google API+ service) - we have not actually done anything yet, in terms of blockchain identity and using business network cards to interact with our Trade Commodity business network - we will do that next,  using the new identity we created earlier.
+While our REST server has authenticated to Google OAUTH2 service - defined by its project/client scope and using the client credentials set up in the Appendix for our service) - we have not actually done anything yet in terms of blockchain identity or using business network cards to interact with our Trade Commodity business network - we will do that next,  using the `jdoe` identity we created earlier.
 
 ### Retrieve the Default Wallet and Import the card and set a default Identity
 
-There is a default wallet (restadmin) that is already created, which we will use to add our identity to
 
-Firstly, go to the REST endpoint under Wallets and do a GET operation (and 'Try it Out') to get the Wallet ID:
+Firstly, go to the REST endpoint under Wallets and do a GET operation (and 'Try it Out') to get the contents of the Wallet - check that the wallet does not contain any business network cards - it should show as empty `[ ]`:
 
     GET /wallets
+    
+You need to add an identity to the REST client wallet and then set this identity as the default one to use for making API calls.
  
-It should show a default Wallet and return a Wallet ID in JSON form (and which changes for each use). Copy the **ID** field value / contents **only** (ie the alpha-numeric code inside the quotes) and go to the following REST API endpoint:
 
-    POST /wallets/{id}/identities
-    
-    
-Paste the wallet ID parameter (from earlier) in the 'id' field and click on 'Try it Out' 
-
-![Wallet](../assets/img/tutorials/auth/get_wallets.png)
-
-In the authenticated browser - go to the POST system operation under /Wallets - its called the `/Wallets/Import` endpoint
+Go to the POST system operation under /Wallets - its called the `/Wallets/Import` endpoint
 
 Choose to import the file jdoe.card  - and provide the name of the card as jdoe@trade-network  and click 'Try it Out'
+
+![Import Wallet](../assets/img/tutorials/auth/import-jdoe-wallet.png)
 
 You should you should get an HTTP Status code 204 (request was successful) 
 
@@ -323,28 +318,42 @@ Next, go back to
 
     GET /wallets
     
-You should see that `jdoe@trade-network` is imported into the wallet. - Next let's set this as the default identity (all we've done so far is Import the business network card)
-
-Go to the POST endpoint for  /Wallets{name}/setDefault and use  `jdoe@trade-network` as the default card and click on Try It Out
+You should see that `jdoe@trade-network` is imported into the wallet. Note also that the value of the `default property` is true, which means that this business network card will be used by default when interacting with the Commodity Trading business network (until such time as you change it to use another).
 
 
-You should get an HTTP Status code 204 (request was successful)
-
-Revisiting the GET  /Wallet operation  - you should see that `jdoe@trade-network` is now set as the default user ('true'))
-    
+![Get Wallet Listing](../assets/img/tutorials/auth/get-wallet.png)
 
 
 ### Test interaction with the Business Network as the default ID
 
 Go to System REST API  Methods section and expand the /GET System/Historian section
 
-Click on 'Try It Out' - you should now see results from the Historian Registry, as the blockchain identity 'jdoe'
+Click on 'Try It Out' - you should now see results from the Historian Registry, as the blockchain identity 'jdoe' and a set of transactions
+
+
+
+![Get Wallet Listing](../assets/img/tutorials/auth/historian-listing.png)
+
+
+Go to the `Trader` methods and expand the /POST `Trader` endpoint  and add the following record:
+
+    {
+        "$class": "org.acme.trading.Trader",
+        "tradeId": "frich",
+        "firstName": "Fred",
+        "lastName": "Rich"
+    }
+
+
+then click 'Try it Out'
 
 Go to the `Trader` methods and expand the /GET `Trader` endpoint then click 'Try it Out'
 
 You should now be able to see the results of the Trader participants that user 'jdoe' is allowed to see in that participant Registry, which is subject to any ACLs that have been set. the Identity 'jdoe' (mapped to Participant 'Trader1') can only see and edit their own participant records (according to the Commodity Trading ACLs) - this merely shows that the REST APIs are subject to access control - like any other interaction with the business network (such as Playground, JS APIs, CLI etc).
 
-<image>
+This concludes the tutorial section - you've seen how Google's OAUTH2.0 service can be used to authenticate client applications, like the Composer REST Server and provide consent to interact with the REST Server without the need to provide additional consent. The REST Server is running in multi-user mode and allows multiple blockchain identities to interact with the business network, without requiring additional consent (while at the same time authenticating requests to use it).
+
+The appendix below describes how the Google Authentication was set up in advance of this tutorial.
 	
 
 ## Appendix - Google Authentication Configuration & Setup
