@@ -78,7 +78,7 @@ You should see output similar to the following with the bottom 2 lines indicatin
     Removing intermediate container 7a116240be21
     Successfully built a16cdea42dac
     Successfully tagged myorg/composer-rest-server:latest
-  
+  
   
 INFO: Don’t worry about seeing the 'npm warn messages' as shown on the console as per above. This can be ignored.
 
@@ -449,6 +449,5 @@ Validate the cryptographic signature. Because the token takes the form of a JSON
 Ensure that the value of the `aud` field is identical to its own client ID.
 
 Once this is accomplished, the REST server can have a high degree of certainty that - the token was issued by Google. 
-
 
 
