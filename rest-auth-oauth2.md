@@ -329,7 +329,7 @@ It should confirm that we are able to interact with the REST Server as `jdoe` in
 
 ![Get Trader Listing](../assets/img/tutorials/auth/get-trader-resp.png)
 
-You should now be able to see all Trader participants currently created. If any ACLs have been set then restrictions on what he can see may apply (they haven't been applied for this current sample network, but examples of ACL rules can be seen in the [ACL tutorial](acl-trading.html) FYI). Suffice to say that REST APIs accessing a business network are subject to access control - like any other interaction with the business network (such as Playground, JS APIs, CLI etc).
+You should now be able to see all Trader participants currently created. If any ACLs have been set then restrictions on what he can see may apply (they haven't been applied for this current sample network, but examples of ACL rules can be seen in the [ACL tutorial](./acl-trading.html) FYI). Suffice to say that REST APIs accessing a business network are subject to access control - like any other interaction with the business network (such as Playground, JS APIs, CLI etc).
 
 Next, return to the `POST /wallet/import` operation and import the card file `kcoe.card` with the card name set to `kcoe@trade-network` and click on '`Try it Out`to import it - it should return a successful (204) response. 
 
@@ -449,5 +449,3 @@ Validate the cryptographic signature. Because the token takes the form of a JSON
 Ensure that the value of the `aud` field is identical to its own client ID.
 
 Once this is accomplished, the REST server can have a high degree of certainty that - the token was issued by Google. 
-
-
