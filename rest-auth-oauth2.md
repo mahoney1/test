@@ -9,7 +9,9 @@ sidebar: sidebars/accordion-toc0.md
 
 # Configuring OAUTH2 Authentication with a persistent Composer REST server instance
 
-This tutorial provides an insight into configuring the OAUTH2 authentication strategy (eg. Google, Facebook, Twitter etc) for end users of a blockchain network that will consume or interact with a deployed smart contract in the form of a Commodity Trading business network. You will run the REST server in multi user mode and test interacting with the network as different blockchain identities.
+This tutorial provides an insight into configuring the OAUTH2  (eg. Google, Facebook, Twitter etc) authentication strategy to authenticate the REST Server and allow end users of a blockchain network to interact with a deployed smart contract/business network. We use the Commodity Trading business network for this tutorial. You will run the REST server in multi user mode and test interacting with the network as different blockchain identities.
+
+When an application in the browser wants to allow users to authenticate using their Google account, they must register it as an application with Google APIs+ which once configured, gives them a client ID and client secret. These values are used to set up Google authentication for the REST server. The idea is that, when an application user (consuming the REST Server) comes along,  he/she doesn't have to pre-register anything ;  the application user is advised they are granted consent in the browser to use the REST APIs (as the REST Server provides the client ID and secret as part of the Google provider 'handshake'). The REST Server is set up to use this Google auth service, as it will allow users to log in using their Google account to the application. 
 
 The REST Server is configured to persist the business network cards (required to connect to the network) and the OAUTH 2.0 user authentication tokens using MongoDB store. Administrators of any REST server must select Passport strategies to authenticate clients such as applications etc in multi user mode (there are a wide range of strategies (300+ at the time of writing). 
 
