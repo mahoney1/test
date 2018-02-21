@@ -461,7 +461,7 @@ You will be prompted to save the Client ID and Client Secret - copy these two an
 
 ![Client ID and Secret](../assets/img/tutorials/auth/google/client-keys.png)
 
-You're all set - you can now return to the main tutorial to set up your REST Server Authentication using Google's OAUTH2.0 client authentication service.
+You're all set - you can now return to the main tutorial to set up your REST Server Authentication using Google's OAUTH2.0 client authentication service. 
 
 ### A word on Google Authentication OAUTH2.0 setup and scope of Authentication
 
