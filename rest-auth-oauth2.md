@@ -1,16 +1,17 @@
 ---
 layout: default
-title: Configuring Google for OAUTH2.0 Authentication Strategy with a persistent Composer REST server instance
+title: Configuring Google OAUTH2.0 Authentication Strategy with a persistent Composer REST server instance
 category: tutorials
 section: tutorials
 index-order: 308
 sidebar: sidebars/accordion-toc0.md
 ---
 
-# Configuring Google for OAUTH2.0 Authentication Strategy with a persistent Composer REST server instance
+# Configuring Google OAUTH2.0 Authentication Strategy with a persistent Composer REST server instance
 
+![Google Authentication and REST Server Overview](../assets/img/tutorials/auth/intro_diagram.png)
 
-This tutorial provides an insight into configuring the OAUTH2.0 authentication strategy  (eg. for Google, Facebook, Twitter authentication providers etc) to authorize access to resources in a configured REST Server instance - and allow end users of a blockchain network to interact with a deployed smart contract/business network - the Commodity Trading network in this tutorial. You will run the REST server in [multi user mode](https://hyperledger.github.io/composer/next/integrating/enabling-multiuser.html) and test interacting with the network as different blockchain identities, accessing resources through the REST APIs. Ideally, you will need to set up your own Google account / authorization scheme to do this (see appendix on the steps to do this - doesn't take long), or minimally, use the ID/metadata provided in this tutorial. Suffice to say, it uses {{site.data.conrefs.composer_full}} as the underlying blockchain network.
+This tutorial provides an insight into configuring the OAUTH2.0 authentication strategy  (eg. for Google, Facebook, Twitter authentication providers etc) to authorize access to resources in a configured REST Server instance - and allow end users of a blockchain network to interact with a deployed smart contract/business network - the Commodity Trading network in this tutorial (a more detailed diagram showing the authentication flow is shown next paragraph). You will run the REST server in [multi user mode](https://hyperledger.github.io/composer/next/integrating/enabling-multiuser.html) and test interacting with the network as different blockchain identities, accessing resources through the REST APIs. Ideally, you will need to set up your own Google account / authorization scheme to do this (see appendix on the steps to do this - doesn't take long), or minimally, use the ID/metadata provided in this tutorial. Suffice to say, it uses {{site.data.conrefs.composer_full}} as the underlying blockchain network.
 
 Note: we have set up the standard 'Development Fabric' network as instructed in Step 3 'Setting up your IDE' described [here](https://hyperledger.github.io/composer/next/installing/development-tools.html)
 
@@ -259,9 +260,7 @@ You should get an Authorized error and that is because we have configured a Goog
 
 <h2 class='everybody'> Step 9:  Create some Participants and Identities for testing OAUTH2.0 authentication  </h2>
 
-1. You need to create a set participant and identities for testing you can interact with the business network. This is because the REST server can handle multiple REST clients in multi-user mode.
-
-We will be using the composer CLI commands to add participants and identities as follows - first name is **Jo Doe**:
+1. You need to create a set participant and identities for testing you can interact with the business network. This is because the REST server can handle multiple REST clients in multi-user mode. We will be using the composer CLI commands to add participants and identities as follows - first name is **Jo Doe**:
 
     composer participant add -c admin@trade-network -d '{"$class":"org.acme.trading.Trader","tradeId":"trader1", "firstName":"Jo","lastName":"Doe"}'
      
