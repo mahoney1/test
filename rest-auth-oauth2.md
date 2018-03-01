@@ -317,7 +317,7 @@ While our REST server has authenticated to Google+ OAUTH2.0 service - defined by
     
 2. You need to add an identity to the REST client wallet and then set this identity as the default one to use for making API calls. Go to the POST system operation under /Wallets - its called the `/Wallets/Import` endpoint
 
-3. Choose to import the file jdoe.card  - and provide the name of the card as jdoe@trade-network  and click 'Try it Out'
+3. Choose to import the file `jdoe_exp.card`  - and provide the name of the card as jdoe@trade-network  and click 'Try it Out'
 
 ![Import jdoe Wallet](../assets/img/tutorials/auth/import-jdoe-wallet.png)
 
@@ -353,7 +353,7 @@ It should confirm that we are able to interact with the REST Server as `jdoe` in
 
 You should now be able to see all Trader participants currently created. If any ACLs have been set then restrictions on what he can see may apply (they haven't been applied for this current sample network, but examples of ACL rules can be seen in the [ACL tutorial](./acl-trading.html) FYI). Suffice to say that REST APIs accessing a business network are subject to access control - like any other interaction with the business network (such as Playground, JS APIs, CLI etc).
 
-4.  Next, return to the `POST /wallet/import` operation and import the card file `kcoe.card` with the card name set to `kcoe@trade-network` and click on '`Try it Out`to import it - it should return a successful (204) response. 
+4.  Next, return to the `POST /wallet/import` operation and import the card file `kcoe_exp.card` with the card name set to `kcoe@trade-network` and click on '`Try it Out`to import it - it should return a successful (204) response. 
 
 ![Import kcoe to Wallet](../assets/img/tutorials/auth/import-kcoe-wallet.png)
 
@@ -403,15 +403,15 @@ You should see the following page on arrival. Search for ‘Google+’ in the se
 
 <h2 class='everybody'>Step A2:  Create Credentials Service Account  </h2>
 
-1. Once you have enabled the service you will be prompted to create service account Credentials so that you can use the service.  Click ‘Create Credentials’.
+1. Once you have enabled the service you will be prompted to create Service Account Credentials so that you can use the service.  Click ‘Create Credentials’.
 
 2. You will be asked a series of questions to determine what kind of credentials you will need. Give the answers shown in the screenshot below. Choose 'Google+ API'  for the API, Web Server (e.g. Node js, Tomcat) and Application data and 'No' for the Engine question at the bottom.
 
+3. Click on `What credentials do I need`  and hit Continue
+
 ![Setup Credentials](../assets/img/tutorials/auth/google/setup_credentials.png)
 
-3. Next, setup a Credentials service account - with the name 'GoogleAuthService' - select 'Project' in the dropdown and select a role of `Owner` and a type of JSON and 
-
-4. Click on `What credentials do I need`  and hit Continue
+4. Next, setup a Credentials service account - with the name 'GoogleAuthService' - select 'Project' in the dropdown and select a role of `Owner` and a type of JSON and 
 
 5. Click on 'Get your Credentials' - it should download (or prompt to download) the service credentials in JSON format - save these to a safe location.
 
@@ -420,13 +420,13 @@ You should see the following page on arrival. Search for ‘Google+’ in the se
 
 ![Download Credentials](../assets/img/tutorials/auth/google/download-service-creds.png)
     
-4. Save a JSON file with the application credentials. After downloading the credentials, the site will take you back to the credentials homepage and you will see a new service account key.
+6. Save a JSON file with the application credentials. After downloading the credentials, the site will take you back to the credentials homepage and you will see a new service account key.
     
 ![Credentials Service Keys](../assets/img/tutorials/auth/google/credentials-service.png)
 
 <h2 class='everybody'>Step A3:  Create OAUTH2.0 Consent </h2>
 
-5. Go to the ‘OAuth consent screen' tab = you will neeed to give a 'product name'  like 'Google Auth REST OAUTH2 service' - a banner that is shown when consent to authorize a request is requested  (ie when we test it on the REST client in the main tutorial) and an email address, click ‘Save’. 
+7. Go to the ‘OAuth consent screen' tab = you will neeed to give a 'product name'  like 'Google Auth REST OAUTH2 service' - a banner that is shown when consent to authorize a request is requested  (ie when we test it on the REST client in the main tutorial) and an email address, click ‘Save’. 
 
 The OAuth consent screen is what the user (in the tutorial) will see when they are authenticating themselves against the Google Auth REST Service
 
