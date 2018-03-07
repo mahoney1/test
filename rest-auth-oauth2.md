@@ -426,7 +426,7 @@ You should see the following page on arrival. Search for ‘Google+’ in the se
 
 <h2 class='everybody'>Step A3:  Create OAUTH2.0 Consent </h2>
 
-7. Go to the ‘OAuth consent screen' tab = you will neeed to give a 'product name'  like 'Google Auth REST OAUTH2 service' - a banner that is shown when consent to authorize a request is requested  (ie when we test it on the REST client in the main tutorial) and an email address, click ‘Save’. 
+7. Go to the ‘OAuth consent screen' tab = you will need to give a 'product name'  like 'Google Auth REST OAUTH2 service' - a banner that is shown when consent to authorize a request is requested  (ie when we test it on the REST client in the main tutorial) and an email address, click ‘Save’. 
 
 The OAuth consent screen is what the user (in the tutorial) will see when they are authenticating themselves against the Google Auth REST Service
 
