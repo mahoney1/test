@@ -12,20 +12,19 @@ Our [**Tutorials**](https://hyperledger.github.io/composer/tutorials/tutorials.h
 ***
 ###  :o: TOPIC INDEX  :o:
 
-| [**ACLs**](#acls) | [**Authorization Errors**](#authorization) | [**Blockchain Recap**](#recap) |[**Business Network Themes**](#biznet) 
-| :---------------------- | :-----------------------| :----------------------- | :-------------------- 
-| [**Business Network Cards**](#bizcards) | [**Client APIs Usage**](#clientapis) | [**Cloud/Kubernetes envs**](#varcloud) | [**Composer Install Issues**](#installissues) 
-| [**Data Migration**](#migration) | [**Debugging**](#debug) | [**Endorsement Policy**](#endorse) | [**Events**](#events) 
-| [**Event Hub Problems**](#eventhub) | [**Filters**](#filters)  |  [**Identity Issues**](#identity) | [**Historian**](#historian) 
-| [**Modeling**](#model) | [**Miscellaneous Items**](#misccomposer) | [**Multi Org Setup/BYFN**](#multiorg) | [**Node / NVM Issues**](#node-issues) 
-| [**Passport Strategies**](#passport-strategy) | [**Queries**](#queries)  | [**REST APIs**](#restapis)  | [**REST Authentication**](#restauth) 
-| [**Runtime Install Errors**](#runtime-install)| [**Sample Networks**](#samples) | [**Scripting Tips**](#scripting) |[**Transaction Processors**](#transproc) 
-| [**Upgrading Composer Runtime**](#upgrade) | [**Updating Biz Networks**](#upgradebn) | [**Topic Name**](#samples)  | [**Topic Name**](#bizcards) 
+| [**ACLs**](#acls) | [**Authorization Errors**](#authorization) | [**Angular**](#angular) | [**Blockchain Recap**](#recap) |[**Business Network Themes**](#biznet) 
+| :---------------------- | :-----------------------| :----------------------- | :-------------------- |:-----------------
+| [**Business Network Cards**](#bizcards) | [**Client APIs Usage**](#clientapis) | [**Cloud/Kubernetes envs**](#varcloud) | [**Composer Install Issues**](#installissues) |  [**Data Migration**](#migration) 
+ [**Debugging**](#debug) | [**Endorsement Policy**](#endorse) | [**Events**](#events) | [**Event Hub Problems**](#eventhub) | [**Filters**](#filters)  
+|  [**Identity Issues**](#identity) | [**Historian**](#historian) | [**Modeling**](#model) | [**Miscellaneous Items**](#misccomposer) | [**Multi Org Setup/BYFN**](#multiorg)
+| [**Node / NVM Issues**](#node-issues) | [**Passport Strategies**](#passport-strategy) | [**Queries**](#queries)  | [**REST APIs**](#restapis)  | [**REST Authentication**](#restauth) 
+| [**Runtime Install Errors**](#runtime-install)| [**Sample Networks**](#samples) | [**Scripting Tips**](#scripting) |[**Transaction Processors**](#transproc) | [**Upgrading Composer Runtime**](#upgrade) 
+| [**Updating Biz Networks**](#upgradebn) | [**empty**](#samples)  | [**empty**](#samples) | [**empty**](#samples) | [**empty**](#samples)  
 
 
 Have Fabric Related issues? (ie when used with Composer Dev Env Setup or Tutorials)
 
-| ~ [**Fabric type Issues**](#fabricsetup)  | [**Misc items**](#misc) |
+| ~ [**Fabric type Issues**](#fabricsetup)  | [**Misc items**](#misccomposer) |
 | :---------------------- | :---------------------- 
 
 ***
@@ -37,6 +36,24 @@ Each topic area has links to suggested solutions (you can open these in a new wi
  
 
 If you still have an issue,  see :link:  [here ](#issue)    
+
+
+<a name="angular"></a>
+
+
+### :information_source:  Angular Generator Questions
+
+
+The following are a selection of answers, to help understand what you may be encountering:
+
+| Message encountered | Resolution 
+| :---------------------- | :-----------------------
+| Current state of Angular Generator | Only creates Assets (not Transaction or Participants yet) - we have a current work-in-progress on improving the Angular generator to include transactions / transaction classes in the generated app -> https://github.com/hyperledger/composer/issues/3136 - this sample app here -> https://github.com/IBM/Decentralized-Energy-Composer/tree/master/angular-app/src/app has the `data service` for transactions added that you may want to take a look at - this may also be of use -> https://blog.angular-university.io/how-to-build-angular2-apps-using-rxjs-observable-data-services-pitfalls-to-avoid/
+
+
+
+#### :card_index: [back to base camp :camping: ](#top) 
+
 
 <a name="authorization"></a>
 
