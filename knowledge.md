@@ -83,9 +83,9 @@ The following are a selection of answers, to help understand what you may be enc
 | Target multiple txn types ++  | see Rocketchat thread for target definition [here](https://chat.hyperledger.org/channel/composer?msg=HaxJg3sHESrPCvzcd)  
 | Minimum ACLs to discover a BN | see Rocketchat thread [here](https://chat.hyperledger.org/channel/composer?msg=ZkMakmszLdQWNNYsj)
 | What does .** in an ACL or what do these ACLs mean? | 1. .system.** -  System ACL to permit all access - access to all operations and commands in the business network, including network access and business access. It is recursive (denoted by .** )
-|continued..  | 2.  .* means the rule definition is non-recursive
-|continued..   | 3. org.acme.perishable.* - resources under the namespace `perishable` (non-recursive)
-|continued..   | 4. org.acme.perishable.**  all resources and everything under that namespace (recursive)
+|  | 2.  .* means the rule definition is non-recursive
+|  | 3. org.acme.perishable.* - resources under the namespace `perishable` (non-recursive)
+|  | 4. org.acme.perishable.**  all resources and everything under that namespace (recursive)
 | Controlling access to a particular field |currently not possible for property (field) based access control in ACL runtime -> https://github.com/hyperledger/composer/issues/983 
 | ..(continued ..) | If your singular field control relateds to 'authorisation' (who's allowed to see a particular asset) you can maybe store a hash of the authorised list (of participants allowed) in an array eg. `String[] Authorised optional` then a rule something like 
 | ..(continued ..) | rule sampleRule {    description: "only allowed users"    participant(p): "org.acme.model.Participant"    operation: ALL    resource(r): "org.acme.model.Asset"    condition: ( ( r.Authorised.indexOf(hashCode(p.getIdentifier()) > -1 ) || p.getIdentifier() === r.owner.getIdentifier()    action: ALLOW    where `hashCode` is a function defined in a script file in js directory .... and `owner` is a relationship field to the participant
