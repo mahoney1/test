@@ -88,15 +88,7 @@ The following are a selection of answers, to help understand what you may be enc
 |  | 4. org.acme.perishable.**  all resources and everything under that namespace (recursive)
 | Controlling access to a particular field |currently not possible for property (field) based access control in ACL runtime -> https://github.com/hyperledger/composer/issues/983 
 | ..(continued ..) | If your singular field control relateds to 'authorisation' (who's allowed to see a particular asset) you can maybe store a hash of the authorised list (of participants allowed) in an array eg. `String[] Authorised optional` then a rule something like 
-| ..(continued ..) | rule sampleRule {
-   description: "only allowed users"
-   participant(p): "org.acme.model.Participant"
-   operation: ALL
-   resource(r): "org.acme.model.Asset"
-   condition: ( ( r.Authorised.indexOf(hashCode(p.getIdentifier()) > -1 ) || p.getIdentifier() === r.owner.getIdentifier()
-   action: ALLOW 
-   
-where `hashCode` is a function defined in a script file in js directory .... and `owner` is a relationship field to the participant
+| ..(continued ..) | `rule sampleRule {    description: "only allowed users"    participant(p): "org.acme.model.Participant"    operation: ALL    resource(r): "org.acme.model.Asset"    condition: ( ( r.Authorised.indexOf(hashCode(p.getIdentifier()) > -1 ) || p.getIdentifier() === r.owner.getIdentifier()    action: ALLOW `   where `hashCode` is a function defined in a script file in js directory .... and `owner` is a relationship field to the participant
 
 
 ++ in the model, transaction `spTransaction` is `abstract` and `SampleTransaction` and `SampleTransaction2` are `extended` transaction types
@@ -755,13 +747,7 @@ The following are a selection of answers, to help understand what you may be enc
 
 | Message encountered | Resolution 
 | :---------------------- | :-----------------------
-| Controlling authority to update a B N | this is a change management issue (a business network model and definition and a policy for aggregating signatures or authority to be able to update a business network using `composer network update`) . By the time it gets to `composer network update` it seems, its already too late. The Network ACLs in Composer, can restrict who (ie a participant of that network) was allowed to do the network update. Its possible that such a record is only created once all the signatures are collected, as a one-time operation (so that the network update could take place). A sample ACL restriction that could be used is `rule networkControlPermission {
-  description:  "networkControl can access network commands"
-  participant: "org.acme.vehicle.auction.networkControl"
-  operation: all
-  resource: "org.hyperledger.composer.system.Network"
-  action: ALLOW  
-}`
+| Controlling authority to update a B N | this is a change management issue (a business network model and definition and a policy for aggregating signatures or authority to be able to update a business network using `composer network update`) . By the time it gets to `composer network update` it seems, its already too late. The Network ACLs in Composer, can restrict who (ie a participant of that network) was allowed to do the network update. Its possible that such a record is only created once all the signatures are collected, as a one-time operation (so that the network update could take place). A sample ACL restriction that could be used is `rule  networkControlPermission {   description:  "networkControl can access network commands"   participant:  "org.acme.vehicle.auction.networkControl"    operation: all    resource: "org.hyperledger.composer.system.Network"    action: ALLOW   }`
 
 
 #### :card_index: [back to base camp :camping: ](#top)  
