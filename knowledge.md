@@ -300,7 +300,7 @@ More info on troubleshooting or understanding issues related Composer business n
 
 | Message encountered | Resolution 
 | :---------------------- | :----------------------- 
-| Error: 14 UNAVAILABLE: Connect Failed  | This error is a failure of Composer to connect to the Fabric, usually because the Fabric is not started. **Resolution:** Start the fabric - depending on how you started the Fabric, it may be necessary to repeat the `composer network install` command.
+| Error: 14 UNAVAILABLE: Connect Failed  | This error is a failure of Composer to connect to the Fabric, usually because the Fabric is not started.  This is an error I have previously associated with errors in the connection.json file, with the CLI being unable to 'find' the Fabric containers - usually because they are not started. It is worth checking the connection.json file that you have the correct addresses, but I assume you have succeeded with a prior `composer network install` for each of the Orgs. *Resolution:** Start the fabric - depending on how you started the Fabric -  it may be necessary to repeat the `composer network install` command.
 | Error: 2 UNKNOWN: chaincode error (status: 500, Message: Unknown chaincodeType: NODE)  | This error is seen when using Composer v0.19 with an outdated Fabric v1.0.x.  Composer requires Fabric v1.1 GA.
 | continued.........  | To continue with Composer v0.19: 
 |  |1. stop and remove all Docker Containers for Fabric v1.0
