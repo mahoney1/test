@@ -60,42 +60,27 @@ This should output some business network information, proving connectivity to th
 
         cp -r /tmp/composer  /tmp/composer.bak
         
-The `Org 3` config files we need, are in the latest `fabric samples` repo, so download this to a temporary directory:   
+The `Org 3` config files we need, is the `fabric samples` repo from `github.com/mahoney1`, which you would have downloaded to your $HOME directory from the Multi-Org (pre-requisite) tutorial eg.   
 
-        cd /tmp ; git clone https://github.com/hyperledger/fabric-samples.git
+        # git clone -b release-1.1 https://github.com/mahoney1/fabric-samples.git
 
-2.  From your `/tmp/fabric-samples/first-network` repo / directory, run these 3 `copy` commmands (`cp` in Linux) below to copy the Org3 requisite files to the current `2-Org` 'working' environment - note use of wildcards in first line:
 
-          cd /tmp/fabric-samples/first-network
-          cp -p docker-compose*org3.* $HOME/fabric-samples/first-network
-          cp -pr org3-artifacts $HOME/fabric-samples/first-network
-          cp -p eyfn.sh $HOME/fabric-samples/first-network/
-
-3. Change directory to the `2-Org` fabric samples `$HOME/fabric-samples/first-network` directory:
+1. Change directory to the current `2-Org` fabric samples `$HOME/fabric-samples/first-network` directory:
 
          cd $HOME/fabric-samples/first-network
 
-4. Save the original BYFN script - as it will be overwritten:
-
-         cp -p scripts/script.sh scripts/script.sh.BYFNOrig
-
-5.  Copy the following files from `/tmp` first-network repo, into the working `first-network` directory:
-
-        cp -p /tmp/fabric-samples/first-network/scripts/*  scripts
- 
-6. Finally, set up the 'PATH' environment variable, in preparation to run the Fabric samples 'Extend your Network' script - note you must still be located in `$HOME/fabric-samples/first-network` at this point.
+2. Finally, set up the 'PATH' environment variable, in preparation to run the Fabric samples 'Extend your Network' script - note you must still be located in `$HOME/fabric-samples/first-network` at this point.
 
         export PATH=$PATH:$HOME/fabric-samples:$HOME/fabric-samples/bin
-        
+
+3. Check you have 'cryptogen' set in your PATH :
+
         which cryptogen
         
 This should reveal that the `cryptogen` executable has been located, in readiness for the next configuration steps.
 
-`which cryptogen` 
 
-should reveal that the PATH is set ; if not found or no PATH, may need to check your PATH setting or similar first.
-
-<h2 class='everybody'>Step Three: Run the EYFN Fabric 'Add Organization' steps and build artifacts for Org 3</h2>
+<h2 class='everybody'>Step Two: Run the EYFN Fabric 'Add Organization' steps and build artifacts for Org 3</h2>
 
 1. Run the `eyfn.sh` script (which was copied over from the downloaded Fabric Samples repo earlier) as follows:
 
