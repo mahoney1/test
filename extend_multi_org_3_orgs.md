@@ -13,7 +13,7 @@ sidebar: sidebars/accordion-toc0.md
 
 This tutorial provides an insight into adding/joining another organization to an existing multi-org blockchain network and the minimal steps needed - from a Composer perspective - to demonstrate interaction with a running business network as a participant from the 3rd organization. The conclusive test is being able to submit a simple Composer-based transaction as the newly created participant, which represents a blockchain identity from the 3rd organization.
 
-It is worth emphasising here that this {{site.data.conrefs.hlf_full}} blockchain network (for three organizations)  will be deployed using docker containers, in a local environment and indeed in the same virtual machine ; obviously, in the real world, they'll be in separate IP networks or domains, with all the IP/name resolution that requires (or indeed perhaps, in secure Cloud environments). The task of configuring Fabric networking,  Docker networking and IP / Host / Container Name resolution is understandably, beyond the scope of this Composer tutorial. NOTE: If you choose to split your organisations across separate physical machines or separate virtual machines running on different IP networks, it is also outside the scope of this particular tutorial and you should consult the Fabric docs, or appropriate resources (such as the #fabric channel on [Rocketchat](https://chat.hyperledger.org/channel/fabric) or ask via Stack Overflow with the appropriate Fabric tag to seek assistance with any Fabric issues.
+It is worth emphasising here that this {{site.data.conrefs.hlf_full}} blockchain network (for three organizations)  will be deployed using docker containers, in a local environment and indeed in the same virtual machine ; obviously, in the real world, they'll be in separate IP networks or domains, with all the IP/name resolution that requires (or indeed perhaps, in secure Cloud environments). The task of configuring Fabric networking,  Docker networking and IP / Host / Container Name resolution is understandably, beyond the scope of this Composer tutorial. NOTE: If you choose to split your organisations across separate physical machines or separate virtual machines running on different IP networks, it is also outside the scope of this particular tutorial and you should consult the Fabric docs, or appropriate resources (such as the #fabric channel on [Rocketchat](https://chat.hyperledger.org/channel/fabric) or ask via Stack Overflow with the appropriate Fabric tag to seek assistance with any Fabric issues).
 
 
 <h2 class='everybody'>Pre-requisites to this tutorial</h2>
@@ -292,7 +292,7 @@ The last phase of this tutorial, is to test that an Org 3 issued identity (linke
         
 2. Submit a `Trade` transaction as participant `trader3-org3` using the `mo@trade-network` card, to change ownership of the existing `EMA` Commodity asset on the `trade-network` to himself:
 
-composer transaction submit --card mo@trade-network -d '{"$class":"org.example.trading.Trade","commodity":"resource:org.example.trading.Commodity#EMA","newOwner":"resource:org.example.trading.Trader#trader3-org3"}'
+        composer transaction submit --card mo@trade-network -d '{"$class":"org.example.trading.Trade","commodity":"resource:org.example.trading.Commodity#EMA","newOwner":"resource:org.example.trading.Trader#trader3-org3"}'
 
 3. Run a `composer network list`, as a participant from Org1 (in this case `jdoe`) - the ledger should now show the `EMA` Commodity asset is now owned by `trader3-org3`
 
