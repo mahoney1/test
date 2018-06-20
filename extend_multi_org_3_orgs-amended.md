@@ -126,7 +126,7 @@ This 'EYFN' {{site.data.conrefs.hlf_full} script adds 2 peers for Organisation 3
             networks:
               - byfn
 
-3. // IGNORE - Run the following command to start up the 3rd Organization's CA server - ignore the messages about other nodes for now - you should see the CA server docker container is launched: (it should be launched, check for presence of the CA3 docker instance)
+3. // IGNORE - Run the following command manually to start up the 3rd Organization's CA server - ignore the messages about other nodes for now - you should see the CA server docker container is launched: (NOTE to Rob; this will go into the EYFN.sh script - just want to see messages for now)
 
          # docker-compose -f docker-compose-ca3.yaml up -d  2>&1
 
