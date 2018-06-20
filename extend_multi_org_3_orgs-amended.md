@@ -84,8 +84,7 @@ This should reveal that the `cryptogen` executable has been located, in readines
 
 1. Run the `eyfn.sh` script (which was copied over from the downloaded Fabric Samples repo earlier) as follows:
 
-        ./eyfn.sh generate -t 60  // like BYFN, initial run to call generate fn, to call the replacePrivateKey fn...etc
-        ./eyfn.sh up -t 60  // - t 60 is TIMEOUT value FYI  
+         ./eyfn.sh up -t 60  // - t 60 is TIMEOUT value FYI  
 
 It should run through a sequence of adding more peers (two for Org3) and associated configuration / crypto artifacts to be able add Org 3 as an MSP and to join its peers to the existing `mychannel` already shared by Org1's and Org2's peers. This Fabric script will run some rudimentary sample chaincode deploys, and follow with some simple 'chaincode query' command line sequences to ensure that the peers are operating correctly on the channel / network and that they can query the ledger. Once it completes, you'll see some peers were added as part of the on-screen messages. You may see a final message something like:
 
