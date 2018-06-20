@@ -22,7 +22,7 @@ You must first complete the [Multi-Org tutorial](./deploy-to-fabric-multi-org.ht
 
 You must have completed the two-organization [Multi-Org tutorial](./deploy-to-fabric-multi-org.html) first, and for the purposes of this tutorial,  it should be up and running, at the point where you had completed that tutorial and interacted with the business network. Do not do a teardown of the environment first - this tutorial builds on that setup, which has a running, established business network.
 
-Firstly, to add the 3rd organization from a Fabric perspective, we use the [Add an Org to a channel](http://hyperledger-fabric.readthedocs.io/en/release-1.1/channel_update_tutorial.html) instructions, as the basis for adding the Fabric artifacts required - it extends the Fabric [Building Your First Network](http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html) 'BYFN' network. 
+Firstly, to add the 3rd organization from a Fabric perspective, we use the [Add an Org to a channel](http://hyperledger-fabric.readthedocs.io/en/release-1.1/channel_update_tutorial.html) instructions, as the basis for adding the Fabric artifacts required - it extends the Fabric [Building Your First Network](http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html) 'BYFN' network. Note: we have incorporated the necessary steps for you in this tutorial - so no need to jump off to the Fabric docs :-).
 
 
 The tutorial has colour-coded steps for convenience, to indicate 'which organization' should follow a particular step or sequence - or indeed, if steps are needed by all Orgs.
@@ -60,7 +60,7 @@ This should output some business network information, proving connectivity to th
 
         cp -r /tmp/composer  /tmp/composer.bak
         
-The `Org 3` config files we need, is the `fabric samples` repo from `github.com/mahoney1`, which you would have downloaded to your $HOME directory from the Multi-Org (pre-requisite) tutorial eg.   this is the repo you would have cloned previously. (Rob - this will be removed just FYI - merely verification that you would have done this in the 2-org tutorial)
+The `Org 3` config files we need, is the `fabric samples` repo from `github.com/mahoney1`, which you would have downloaded to your $HOME directory from the Multi-Org (pre-requisite) tutorial eg.   this is the repo you would have cloned previously - no need to execute. (Rob - this will be removed just FYI - merely verification that you would have done this in the 2-org tutorial)
 
         # git clone -b multi-org https://github.com/mahoney1/fabric-samples.git  and done a `git checkout multi-org` etc
 
@@ -84,9 +84,9 @@ This should reveal that the `cryptogen` executable has been located, in readines
 
 1. Run the `eyfn.sh` script (which was copied over from the downloaded Fabric Samples repo earlier) as follows:
 
-         ./eyfn.sh up -t 60  // - t 60 is TIMEOUT value FYI  
+         ./eyfn.sh up -t 60 -s couchdb  // - t 60 is TIMEOUT value FYI  
 
-It should run through a sequence of adding more peers (two for Org3) and associated configuration / crypto artifacts to be able add Org 3 as an MSP and to join its peers to the existing `mychannel` already shared by Org1's and Org2's peers. This Fabric script will run some rudimentary sample chaincode deploys, and follow with some simple 'chaincode query' command line sequences to ensure that the peers are operating correctly on the channel / network and that they can query the ledger. Once it completes, you'll see some peers were added as part of the on-screen messages. You may see a final message something like:
+It should run through a sequence of adding more peers (two for Org3) and associated configuration / crypto artifacts to be able add Org 3 as an MSP and to join its peers to the existing `mychannel` already shared by Org1's and Org2's peers. This Fabric script will run some rudimentary sample chaincode deploys, and follow with some simple 'chaincode query' command line sequences to ensure that the peers are operating correctly at a Fabric level, on the channel / network and that they can query the ledger. You'll also see some peers were added as part of the on-screen messages. You may see a final message something like:
 
    ========= All GOOD, EYFN execution completed ===========
 
@@ -98,11 +98,11 @@ It should run through a sequence of adding more peers (two for Org3) and associa
     |_____| |_| \_| |____/
 
 
-PLEASE NOTE: the last `chaincode query` result may return a `Query result is invalid` message (and therefore you may not see this banner currently) - you can ignore this particular 'invalid' message for now (as a return value in the script isn't producing the right return value, even though the query is actually successful). Any other result will likely indicate some issues with running the script in your environment.
+PLEASE NOTE: the last `chaincode query` result may return a `Query result is invalid` message (and therefore you may not see this banner currently) - you can ignore this particular 'invalid' message for now (a 'check' in the script isn't producing the right return value, even though the query is actually successful). Any other result, will likely indicate some issues with running the script in your environment.
 
-This 'EYFN' {{site.data.conrefs.hlf_full} script adds 2 peers for Organisation 3 and performs the requisite steps to join the existing `mychannel` channel successfully. Next,  we need to add Org 3's own Fabric CA server, so that an Org 3 admin is able to issue identity certificates for Org 3 identities (and which are mapped to participants in Composer, which we'll see later).
+This 'EYFN' {{site.data.conrefs.hlf_full} script adds 2 peers for Organisation 3 ('Org 3') and performs the requisite steps to join the existing `mychannel` channel successfully. Next,  we need to add Org 3's own Fabric CA server, so that an Org 3 admin is able to issue identity certificates for Org 3 identities (and which are mapped to participants in Composer, which we'll see later).
 
-2.Check that a `docker-compose-ca3.yaml ` has been created in the current directory and contains the 'keyfile' information - something like that shown below: (Rob - this will be removed just FYI - merely verification)
+2.Check that a `docker-compose-ca3.yaml ` has been created in the current directory and contains the 'keyfile' information - something like that shown below: (Rob - this will be removed for reasons already known just FYI - merely left for verification)
 
         version: '2'
 
@@ -126,12 +126,21 @@ This 'EYFN' {{site.data.conrefs.hlf_full} script adds 2 peers for Organisation 3
             networks:
               - byfn
 
-3. // IGNORE - Run the following command manually to start up the 3rd Organization's CA server - ignore the messages about other nodes for now - you should see the CA server docker container is launched: (NOTE to Rob; this will go into the EYFN.sh script - just want to see messages for now)
+3. // IGNORE - Run the following command manually to start up the 3rd Organization's CA server - ignore the messages about other nodes for now - you should see the CA server docker container is launched: (NOTE to Rob; this will eventually go into the EYFN.sh script - just want to see messages on-screen for now)
 
-         # docker-compose -f docker-compose-ca3.yaml up -d  2>&1
+         docker-compose -f docker-compose-ca3.yaml up -d  2>&1
 
-We've now completed the 'Fabric' elements of the 3-Org configuration.
+We've now completed the 'Fabric' elements of the 3-Org configuration. We'll now move on to the Composer tasks of onboarding a business network participant from Org 3, such that he can transact on the existing business network and it can be seen by the others.
 
+The remainder of the tutorial describes Composer tasks, namely:
+
+    - update the common connection profile to includes Org 3's Fabric config (eg. Org 3's CA server, two peers etc) and Organizational metadata
+    - build an Org3 PeerAdmin business network card to install the `trade-network` code on Org 3's peers
+    - the act of an existing Org admin binding an Org3 participant (and associated Org 3 identity) to the business network
+    - issuing identities, as an admin of Org 3 and creating business network cards for the Org 3 participants
+    - checking the ability to create transactions, as an Org 3 issued identity (and participant) on the same business network and verifying the ledger changes are seen, from someone in Org1. 
+     - finally, in the Appendix: the steps for updating the endorsement policy on the running network (to require that 3 Organizations endorse transactions (rather than 2 previously) on the business network, before they are committed to the blockchain).
+     
 <h2 class='everybody'>Step Four: Create Composer artifacts in preparation for Org 3's business network interaction</h2>
 
 
@@ -149,7 +158,7 @@ We've now completed the 'Fabric' elements of the 3-Org configuration.
 
         awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' org3-artifacts/crypto-config/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt > /tmp/composer/org3/ca-org3.txt
 
-2. Go to Org1's temporary directory in `/tmp/composer/org1`, and edit the existing `byfn-network-org1.json` file - we will add Org3's essential config data to this connection profile: 
+2. Go to Org1's temporary directory in `/tmp/composer/org1`, and edit the existing `byfn-network-org1.json` file - we will add Org3's essential JSON-formatted config data to this connection profile: If you have issues inserting these stanzas - tip: you can use https://jsonformatter.curiousconcept.com/ to validate your edit session for the connection profile.
 
 Under `channels` section / stanza - add the two peers as follows, after `peer1.org2` entry (don't forgot to add a comma):
 
@@ -222,7 +231,10 @@ In the next section, we will build the new 3-Org business network card, for part
 
 <h2 class='everybody'>Step Five: Create Org3's Peer Admin card and install Trade Network onto Org3's peers</h2>
 
-1. Perform the following sequence of commands to build cards then install the business network onto Org3's peers 
+
+1. Perform the following sequence of commands to build cards then install the business network onto Org3's peers - ensure you're in the `first-network`:
+
+        cd $HOME/fabric-samples/first-network
 
         composer card create -p /tmp/composer/org3/byfn-network-org3.json -u PeerAdmin -c /tmp/composer/org3/Admin@org3.example.com-cert.pem -k /tmp/composer/org3/*_sk -r PeerAdmin -r ChannelAdmin -f PeerAdmin@byfn-network-org3.card
 
@@ -232,7 +244,7 @@ In the next section, we will build the new 3-Org business network card, for part
 
         composer network install --card PeerAdmin@byfn-network-org3 --archiveFile $HOME/trade-network.bna
         
-        composer network ping ---card PeerAdmin@byfn-network-org3
+    
         
         
 <h2 class='everybody'>Step Six: Bind Org3's admin using an existing Org Admin of the network</h2>
@@ -257,7 +269,11 @@ In the next section, we will build the new 3-Org business network card, for part
         composer card create -p /tmp/composer/org3/byfn-network-org3.json -u mike -n trade-network -c mike/admin-pub.pem -k mike/admin-priv.pem
         composer card import -f mike@trade-network.card
 
+2. Now `ping` the business network - please be patient, as this creates/deployes 2 'chaincode' containers (being the first contact, in Org 3, implicitly via instantiation) 
+
         composer network ping -c mike@trade-network
+
+3. Verify you can see some business network artifacts 
 
         composer network list -c mike@trade-network
 
@@ -294,7 +310,7 @@ We hope you found the tutorial useful :-) - thanks for completing it !
 
 <h2 class='everybody'>Appendix - the next steps</h2>
 
-The tutorial added a 3rd organization, and showed how, at a Composer and business network level, the minimum tasks to allow Org3 participants to participate. However, you may recall, that we are still using an endorsement policy, that is a 'legacy' policy from our 2-Org multi-org tutorial. The endorsement policy should ideally be 'upgraded' to reflect rules around 3 organizations must endorse transactions before they can be committed to the blockchain.  You can find more information on endorsement policies in the Hyperledger Fabric documentation, in [Endorsement policies](https://hyperledger-fabric.readthedocs.io/en/release/endorsement-policies.html) .
+The tutorial added a 3rd organization, and showed how, initially at a Fabric level - then at a Composer and business network level, the minimum tasks to allow Org3 participants to participate in that `trade-network` Commodity Trading business network. However, you may recall, that we are still using an endorsement policy, that is a 'legacy' policy from our 2-Org multi-org tutorial. The endorsement policy should ideally be 'upgraded' to reflect rules around 3 organizations must endorse transactions before they can be committed to the blockchain.  You can find more information on endorsement policies in the Hyperledger Fabric documentation, in [Endorsement policies](https://hyperledger-fabric.readthedocs.io/en/release/endorsement-policies.html) .
 
 Complete the following steps to add the requirement for the 3rd organization to be required to endorse transactions.
 
