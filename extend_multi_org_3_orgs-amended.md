@@ -60,7 +60,7 @@ This should output some business network information, proving connectivity to th
 
         cp -r /tmp/composer  /tmp/composer.bak
         
-The `Org 3` config files we need, is the `fabric samples` repo from `github.com/mahoney1`, which you would have downloaded to your $HOME directory from the Multi-Org (pre-requisite) tutorial eg.   
+The `Org 3` config files we need, is the `fabric samples` repo from `github.com/mahoney1`, which you would have downloaded to your $HOME directory from the Multi-Org (pre-requisite) tutorial eg.   this is the repo you would have cloned previously. (Rob - this will be removed just FYI - merely verification)
 
         # git clone -b release-1.1 https://github.com/mahoney1/fabric-samples.git
 
@@ -102,7 +102,7 @@ PLEASE NOTE: the last `chaincode query` result may return a `Query result is inv
 
 This 'EYFN' {{site.data.conrefs.hlf_full} script adds 2 peers for Organisation 3 and performs the requisite steps to join the existing `mychannel` channel successfully. Next,  we need to add Org 3's own Fabric CA server, so that an Org 3 admin is able to issue identity certificates for Org 3 identities (and which are mapped to participants in Composer, which we'll see later).
 
-2. Create a file `docker-compose-ca3.yaml ` in the current directory and add the following:
+2.Check that a `docker-compose-ca3.yaml ` has been created in the current directory and contains the 'keyfile' information - something like that shown below: (Rob - this will be removed just FYI - merely verification)
 
         version: '2'
 
@@ -126,9 +126,9 @@ This 'EYFN' {{site.data.conrefs.hlf_full} script adds 2 peers for Organisation 3
             networks:
               - byfn
 
-3. Run the following command to start up the 3rd Organization's CA server - ignore the messages about other nodes for now - you should see the CA server docker container is launched:
+3. // IGNORE - Run the following command to start up the 3rd Organization's CA server - ignore the messages about other nodes for now - you should see the CA server docker container is launched: (it should be launched, check for presence of the CA3 docker instance)
 
-        docker-compose -f docker-compose-ca3.yaml up -d  2>&1
+         # docker-compose -f docker-compose-ca3.yaml up -d  2>&1
 
 We've now completed the 'Fabric' elements of the 3-Org configuration.
 
