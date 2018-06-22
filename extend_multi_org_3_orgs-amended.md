@@ -20,7 +20,12 @@ It is worth emphasising here that this {{site.data.conrefs.hlf_full}} blockchain
 
 You must first complete the [Multi-Org tutorial](./deploy-to-fabric-multi-org.html), as this sets up the {{site.data.conrefs.hlf_full}} 'BYFN' two-organization network with a running, established Composer business network (and associated metadata / identities that entails).
 
-You must have completed the two-organization [Multi-Org tutorial](./deploy-to-fabric-multi-org.html) first, and for the purposes of this tutorial,  it should be up and running, at the point where you had completed that tutorial and interacted with the business network. Do not do a teardown of the environment first - this tutorial builds on that setup, which has a running, established business network.
+NOTE: If you've completed that tutorial and need a break first or are resuming the next day etc - you can use these commands to stop and start your BYFN environment, saving the current state ; these are equivalent to the `docker-compose up` and `docker-compose stop` commands to save you containers' state.
+
+    ./byfn.sh -m stop    # stop current BYFN containers
+    ./byfn.sh -m start   # start current BYFN containers from last 'stopped' state.
+
+You must have completed the two-organization [Multi-Org tutorial](./deploy-to-fabric-multi-org.html)before doing this tutorial, and the runtime Fabric docker containers should be up and running, at the point where you had completed that tutorial. Do not do a teardown of the environment first - as this tutorial builds on that setup, which has a running, established Commodity Trading business network.
 
 Firstly, to add the 3rd organization from a Fabric perspective, we use the [Add an Org to a channel](http://hyperledger-fabric.readthedocs.io/en/release-1.1/channel_update_tutorial.html) instructions, as the basis for adding the Fabric artifacts required - it extends the Fabric [Building Your First Network](http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html) 'BYFN' network. Note: we have incorporated the necessary steps for you in this tutorial - so no need to jump off to the Fabric docs :-).
 
