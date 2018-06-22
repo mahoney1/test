@@ -223,8 +223,7 @@ Firstly, its to do with 'roles' that FABRIC lays down - so **admin** (in the sam
 | Message/Issue encountered | Resolution 
 | :---------------------- | :-----------------------
 | Programmatic Issue, upload and import card to wallet / std HTTP or using react and the axios http library or  | see this snippet https://pastebin.com/ST684NCw or see Caroline Church blog -> https://medium.com/@CazChurchUk/developing-multi-user-application-using-the-hyperledger-composer-rest-server-b3b88e857ccc
-| End to End code example ; issue identity, import card, then export the Card to a .card file | 
-
+| End to End code example ; issue identity, import card, then export the Card to a .card file |  See example below..
     createCard(meta: Metadata, businessNetwork: string, profilePath: string){
     
     let BusNetworkConnection = new BusinessNetworkConnection();
