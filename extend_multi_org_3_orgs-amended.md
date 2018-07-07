@@ -67,12 +67,12 @@ This should output some business network information, proving connectivity to th
         
 The `Org 3` config files we need, is the `fabric samples` repo from `github.com/mahoney1`, which you would have downloaded to your $HOME directory from the Multi-Org (pre-requisite) tutorial eg.   this is the repo you would have cloned previously - no need to execute. (Rob - this will be removed just FYI - merely verification that you would have done this in the 2-org tutorial)
 
-        # git clone -b multi-org https://github.com/mahoney1/fabric-samples.git  and done a `git checkout multi-org` etc
+        # git clone -b multi-org https://github.com/mahoney1/fabric-samples.git  
 
 
 1. Change directory to the current `2-Org` fabric samples `$HOME/fabric-samples/first-network` directory:
 
-         cd $HOME/fabric-samples/first-network
+         cd $HOME/fabric-samples/first-network ; git checkout multi-org
 
 2. Finally, set up the 'PATH' environment variable, in preparation to run the Fabric samples 'Extend your Network' script - note you must still be located in `$HOME/fabric-samples/first-network` at this point.
 
