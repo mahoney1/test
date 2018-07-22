@@ -93,7 +93,7 @@ This should reveal that the `cryptogen` executable has been located, in readines
 
 It should run through a sequence of adding more peers (two for Org3) and associated configuration / crypto artifacts to be able add Org 3 as an MSP and to join its peers to the existing `mychannel` already shared by Org1's and Org2's peers. This Fabric script will run some rudimentary sample chaincode deploys, and follow with some simple 'chaincode query' command line sequences to ensure that the peers are operating correctly at a Fabric level, on the channel / network and that they can query the ledger. You'll also see some peers were added as part of the on-screen messages. You may see a final message something like:
 
-   ========= All GOOD, EYFN execution completed ===========
+   ========= All GOOD, EYFN test execution completed ===========
 
 
     _____   _   _   ____
