@@ -131,7 +131,7 @@ This 'EYFN' {{site.data.conrefs.hlf_full} script adds 2 peers for Organisation 3
             networks:
               - byfn
 
-3. // IGNORE - Run the following command manually to start up the 3rd Organization's CA server - ignore the messages about other nodes for now - you should see the CA server docker container is launched: (NOTE to Rob; this will eventually go into the EYFN.sh script - just want to see messages on-screen for now)
+3. Run the following command to start up the 3rd Organization's CA server - ignore the messages ("WARNING: Found orphan containers") about other existing nodes for now - you should see confirmation that the CA server docker container is launched:
 
          docker-compose -f docker-compose-ca3.yaml up -d  2>&1
 
@@ -164,6 +164,8 @@ The remainder of the tutorial describes Composer tasks, namely:
         awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' org3-artifacts/crypto-config/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt > /tmp/composer/org3/ca-org3.txt
 
 2. Go to Org1's temporary directory in `/tmp/composer/org1`, and edit the existing `byfn-network-org1.json` file - we will add Org3's essential JSON-formatted config data to this connection profile: If you have issues inserting these stanzas - tip: you can use https://jsonformatter.curiousconcept.com/ to validate your edit session for the connection profile.
+
+REMEMBER ALSO that you will be adding a 'comma' to EXISTING stanzas (eg. between Org2 and a 'new' Org3 stanza below):
 
 Under `channels` section / stanza - add the two peers as follows, after `peer1.org2` entry (don't forgot to add a comma):
 
@@ -274,9 +276,11 @@ In the next section, we will build the new 3-Org business network card, for part
         composer card create -p /tmp/composer/org3/byfn-network-org3.json -u mike -n trade-network -c mike/admin-pub.pem -k mike/admin-priv.pem
         composer card import -f mike@trade-network.card
 
-2. Now `ping` the business network - please be patient, as this creates/deployes 2 'chaincode' containers (being the first contact, in Org 3, implicitly via instantiation) 
+2. Now `ping` the business network - this may take a little time, so please be patient, as this creates/deploys 2 'chaincode' containers on Org 3's peers (this being the first contact in Org 3, implicitly via ping) 
 
         composer network ping -c mike@trade-network
+
+You should get confirmation of the business network version and the Org 3 admin participant in the listing.
 
 3. Verify you can see some business network artifacts 
 
@@ -302,7 +306,7 @@ The last phase of this tutorial, is to test that an Org 3 issued identity (linke
 
 3. Run a `composer network list`, as a participant from Org1 (in this case `jdoe`) - the ledger should now show the `EMA` Commodity asset is now owned by `trader3-org3`
 
-        composer network list jdoe@trade-network 
+        composer network list -c jdoe@trade-network 
        
 
 
