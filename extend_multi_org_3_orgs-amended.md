@@ -20,7 +20,7 @@ It is worth emphasising here that this {{site.data.conrefs.hlf_full}} blockchain
 
 You must first complete the [Multi-Org tutorial](./deploy-to-fabric-multi-org.html), as this sets up the {{site.data.conrefs.hlf_full}} 'BYFN' two-organization network with a running, established Composer business network (and associated metadata / identities that entails).
 
-NOTE: If you've completed that tutorial and need a break first or are resuming the next day etc - you can use these commands to stop and start your BYFN environment, saving the current state ; these are equivalent to the `docker-compose up` and `docker-compose stop` commands to save you containers' state.
+NOTE: If you've completed that tutorial and need a break first or are resuming the next day etc - you can use these commands to stop and start your BYFN environment, saving the current state ; these are equivalent to the `docker-compose up` and `docker-compose stop` commands to save you containers' state. Only works with the BYFN script from the Git repo above.
 
     ./byfn.sh -m stop    # stop current BYFN containers
     ./byfn.sh -m start   # start current BYFN containers from last 'stopped' state.
