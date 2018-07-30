@@ -20,7 +20,7 @@ It is worth emphasising here that this {{site.data.conrefs.hlf_full}} blockchain
 
 You must first complete the [Multi-Org tutorial](./deploy-to-fabric-multi-org.html), as this sets up the {{site.data.conrefs.hlf_full}} 'BYFN' two-organization network with a running, established Composer business network (and associated metadata / identities that entails).
 
-NOTE: If you've completed that tutorial and need a break first or are resuming the next day etc - you can use these commands to stop and start your BYFN environment, saving the current state ; these are equivalent to the `docker-compose up` and `docker-compose stop` commands to save you containers' state. Only works with the BYFN script from the Git repo above.
+NOTE: If you've completed that tutorial and need a break first or are resuming the next day etc - you can use these commands to stop and start your BYFN environment, saving the current state ; these are equivalent to the `docker-compose start` and `docker-compose stop` commands to save you containers' state (not `up` / `down`). Note: only works with the BYFN script from the Git repo above.
 
     ./byfn.sh -m stop    # stop current BYFN containers
     ./byfn.sh -m start   # start current BYFN containers from last 'stopped' state.
@@ -67,8 +67,6 @@ This should output some business network information, proving connectivity to th
         
 The `Org 3` config files we need, is the `fabric samples` repo from `github.com/mahoney1`, which you would have downloaded to your $HOME directory from the Multi-Org (pre-requisite) tutorial eg.   this is the repo you would have cloned previously - no need to execute. (Rob - this will be removed just FYI - merely verification that you would have done this in the 2-org tutorial)
 
-        # NOT REQUIRED (DONE IN BYFN TUTORIAL) git clone -b multi-org https://github.com/mahoney1/fabric-samples.git  
-
 
 1. Change directory to the working `2-Org` fabric samples `$HOME/fabric-samples/first-network` directory:
 
@@ -89,8 +87,8 @@ This should reveal that the `cryptogen` executable has been located, in readines
 
 1. Run the `eyfn.sh` script (which was copied over from the downloaded Fabric Samples repo earlier) as follows:
 
-         ./eyfn.sh up -t 60 -s couchdb  // - t 60 is TIMEOUT value FYI  
-
+         ./eyfn.sh up -t 60 -s couchdb 
+         
 It should run through a sequence of adding more peers (two for Org3) and associated configuration / crypto artifacts to be able add Org 3 as an MSP and to join its peers to the existing `mychannel` already shared by Org1's and Org2's peers. This Fabric script will run some rudimentary sample chaincode deploys, and follow with some simple 'chaincode query' command line sequences to ensure that the peers are operating correctly at a Fabric level, on the channel / network and that they can query the ledger. You'll also see some peers were added as part of the on-screen messages. You may see a final message something like:
 
    ========= All GOOD, EYFN test execution completed ===========
@@ -107,35 +105,13 @@ PLEASE NOTE: the last `chaincode query` result may return a `Query result is inv
 
 This 'EYFN' {{site.data.conrefs.hlf_full} script adds 2 peers for Organisation 3 ('Org 3') and performs the requisite steps to join the existing `mychannel` channel successfully. Next,  we need to add Org 3's own Fabric CA server, so that an Org 3 admin is able to issue identity certificates for Org 3 identities (and which are mapped to participants in Composer, which we'll see later).
 
-2.Check that a `docker-compose-ca3.yaml ` has been created in the current directory and contains the 'keyfile' information - something like that shown below: (Rob - this will be removed for reasons already known just FYI - merely left for verification)
-
-        version: '2'
-
-        networks:
-          byfn:
-        services:
-          ca2:
-            image: hyperledger/fabric-ca
-            environment:
-              - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-              - FABRIC_CA_SERVER_CA_NAME=ca-org3
-              - FABRIC_CA_SERVER_TLS_ENABLED=true
-              - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org3.example.com-cert.pem
-              - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/b5f973338e883bdd4cf8346ce40cd431d65fe83bccbbb2771349d9a38f674102_sk
-        ports:
-              - "9054:7054"
-            command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org3.example.com-cert.pem --    ca.keyfile /etc/hyperledger/fabric-ca-server-config/b5f973338e883bdd4cf8346ce40cd431d65fe83bccbbb2771349d9a38f674102_sk -b admin:adminpw -d'
-            volumes:
-              - ./org3-artifacts/crypto-config/peerOrganizations/org3.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
-            container_name: ca_peerOrg3
-            networks:
-              - byfn
+2.Check that a `docker-compose-ca3.yaml ` has been created in the current directory (from the earlier `eyfn.sh` execution)
 
 3. Run the following command to start up the 3rd Organization's CA server - ignore the messages ("WARNING: Found orphan containers") about other existing nodes for now - you should see confirmation that the CA server docker container is launched:
 
          docker-compose -f docker-compose-ca3.yaml up -d  2>&1
 
-We've now completed the 'Fabric' elements of the 3-Org configuration. We'll now move on to the Composer tasks of onboarding a business network participant from Org 3, such that he can transact on the existing business network and it can be seen by the others.
+We've now completed the 'Fabric' elements of the 3-Org configuration. We'll now move on to the Composer tasks of onboarding a business network participant from Org 3, such that he/she can transact on the existing business network and it can be seen by the others.
 
 The remainder of the tutorial describes Composer tasks, namely:
 
@@ -149,7 +125,7 @@ The remainder of the tutorial describes Composer tasks, namely:
 <h2 class='everybody'>Step Four: Create Composer artifacts in preparation for Org 3's business network interaction</h2>
 
 
-1. Start to create Org 3's Composer configuration metadata, to be used for building creating business network cards etc
+1. Create Org 3's Composer configuration metadata, to be used for building creating business network cards later - you must still be in the `first-network` subdirectory at this point: 
 
         mkdir /tmp/composer/org3
 
@@ -236,7 +212,7 @@ Under `channels` section / stanza - add the two peers as follows, after `peer1.o
 
 In the next section, we will build the new 3-Org business network card, for participants aligned to the 3rd Organization.
 
-<h2 class='everybody'>Step Five: Create Org3's Peer Admin card and install Trade Network onto Org3's peers</h2>
+<h2 class='everybody'>Step Five: Create Org3's Peer Admin card and install Trade Network  onto Org3's peers</h2>
 
 
 1. Perform the following sequence of commands to build cards then install the business network onto Org3's peers - ensure you're in the `first-network`:
@@ -260,7 +236,7 @@ In the next section, we will build the new 3-Org business network card, for part
 
         composer identity request -c PeerAdmin@byfn-network-org3 -u admin -s adminpw -d mike
 
-2. Next, add a participant ("org3-admin") as an existing administrator from (say) Org 1.
+2. Next, add a participant ("org3-admin") as an existing administrator from Org 1.
 
         composer participant add -c alice@trade-network -d '{"$class":"org.hyperledger.composer.system.NetworkAdmin", "participantId":"org3-admin"}'
 
