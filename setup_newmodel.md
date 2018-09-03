@@ -13,7 +13,7 @@ sidebar: sidebars/accordion-toc0.md
 
 This tutorial provides an and End-to-End example of setting up, configuring and running a sample NodeJS chaincode, using {{site.data.conrefs.hlf_full}} as the blockchain network of choice and invoking Smart Contract chaincode using the new programming model.
 
-From initial setup of a local Fabric environment, it provides an insight into building a sample chaincode, installing and running it, so that you can instantiate it then invoke chaincode transaction functions, like you would with any smart contract.
+It takes the developer from initial setup of a local Fabric environment, to building a sample chaincode, installing and running it, so that he/she can instantiate it and then invoke chaincode transaction functions - like you would with any smart contract.
 
 
 # Pre-requisites
