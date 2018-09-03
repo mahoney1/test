@@ -11,7 +11,7 @@ sidebar: sidebars/accordion-toc0.md
 
 ![Overview of Three-Org blockchain network](../assets/img/tutorials/multi/three-org-network.png)
 
-This tutorial provides an and End-to-End example of setting up, configuring and running a sample NodeJS chaincode, using {{site.data.conrefs.hlf_full}} as the blockchain network of choice and invoking Smart Contract chaincode using the new programming model.
+This tutorial provides an End-to-End example of setting up, configuring and running a sample NodeJS chaincode, using {{site.data.conrefs.hlf_full}} as the blockchain network of choice and invoking Smart Contract chaincode using the new programming model.
 
 It takes the developer from initial setup of a local Fabric environment, to building a sample chaincode, installing and running it, so that he/she can instantiate it and then invoke chaincode transaction functions - like you would with any smart contract.
 
