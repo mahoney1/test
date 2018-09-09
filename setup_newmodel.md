@@ -11,17 +11,18 @@ sidebar: sidebars/accordion-toc0.md
 
 ![Smart Contract Example](./smartcontr.png)
 
-This tutorial provides an End-to-End example of setting up, configuring and running a sample NodeJS chaincode, using {{site.data.conrefs.hlf_full}} as the blockchain network of choice and invoking Smart Contract chaincode using the new programming model.
-
-It takes the developer from initial setup of a local Fabric environment, to building a sample chaincode, installing and running it, so that he/she can instantiate it and then invoke chaincode transaction functions - like you would with any smart contract.
+This tutorial provides an End-to-End example of setting up, configuring and running a sample NodeJS chaincode, using the new {{site.data.conrefs.hlf_full}} programming model. The goal is to show a simple example of implementing Smart Contract chaincode using the new programming model. The tutorial is intended to be a full 'end-to-end' tutorial - it takes the developer from initial setup of a local Fabric environment, to building, deploying and interacting with the smart contract, running on the blockchain. As part of this, we will briefly show the Chaincode 'Developer Mode' vs the standard deployment (non-developer mode) of the smart contract (ie as chaincode) to a running Fabric blockchain. 
 
 
 # Pre-requisites
 
-- A Fabric 1.3 docker-based Fabric environment, configured for 'Chaincode dev mode' - this is a setting in a docker-compose YAML file - more on that later.
+- The new Fabric 1.3 `fabric-contract-apis` and `fabric-shim` dependencies in the `package.json` file for our chaincode example.
+- Docker and docker-compose - as part of the tutorial, you will pull the latest docker Fabric images to set up your {{site.data.conrefs.hlf_full}}  environment.
+- A {{site.data.conrefs.hlf_full}} Fabric 1.3 environment (dockerized images), configured for 'Chaincode dev mode' - this is a setting in a docker-compose YAML file - more on that later.
 - multiple terminal windows
-- a clone of Fabric Samples, with sample code to use.
-- Docker and docker-compose - as part of the tutorial, you will pull the latest Docker Fabric images to set up your {{site.data.conrefs.hlf_full}}  environment.
+- a clone of Fabric Samples from https://github.com/hyperledger/fabric-samples
+- Some sample code to use (provided as code blocks in this tutorial)
+
 
 # Download the Fabric Samples
 
