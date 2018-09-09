@@ -9,7 +9,7 @@ sidebar: sidebars/accordion-toc0.md
 
 # Setting up and running a NodeJS Chaincode using the new Programming Model
 
-![Overview of Three-Org blockchain network](../assets/img/tutorials/multi/three-org-network.png)
+![Smart Contract Example](./smartcontr.png)
 
 This tutorial provides an End-to-End example of setting up, configuring and running a sample NodeJS chaincode, using {{site.data.conrefs.hlf_full}} as the blockchain network of choice and invoking Smart Contract chaincode using the new programming model.
 
