@@ -11,7 +11,7 @@ sidebar: sidebars/accordion-toc0.md
 
 ![Smart Contract Example](./smartcontr.png)
 
-This tutorial provides an End-to-End example of setting up, configuring and running a sample NodeJS chaincode, using the new {{site.data.conrefs.hlf_full}} programming model. The goal is to show a simple example of implementing Smart Contract chaincode using the new programming model. The tutorial is intended to be a full 'end-to-end' tutorial - it takes the developer from initial setup of a local Fabric environment, to building, deploying and interacting with the smart contract, running on the blockchain. As part of this, we will briefly show the Chaincode 'Developer Mode' vs the standard deployment (non-developer mode) of the smart contract (ie as chaincode) to a running Fabric blockchain. 
+This tutorial provides an End-to-End example of setting up, configuring and running a sample NodeJS chaincode, using the new {{site.data.conrefs.hlf_full}} programming model. The goal is to show a simple example of implementing Smart Contract chaincode using the new programming model. The tutorial is intended to be a full 'end-to-end' tutorial - it takes the developer from initial setup of a local Fabric 'dev' environment, to building, deploying and interacting with the smart contract, running on the blockchain. As part of this, we will briefly show the Chaincode 'Developer Mode' vs the standard deployment (non-developer mode) of the smart contract (ie as chaincode) to a running Fabric blockchain. 
 
 
 # Pre-requisites
