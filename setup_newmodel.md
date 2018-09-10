@@ -113,10 +113,11 @@ Your chaincode development environment should now be up and running.
 
 2. Copy the file `updatevalues.js`, `package.json`, `index.js`  from this repository: https://github.com/mahoney1/newprogmodel/  into this directory - you can simply clone it to `/tmp` and copy the files into the current chaincode dev directory eg.
 
-git clone https://github.com/mahoney1/newprogmodel/ /tmp ; cp /tmp/newprogmodel/* .
+    `git clone https://github.com/mahoney1/newprogmodel/ /tmp ; cp /tmp/newprogmodel/* . `
 
 The index.js file contains the definition of where the smart contract logic is defined  (see more about the Smart Contract APIs [here](https://www.npmjs.com/package/fabric-contract-api) - and review this for a moment - it provides the 'basic ingredients' for a our smart contract NodeJS implementation and `requires` the contract logic `updatevalues.js` to be included.
 
+   ```
      // index.js
      'use strict';
 
@@ -124,7 +125,7 @@ The index.js file contains the definition of where the smart contract logic is d
       const UpdateValues = require('./updatevalues.js')
 
       module.exports.contracts = ['UpdateValuesContract'];
-
+   ```
 
 3. Next, open the javascript file `updatevalues.js` and check for the presence of the requisite `Init` and `Invoke` functions. The Fabric chaincode interface requires these functions (methods) to be present. In particular, the `Init` method is called when a chaincode receives an instantiate (or indeed an upgrade transaction), so that the chaincode may perform any necessary initialization, such as initialization of an application state. The `Invoke` method is called in response to receiving a chaincode invoke transaction to process transaction proposals, eg. updating/creating an asset's state or specific attributes of an asset, as part of a transaction.
 
@@ -165,19 +166,24 @@ A more detailed description of these can be found at https://mbwhite.github.io/t
         "fabric-contract-api": "fabric-contract-api-1.3.0-snapshot",
         "fabric-shim": "fabric-shim-1.3.0-snapshot"```
 
+```
+
 The important pieces are the `dependencies` section, requiring the `fabric-contract-api` (new in 1.3) and the `fabric-shim` (standard chaincode APIs) for the application. The start sequence should be called `startChaincode`.
 
 Lastly, the sample code has some debug messages (implemented with `console.log`) so that we can see the chaincode messages interactively, when running the chaincode.
 
 5. Next, let's install our dependencies listed in `package.json`, so that we can run the chaincode:
 
-    npm install
+    `npm install`
 
 6. Now we're ready to start up our chaincode, by access the CLI container, using the following commands:
 
+    ```
        docker exec -it cli bash
 
        CORE_CHAINCODE_ID_NAME="mycontract:v0" node updatevalues.js --peer.address grpc://localhost:7052
+       
+    ```
      
    Your node application should be running in the current window, with some messages, but waiting for activity.
      
@@ -190,21 +196,21 @@ Lastly, the sample code has some debug messages (implemented with `console.log`)
 
 8. Next, we need to instantiate the chaincode on the channel, using the following command (it requires the namespace prefix, with no arguments):
 
-       CORE_PEER_ADDRESS=peer:7051 peer chaincode instantiate -o orderer:7050 -C myc -l node -n mycontract -v v0 -c '{"Args":["org.mynamespace.updates_Init",""]}'
+       `CORE_PEER_ADDRESS=peer:7051 peer chaincode instantiate -o orderer:7050 -C myc -l node -n mycontract -v v0 -c '{"Args":["org.mynamespace.updates_Init",""]}'`
     
    After 30s-60s, you will see messages about the sample running chaincode being instantiated on the channel.
    
 9. Next, invoke the first smart Contract function, `Init_Contract` - which creates an asset/key in the world state as follows:
 
-    CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["Init_Contract","A1","10"]}' -n mycontract
+    `CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["Init_Contract","A1","10"]}' -n mycontract`
 
 10. Next, invoke the following two transactions in succession and observe the console logged messages on the running chaincode window in the other terminal:
 
-    CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["transactionA","A1","30"]}' -n mycontract
+    `CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["transactionA","A1","30"]}' -n mycontract`
     
     Observe the messages in the running chaincode window.
     
-    CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["transactionB","A1","103"]}' -n mycontract
+    `CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["transactionB","A1","103"]}' -n mycontract`
     
     Once more, observe the messages in the running chaincode window.
 
