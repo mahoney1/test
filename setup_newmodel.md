@@ -26,7 +26,9 @@ This tutorial provides an End-to-End example of setting up, configuring and runn
 
 # A word about using Chaincode - Dev mode vs 'non-Dev' (deploy) mode
 
-{site.data.conrefs.hlf_full}} - in its `basic-network` configuration, downloaded as part of Fabric samples - provides a simple docker-compose YAML file to start a simple network, and it starts the peer in "dev mode". Note that it also starts two additional containers (one is for the chaincode container and the other is a CLI container, so as to interact with the chaincode itself). In the configuration (`docker-compose-simple.yml`) the Chaincode container has volume mapping in place, the `chaincode` directory under `fabric-samples` is mapped to /opt/gopath/src/chaincode in the chaincode container. So our chaincode now can be deployed.
+Normally chaincodes are started and maintained by peer. However in “dev mode”, chaincode is built and started by the user (developer). This mode is useful during chaincode development phase for rapid code/build/run/debug cycle turnaround.
+
+{site.data.conrefs.hlf_full}} - in its `basic-network` configuration, downloaded as part of Fabric samples - provides a simple docker-compose YAML file to start a simple network, and it starts the peer in "dev mode". Note that it also starts two additional containers (one is for the chaincode container and the other is a CLI container, so as to interact with the chaincode itself). In the configuration (`docker-compose-simple.yml`) the Chaincode container has volume mapping in place, the `chaincode` directory under `fabric-samples` is mapped to /opt/gopath/src/chaincode in the chaincode container. 
 
 To start out with, you can deposit the chaincode to the directory $GOPATH/src directory to test the chaincode. Once the chaincode is tested and the developer is satisfied it works, it can be later be deployed (via the CLI container) to a  'test' or 'production' Fabric,   by attaching as a volume to our chaincode container,  so that this chaincode (and version of chaincode) can be installed/deployed and initialised on a channel on the {site.data.conrefs.hlf_full} blockchain network.
 
