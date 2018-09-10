@@ -54,37 +54,67 @@ eg. curl -sSL http://bit.ly/2ysbOFE | bash -s 1.3.0 1.3.0 0.4.10
  The docker images can be obtained from the Fabric Nexus docker repository: eg.
 https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric-1.3.0-stable/
 
-1. For the peer image - do the following:
+ie find the latest images under this directory (datestamp on right) for the platform you want to download the images eg. Mac, Linux etc
+
+1. For the peer image - do the following and tag the image with a new label:
     docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-peer:amd64-1.3.0-stable-1b2d58c
+    docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-peer:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-peer:x86_64-1.3.0
 
 2. For the orderer image - do the following:
     docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-orderer:amd64-1.3.0-stable-1b2d58c
+    docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-orderer:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-orderer:x86_64-1.3.0
 
 3. For the Fabric base image - do the following:
     docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-baseimage:amd64-1.3.0-stable-1b2d58c
+    docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-baseimage:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-baseimage:x86_64-1.3.0
 
 2. For fabric tools, CLI - do the following:
    docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-tools:amd64-1.3.0-stable-1b2d58c
- 
+   docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-tools:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-tools:x86_64-1.3.0
+   
 3. For Fabric ccenv - do the following:
    docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-ccenv:amd64-1.3.0-stable-1b2d58c
+   docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-ccenv:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-ccenv:x86_64-1.3.0
 
-Find the latest date on the files listed under this directory (datestamp on right) for the platform you want to download the images eg. Mac, Linux etc
- 
 
 # Setup your Development environment
 
-1. The first thing to do is to is to change directory to the Fabric chaincode dev environment inside your `fabric-samples` directory that was cloned earlier
+1. The first thing to do is to is to change directory to the Fabric chaincode dev environment inside your `fabric-samples` directory that was cloned earlier:
 
     `cd chaincode-docker-devmode`
     
-2. `docker-compose -f docker-compose-simple.yaml down`  # (to clear down any old environments)
+2. Copy the file `docker-compose-simple.yaml` from this repository: https://github.com/mahoney1/newprogmodel/  into this directory
 
-3.  `docker ps -a ` to ensure you have no lingering containers  - if you do, stop them and remove them using `docker stop <container id> ` and `docker rm <container_id>
+3. Run the following command:
 
-4. Now start the new Dev mode environment:
+`docker-compose -f docker-compose-simple.yaml down`  # (to clear down any old environments)
+
+4.  `docker ps -a ` to ensure you have no lingering containers  - if you do, stop them and remove them using `docker stop <container id> ` and `docker rm <container_id>
+
+5. Now start the new Dev mode environment:
 
      `docker-compose -f docker-compose-simple.yaml up` 
+
+Your chaincode development environment should now be up and running.
+
+# Create a sample chaincode using the new programming model
+
+1. Make a directory called `updatesample` in the current directory
+
+2. Copy the file `updatevalues.js`, `package.json`, `index.js`  from this repository: https://github.com/mahoney1/newprogmodel/  into this directory
+
+The index.js file contains the definition of where the smart contract logic is defined  (see more about the Smart Contract APIs [here](https://www.npmjs.com/package/fabric-contract-api) - and review this for a moment - it provides the 'basic ingredients' for a our smart contract NodeJS implementation and `requires` the contract logic `updatevalues.js` to be included.
+
+     // index.js
+     'use strict';
+
+
+      const UpdateValues = require('./updatevalues.js')
+
+      module.exports.contracts = ['UpdateValuesContract'];
+
+
+3. 
 
 
 <h2 class='everybody'>Conclusion</h2>
