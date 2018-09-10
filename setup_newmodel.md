@@ -38,30 +38,25 @@ To start out with, you can deposit the chaincode to the directory $GOPATH/src di
 
 git clone https://github.com/hyperledger/fabric-samples.git
 
-2. As per the Fabric [Getting Started guide](https://hyperledger-fabric.readthedocs.io/en/release-1.2/install.html) - you need to install the latest binaries and samples. The `curl` command to pull the 3 different images (3 parameters) is shown on that page.
-
-eg. curl -sSL http://bit.ly/2ysbOFE | bash -s 1.3.0 1.3.0 0.4.10
-
 2. cd fabric-samples ; git checkout master  # need 'master' branch for latest changes
 
-3. Set the PATH as follows (replace <workingdir> with where you've downloaded the sames, eg in $HOME for example):
+3. Download the latest Fabric tools, inside the fabric-samples directory:
 
-   export PATH=<workingdir>/fabric-samples/bin:$PATH
+curl -sSl https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric-1.3.0-stable/linux-amd64.1.3.0-stable-1b2d58c/hyperledger-fabric-1.3.0-stable-linux-amd64.1.3.0-stable-1b2d58c.tar.gz | tar zxvf -
 
-4. change directory to the chaincode dev mode directory:
-  
-  cd chaincode-docker-devmode
-  
+4. Set the PATH as follows (replace <workingdir> with where you've downloaded the sames, eg in $HOME for example):
 
-# Download the correct Fabric Images 
+   export PATH=<currentworkingdir>/fabric-samples/bin:$PATH
+
+# Download the correct Fabric Docker Images 
  
- The docker images can be obtained from the Fabric Nexus docker repository: eg.
+ The Fabric 1.3 docker images can be obtained from the Fabric Nexus docker repository: eg.
  
 `https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric-1.3.0-stable/`
 
 ie find the latest images under this directory (datestamp on right) for the platform you want to download the images eg. Mac, Linux etc
 
-1. For the peer image - do the following and tag the image with a new label:   
+1. For the peer image - do the following,  and tag the image with a new label to indicate its a 1.3 image:   
 
     `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-peer:amd64-1.3.0-stable-3139ec2` https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric-1.3.0-stable/linux-amd64.1.3.0-stable-3139ec2/
     
@@ -79,13 +74,13 @@ ie find the latest images under this directory (datestamp on right) for the plat
     
     `docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-baseimage:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-baseimage:x86_64-1.3.0`
 
-2. For fabric tools, CLI - do the following:
+4. For fabric tools, CLI - do the following:
 
    `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-tools:amd64-1.3.0-stable-3139ec2`
    
    `docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-tools:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-tools:x86_64-1.3.0`
    
-3. For Fabric ccenv - do the following:
+5. For Fabric ccenv - do the following:
 
    `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-ccenv:amd64-1.3.0-stable-3139ec2`
    
@@ -94,15 +89,15 @@ ie find the latest images under this directory (datestamp on right) for the plat
 
 # Setup your Development environment
 
-1. The first thing to do is to is to change directory to the Fabric chaincode dev environment inside your `fabric-samples` directory that was cloned earlier:
+1. First, change directory to the Fabric chaincode dev environment inside your `fabric-samples` directory that was cloned earlier:
 
     `cd chaincode-docker-devmode`
     
-2. Copy the file `docker-compose-simple.yaml` from this repository: https://github.com/mahoney1/newprogmodel/  into this directory
+2. Copy the file `docker-compose-simple.yaml` from this repository: https://github.com/mahoney1/newprogmodel/  into this directory, overwriting the current `docker-compose-simple.yaml` file
 
-3. Run the following command:
+3. Run the following command, to clear down old docker containers or images:
 
-`docker-compose -f docker-compose-simple.yaml down`  # (to clear down any old environments)
+`docker-compose -f docker-compose-simple.yaml down`  # clear down any old environment
 
 4.  `docker ps -a ` to ensure you have no lingering containers  - if you do, stop them and remove them using `docker stop <container id> ` and `docker rm <container_id>
 
@@ -116,7 +111,9 @@ Your chaincode development environment should now be up and running.
 
 1. Make a directory called `updatesample` in the current directory
 
-2. Copy the file `updatevalues.js`, `package.json`, `index.js`  from this repository: https://github.com/mahoney1/newprogmodel/  into this directory
+2. Copy the file `updatevalues.js`, `package.json`, `index.js`  from this repository: https://github.com/mahoney1/newprogmodel/  into this directory - you can simply clone it to `/tmp` and copy the files into the current chaincode dev directory eg.
+
+git clone https://github.com/mahoney1/newprogmodel/ /tmp ; cp /tmp/newprogmodel/* .
 
 The index.js file contains the definition of where the smart contract logic is defined  (see more about the Smart Contract APIs [here](https://www.npmjs.com/package/fabric-contract-api) - and review this for a moment - it provides the 'basic ingredients' for a our smart contract NodeJS implementation and `requires` the contract logic `updatevalues.js` to be included.
 
@@ -129,12 +126,12 @@ The index.js file contains the definition of where the smart contract logic is d
       module.exports.contracts = ['UpdateValuesContract'];
 
 
-3. 
+3. Next, open the javascript file `updatevalues.js` and check for the presence of the requisite `Init` and `Invoke` functions. The Fabric chaincode interface requires these functions (methods) to be present. In particular, the `Init` method is called when a chaincode receives an instantiate (or indeed an upgrade transaction), so that the chaincode may perform any necessary initialization, such as initialization of an application state. The `Invoke` method is called in response to receiving a chaincode invoke transaction to process transaction proposals, eg. updating/creating an asset's state or specific attributes of an asset, as part of a transaction.
 
 
 <h2 class='everybody'>Conclusion</h2>
 
-In this tutorial you have seen how to add an Organization to an existing blockchain network based on {{site.data.conrefs.composer_full}} . You've seen the important steps of an 'initiator' of the business network (the Org1 admin), admit an Org admin from Org3 to be able to perform business network operations, as an admin of the 3rd organization. Furthermore, you've seen how to add new Org3 aligned participants to the business network, and successfully submit a Trade transaction on the business network. 
+In this tutorial, you'll have seen how to get going with the new Fabric 1.3 programming model, through a very simple example. As part of this, you have implemented the new `Contract` smart contract API and interacted with the blockchain, performing very simple transactions. The appendix provides more detail on transitioning from Chaincode 'dev' mode, to standing up a full Fabric environment and installing chaincode onto a fully-fledged blockchain network.
 
 We hope you found the tutorial useful :-) - thanks for completing it !
 
