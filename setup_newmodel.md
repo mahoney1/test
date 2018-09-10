@@ -128,6 +128,86 @@ The index.js file contains the definition of where the smart contract logic is d
 
 3. Next, open the javascript file `updatevalues.js` and check for the presence of the requisite `Init` and `Invoke` functions. The Fabric chaincode interface requires these functions (methods) to be present. In particular, the `Init` method is called when a chaincode receives an instantiate (or indeed an upgrade transaction), so that the chaincode may perform any necessary initialization, such as initialization of an application state. The `Invoke` method is called in response to receiving a chaincode invoke transaction to process transaction proposals, eg. updating/creating an asset's state or specific attributes of an asset, as part of a transaction.
 
+Note that ALL the other functions defined in this JS script is executed as chaincode, and can be called/invoked by the Fabric client SDK.
+
+The class implemented is called UpdateValuesContract (as matched in the module.exports of the index.js file) that extends the superclass `Contract`, with a namespace of `org.mynamespace.updates`
+There are 3 functions setup: `InitContract`, `transactionA` and `transactionB` that are intended to be invokedi from the client side (via an invoke sequence). 
+
+The `ctx` parameter (and reference object) in the function is a transaction context; each time a invoke is called, a new instance is created, that can be used by the function implementation, to access the native Fabric APIs, to perform transactions or queries etc.
+
+The arguments (`args`) is an array, passed on with the invoke.
+
+The constructor contains a 'namespace' to help identify the sets of functions, from the client side.
+
+A more detailed description of these can be found at https://mbwhite.github.io/tutorial-using-contractinterface.html (need to replace with final URL etc - Paul)
+
+4. Finally, open the `package.json` and examine some of the key information (extract shown below):
+
+```
+    "name": "my sample contract",
+    "version": "0.0.1",
+    "description": "Smart Contract Sample - mycontract",
+    "engines": {
+        "node": ">=8",
+        "npm": ">=5"
+    },
+    "main": "updatevalues.js",
+    "scripts": {
+        "lint": "eslint .",
+        "pretest": "npm run lint",
+        "test": "nyc mocha --recursive",
+        "start": "startChaincode"
+    },
+    "engineStrict": true,
+    "author": "Paul O",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "fabric-contract-api": "fabric-contract-api-1.3.0-snapshot",
+        "fabric-shim": "fabric-shim-1.3.0-snapshot"```
+
+The important pieces are the `dependencies` section, requiring the `fabric-contract-api` (new in 1.3) and the `fabric-shim` (standard chaincode APIs) for the application. The start sequence should be called `startChaincode`.
+
+Lastly, the sample code has some debug messages (implemented with `console.log`) so that we can see the chaincode messages interactively, when running the chaincode.
+
+5. Next, let's install our dependencies listed in `package.json`, so that we can run the chaincode:
+
+    npm install
+
+6. Now we're ready to start up our chaincode, by access the CLI container, using the following commands:
+
+       docker exec -it cli bash
+
+       CORE_CHAINCODE_ID_NAME="mycontract:v0" node updatevalues.js --peer.address grpc://localhost:7052
+     
+   Your node application should be running in the current window, with some messages, but waiting for activity.
+     
+7. Open another terminal, this time the directory should be `chaincode-docker-devmode` and run the following command:
+
+       CORE_PEER_ADDRESS=peer:7051 peer chaincode install -l node -n mycontract -v v0 -p updatevalues
+
+    This installs the chaincode on the peer (via the shared docker volume with the CLI container)
+
+
+8. Next, we need to instantiate the chaincode on the channel, using the following command (it requires the namespace prefix, with no arguments):
+
+       CORE_PEER_ADDRESS=peer:7051 peer chaincode instantiate -o orderer:7050 -C myc -l node -n mycontract -v v0 -c '{"Args":["org.mynamespace.updates_Init",""]}'
+    
+   After 30s-60s, you will see messages about the sample running chaincode being instantiated on the channel.
+   
+9. Next, invoke the first smart Contract function, `Init_Contract` - which creates an asset/key in the world state as follows:
+
+    CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["Init_Contract","A1","10"]}' -n mycontract
+
+10. Next, invoke the following two transactions in succession and observe the console logged messages on the running chaincode window in the other terminal:
+
+    CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["transactionA","A1","30"]}' -n mycontract
+    
+    Observe the messages in the running chaincode window.
+    
+    CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["transactionB","A1","103"]}' -n mycontract
+    
+    Once more, observe the messages in the running chaincode window.
+
 
 <h2 class='everybody'>Conclusion</h2>
 
