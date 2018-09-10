@@ -24,6 +24,12 @@ This tutorial provides an End-to-End example of setting up, configuring and runn
 - Some sample code to use (provided as code blocks in this tutorial)
 
 
+# A word using Chaincode - Dev mode vs 'non-Dev' (deploy) mode
+
+{site.data.conrefs.hlf_full}} - in its `basic-network` configuration, downloaded as part of Fabric samples - provides a simple docker-compose YAML file to start a simple network, and it starts the peer in "dev mode". Note that it also starts two additional containers (one is for the chaincode container and the other is a CLI container, so as to interact with the chaincode itself). In the configuration (`docker-compose-simple.yml`) the Chaincode container has volume mapping in place, the `chaincode` directory under `fabric-samples` is mapped to /opt/gopath/src/chaincode in the chaincode container. So our chaincode now can be deployed.
+
+To start out with, you can deposit the chaincode to that Go file $GOPATH/src directory to test the chaincode. Once the chaincode is tested and the developer is satisfied it works, it can be deployed (via the CLI container)  by attaching as a volume to our chaincode container,  so that this chaincode (and version of chaincode) can be deployed and initialised on the {site.data.conrefs.hlf_full} blockchain network.
+
 # Download the Fabric Samples
 
 1. As per the Fabric [Getting Started guide](https://hyperledger-fabric.readthedocs.io/en/release-1.2/install.html) - you need to install the latest binaries and samples. The `curl` command to pull the 3 different images (3 parameters) is shown on that page.
