@@ -82,7 +82,7 @@ Find the latest date on the files listed under this directory (datestamp on righ
 
 4. Now start the new Dev mode environment:
 
-     `docker-compose -f docker-compose-simple.yaml down` 
+     `docker-compose -f docker-compose-simple.yaml up` 
 
 
 <h2 class='everybody'>Conclusion</h2>
