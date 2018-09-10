@@ -57,23 +57,33 @@ https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabr
 ie find the latest images under this directory (datestamp on right) for the platform you want to download the images eg. Mac, Linux etc
 
 1. For the peer image - do the following and tag the image with a new label:
+
     docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-peer:amd64-1.3.0-stable-1b2d58c
+    
     docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-peer:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-peer:x86_64-1.3.0
 
 2. For the orderer image - do the following:
+
     docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-orderer:amd64-1.3.0-stable-1b2d58c
+    
     docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-orderer:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-orderer:x86_64-1.3.0
 
 3. For the Fabric base image - do the following:
+
     docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-baseimage:amd64-1.3.0-stable-1b2d58c
+    
     docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-baseimage:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-baseimage:x86_64-1.3.0
 
 2. For fabric tools, CLI - do the following:
+
    docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-tools:amd64-1.3.0-stable-1b2d58c
+   
    docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-tools:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-tools:x86_64-1.3.0
    
 3. For Fabric ccenv - do the following:
+
    docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-ccenv:amd64-1.3.0-stable-1b2d58c
+   
    docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-ccenv:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-ccenv:x86_64-1.3.0
 
 
