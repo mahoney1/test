@@ -109,7 +109,9 @@ Your chaincode development environment should now be up and running.
 
 # Create a sample chaincode using the new programming model
 
-1. Make a directory called `updatesample` in the current directory
+1. Make a directory called `updatesamples` in the current directory and `cd into it.
+
+   `cd updatevalues`
 
 2. Copy the file `updatevalues.js`, `package.json`, `index.js`  from this repository: https://github.com/mahoney1/newprogmodel/  into this directory - you can simply clone it to `/tmp` and copy the files into the current chaincode dev directory eg.
 
@@ -189,9 +191,14 @@ Lastly, the sample code has some debug messages (implemented with `console.log`)
      
 7. Open another terminal, this time the directory should be `chaincode-docker-devmode` and run the following command:
 
+        ```
+       cd ../chaincode-docker-devmode
+       
        CORE_PEER_ADDRESS=peer:7051 peer chaincode install -l node -n mycontract -v v0 -p updatevalues
+       
+       ```
 
-    This installs the chaincode on the peer (via the shared docker volume with the CLI container)
+    This installs the chaincode package on the peer (via the shared docker volume with the CLI container)
 
 
 8. Next, we need to instantiate the chaincode on the channel, using the following command (it requires the namespace prefix, with no arguments):
@@ -200,11 +207,11 @@ Lastly, the sample code has some debug messages (implemented with `console.log`)
     
    After 30s-60s, you will see messages about the sample running chaincode being instantiated on the channel.
    
-9. Next, invoke the first smart Contract function, `Init_Contract` - which creates an asset/key in the world state as follows:
+9. Next, invoke the first Smart Contract function we've implemented, called `Init_Contract` - which creates a simple asset/key value in the world state as follows:
 
     `CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["Init_Contract","A1","10"]}' -n mycontract`
 
-10. Next, invoke the following two transactions in succession and observe the console logged messages on the running chaincode window in the other terminal:
+10. Next, invoke the following next two Smart Contract transactions in succession, and observe the console logged messages on the running chaincode window in the other terminal:
 
     `CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["transactionA","A1","30"]}' -n mycontract`
     
