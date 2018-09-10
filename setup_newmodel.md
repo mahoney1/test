@@ -30,11 +30,15 @@ Normally chaincodes are started and maintained by peer. However in â€œdev modeâ€
 
 {site.data.conrefs.hlf_full}} - in its `basic-network` configuration, downloaded as part of Fabric samples - provides a simple docker-compose YAML file to start a simple network, and it starts the peer in "dev mode". Note that it also starts two additional containers (one is for the chaincode container and the other is a CLI container, so as to interact with the chaincode itself). In the configuration (`docker-compose-simple.yml`) the Chaincode container has volume mapping in place, the `chaincode` directory under `fabric-samples` is mapped to /opt/gopath/src/chaincode in the chaincode container. 
 
-To start out with, you can deposit the chaincode to the directory $GOPATH/src directory to test the chaincode. Once the chaincode is tested and the developer is satisfied it works, it can be later be deployed (via the CLI container) to a  'test' or 'production' Fabric,   by attaching as a volume to our chaincode container,  so that this chaincode (and version of chaincode) can be installed/deployed and initialised on a channel on the {site.data.conrefs.hlf_full} blockchain network.
+To start out with, you can deposit the chaincode to the directory $GOPATH/src directory to test the chaincode. Once the chaincode is tested and the developer is satisfied it works, it can be later be deployed (via the CLI container) to a full Fabric enviroment,   by attaching as a volume to our chaincode container,  so that this chaincode (combined with the version of chaincode in particular) can be installed/deployed and initialised (instantiated) on a channel on the {site.data.conrefs.hlf_full} blockchain network.
 
 # Download the Fabric Samples
 
-1. As per the Fabric [Getting Started guide](https://hyperledger-fabric.readthedocs.io/en/release-1.2/install.html) - you need to install the latest binaries and samples. The `curl` command to pull the 3 different images (3 parameters) is shown on that page.
+1. Clone the Fabric Samples directory as follows, into your chosen directory:
+
+git clone https://github.com/hyperledger/fabric-samples.git
+
+2. As per the Fabric [Getting Started guide](https://hyperledger-fabric.readthedocs.io/en/release-1.2/install.html) - you need to install the latest binaries and samples. The `curl` command to pull the 3 different images (3 parameters) is shown on that page.
 
 eg. curl -sSL http://bit.ly/2ysbOFE | bash -s 1.3.0 1.3.0 0.4.10
 
@@ -57,33 +61,33 @@ eg. curl -sSL http://bit.ly/2ysbOFE | bash -s 1.3.0 1.3.0 0.4.10
 
 ie find the latest images under this directory (datestamp on right) for the platform you want to download the images eg. Mac, Linux etc
 
-1. For the peer image - do the following and tag the image with a new label:
+1. For the peer image - do the following and tag the image with a new label:   
 
-    `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-peer:amd64-1.3.0-stable-1b2d58c`
+    `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-peer:amd64-1.3.0-stable-3139ec2` https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric-1.3.0-stable/linux-amd64.1.3.0-stable-3139ec2/
     
     `docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-peer:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-peer:x86_64-1.3.0`
 
 2. For the orderer image - do the following:
 
-    `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-orderer:amd64-1.3.0-stable-1b2d58c`
+    `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-orderer:amd64-1.3.0-stable-3139ec2`
     
     `docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-orderer:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-orderer:x86_64-1.3.0`
 
 3. For the Fabric base image - do the following:
 
-    `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-baseimage:amd64-1.3.0-stable-1b2d58c`
+    `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-baseimage:amd64-1.3.0-stable-3139ec2`
     
     `docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-baseimage:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-baseimage:x86_64-1.3.0`
 
 2. For fabric tools, CLI - do the following:
 
-   `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-tools:amd64-1.3.0-stable-1b2d58c`
+   `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-tools:amd64-1.3.0-stable-3139ec2`
    
    `docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-tools:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-tools:x86_64-1.3.0`
    
 3. For Fabric ccenv - do the following:
 
-   `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-ccenv:amd64-1.3.0-stable-1b2d58c`
+   `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-ccenv:amd64-1.3.0-stable-3139ec2`
    
    `docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-ccenv:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-ccenv:x86_64-1.3.0`
 
