@@ -195,9 +195,11 @@ Lastly, the sample code has some debug messages (implemented with `console.log`)
     <date> INFO [lib/handler.js] Successfully registered with peer node. State transferred to "established" 
     <date> INFO [lib/handler.js] Successfully established communication with peer node. State transferred to "ready"
      
-7. Open another terminal and launch the CLI again, and once again, from the `chaincode-docker-devmode` directory, run the following command:
+7. Open another terminal and launch the CLI again, and once again, from the `chaincode-docker-devmode` directory, run the following command - NOTE - this will launch your running NodeJS chaincode, so this is the terminal window to look for messages, as referred to further down this tutorial:
 
         ```
+       
+       docker exec -it cli bash
        
        CORE_PEER_ADDRESS=peer:7051 peer chaincode install -l node -n mycontract -v v0 -p mycontract
        
@@ -205,7 +207,7 @@ Lastly, the sample code has some debug messages (implemented with `console.log`)
 
     This installs the chaincode package on the peer (via the shared docker volume with the CLI container) - you should see a message response:
     
-    `Installed remotely response:<status:200 payload:"OK" >`
+       Installed remotely response:<status:200 payload:"OK" >
 
 
 8. Next, we need to instantiate the chaincode on the channel, using the following command (it requires the namespace prefix, with no arguments supplied to the `Init` below):
@@ -219,7 +221,7 @@ Lastly, the sample code has some debug messages (implemented with `console.log`)
    
 9. From the same CLI terminal, invoke the first Smart Contract function we've implemented, called `Init_Contract` - which creates a simple asset/key value in the world state as follows:
 
-      CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["InitContract","A1","10"]}' -n mycontract
+       CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["InitContract","A1","10"]}' -n mycontract
 
 Back on the running chaincode window, you should get some console messages about the key `A1` being initialised in the world state eg.
     
@@ -227,11 +229,11 @@ Back on the running chaincode window, you should get some console messages about
 
 10. Next, invoke the following next two Smart Contract transactions in succession, and observe the console logged messages on the running chaincode window in the other terminal:
 
-    `CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["transactionA","A1","30"]}' -n mycontract`
+    CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["transactionA","A1","30"]}' -n mycontract
 
 Back on the running chaincode window, you should get some console messages about the result of `transactionA` being invoked.
     
-    `CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["transactionB","A1","103"]}' -n mycontract`
+     CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["transactionB","A1","103"]}' -n mycontract
     
 Once more, observe the messages in the running chaincode window, this time concerning `transactionB`
 
