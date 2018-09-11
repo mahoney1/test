@@ -133,21 +133,22 @@ The index.js file contains the definition of where the smart contract logic is d
 
 Note that ALL the other functions defined in this JS script is executed as chaincode, and can be called/invoked by the Fabric client SDK.
 
-The class implemented is called UpdateValuesContract (as matched in the module.exports of the index.js file) that extends the superclass `Contract`, with a namespace of `org.mynamespace.updates`
-There are 3 functions setup: `InitContract`, `transactionA` and `transactionB` that are intended to be invokedi from the client side (via an invoke sequence). 
+The class implemented is called UpdateValuesContract (as matched in the `module.exports` of the `index.js` file) that extends the superclass `Contract`, with a namespace of `org.mynamespace.updates` .
 
-The `ctx` parameter (and reference object) in the function is a transaction context; each time a invoke is called, a new instance is created, that can be used by the function implementation, to access the native Fabric APIs, to perform transactions or queries etc.
+There are 3 functions set up: `InitContract`, to initialise the contract (eg. initialise the state of assets that the contract will handle) ; `transactionA`(update the asset with a value) and `transactionB` (update the asset with a different value) and which are intended to be invoked from the client side (ie the SDK, via an invoke sequence). 
 
-The arguments (`args`) is an array, passed on with the invoke.
+The `ctx` parameter (and reference object) seen in the function parameter list is a transaction context; each time an `invoke` is called, a new instance is created, that can be used by the function implementation, to access the native Fabric APIs, to perform transactions or queries etc. etc.
 
-The constructor contains a 'namespace' to help identify the sets of functions, from the client side.
+The arguments (`args`) is an array, passed on with the invoke eg the asset key and a value to apply.
 
-A more detailed description of these can be found at https://mbwhite.github.io/tutorial-using-contractinterface.html (need to replace with final URL etc - Paul)
+The constructor contains a 'namespace' to help identify the sets of functions, from the client side. In this example,  the `Invoke` function checks for the function name that was invoked and calls it, async promise style, passing on the parameters. 
+
+A more detailed description of the Contract APIs can be found at https://mbwhite.github.io/tutorial-using-contractinterface.html (need to replace with final URL etc - Paul)
 
 4. Finally, open the `package.json` and examine some of the key information (extract shown below):
 
 ```
-    "name": "my sample contract",
+    "name": "mycontract",
     "version": "0.0.1",
     "description": "Smart Contract Sample - mycontract",
     "engines": {
