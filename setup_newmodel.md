@@ -206,13 +206,13 @@ Lastly, the sample code has some debug messages (implemented with `console.log`)
     `Installed remotely response:<status:200 payload:"OK" >`
 
 
-8. Next, we need to instantiate the chaincode on the channel, using the following command (it requires the namespace prefix, with no arguments):
+8. Next, we need to instantiate the chaincode on the channel, using the following command (it requires the namespace prefix, with no arguments supplied to the `Init` below):
 
        `CORE_PEER_ADDRESS=peer:7051 peer chaincode instantiate -o orderer:7050 -C myc -l node -n mycontract -v v0 -c '{"Args":["org.mynamespace.updates_Init",""]}'`
     
-   After 30s-60s, you will see messages about the sample running chaincode being instantiated on the channel.
+  This can take a little time to instantiate on the channel, please note. After some 60s or so, you will see messages about the sample running chaincode being instantiated on the channel.
    
-9. Next, invoke the first Smart Contract function we've implemented, called `Init_Contract` - which creates a simple asset/key value in the world state as follows:
+9. From the same CLI terminal, invoke the first Smart Contract function we've implemented, called `Init_Contract` - which creates a simple asset/key value in the world state as follows:
 
     `CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["Init_Contract","A1","10"]}' -n mycontract`
 
