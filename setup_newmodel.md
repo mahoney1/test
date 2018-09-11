@@ -111,9 +111,9 @@ Your chaincode development environment should now be up and running.
 
 1. Make a directory called `mycontract` in the current directory and `cd` into it.
 
-   `cd updatevalues`
+   `cd mycontract`
 
-2. Copy the file `updatevalues.js`, `package.json`, `index.js`  from this repository: https://github.com/mahoney1/newprogmodel/  into this directory - you can simply clone it to `/tmp` and copy the files into the current chaincode dev directory eg.
+2. Copy the files  `updatevalues.js`, `package.json`, `index.js`, `query.js`   from this repository: https://github.com/mahoney1/newprogmodel/  into this directory - you can simply clone it to `/tmp` and copy the files into the current chaincode dev directory eg.
 
     `git clone https://github.com/mahoney1/newprogmodel/ /tmp ; cp /tmp/newprogmodel/* . `
 
