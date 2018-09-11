@@ -109,7 +109,7 @@ Your chaincode development environment should now be up and running.
 
 # Create a sample chaincode using the new programming model
 
-1. Make a directory called `updatesvalues` in the current directory and `cd` into it.
+1. Make a directory called `mycontract` in the current directory and `cd` into it.
 
    `cd updatevalues`
 
@@ -178,29 +178,32 @@ Lastly, the sample code has some debug messages (implemented with `console.log`)
 
     `npm install`
 
-6. Now we're ready to start up our chaincode, by accessing the CLI container, and directory where the smart contract is located, using the following commands:
+6. Now we're ready to start up our chaincode, by accessing the CLI container, and directory where the smart contract is located, using the following commands from the `chaincodedev` directory, as accessed from the CLI container below:
 
     ```
        docker exec -it cli bash
        
-       cd /opt/gopath/src/github.com/mycontract
+       cd mycontract
 
        CORE_CHAINCODE_ID_NAME="mycontract:v0" node updatevalues.js --peer.address grpc://localhost:7052
        
     ```
      
-   Your node application should be running in the current window, with some messages, but waiting for activity.
+   Your node application should be running in the current window, with some messages, but waiting for activity eg.
+   
+    `...Registering with peer grpc://localhost:7052 as chaincode "mycontract:v0"`
      
-7. Open another terminal, this time the directory should be `chaincode-docker-devmode` and run the following command:
+7. Open another terminal and launch the CLI again, and once again, from the `chaincode-docker-devmode` directory, run the following command:
 
         ```
-       cd ../chaincode-docker-devmode
        
-       CORE_PEER_ADDRESS=peer:7051 peer chaincode install -l node -n mycontract -v v0 -p updatevalues
+       CORE_PEER_ADDRESS=peer:7051 peer chaincode install -l node -n mycontract -v v0 -p mycontract
        
        ```
 
-    This installs the chaincode package on the peer (via the shared docker volume with the CLI container)
+    This installs the chaincode package on the peer (via the shared docker volume with the CLI container) - you should see a message response:
+    
+    `Installed remotely response:<status:200 payload:"OK" >`
 
 
 8. Next, we need to instantiate the chaincode on the channel, using the following command (it requires the namespace prefix, with no arguments):
