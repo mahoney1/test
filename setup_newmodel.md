@@ -220,15 +220,19 @@ Lastly, the sample code has some debug messages (implemented with `console.log`)
 
       CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["InitContract","A1","10"]}' -n mycontract
 
+Back on the running chaincode window, you should get some console messages about the key `A1` being initialised in the world state eg.
+    
+    FQ Function called is : InitContract was found with params A1,10
+
 10. Next, invoke the following next two Smart Contract transactions in succession, and observe the console logged messages on the running chaincode window in the other terminal:
 
     `CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["transactionA","A1","30"]}' -n mycontract`
-    
-    Observe the messages in the running chaincode window.
+
+Back on the running chaincode window, you should get some console messages about the result of `transactionA` being invoked.
     
     `CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["transactionB","A1","103"]}' -n mycontract`
     
-    Once more, observe the messages in the running chaincode window.
+Once more, observe the messages in the running chaincode window, this time concerning `transactionB`
 
 
 <h2 class='everybody'>Conclusion</h2>
