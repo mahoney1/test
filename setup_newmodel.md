@@ -191,7 +191,8 @@ Lastly, the sample code has some debug messages (implemented with `console.log`)
      
    Your node application should be running in the current window, with some messages, but waiting for activity eg.
    
-    `...Registering with peer grpc://peer:7052 as chaincode "mycontract:v0"`
+    <date> INFO [lib/handler.js] Successfully registered with peer node. State transferred to "established" 
+    <date> INFO [lib/handler.js] Successfully established communication with peer node. State transferred to "ready"
      
 7. Open another terminal and launch the CLI again, and once again, from the `chaincode-docker-devmode` directory, run the following command:
 
@@ -210,7 +211,10 @@ Lastly, the sample code has some debug messages (implemented with `console.log`)
 
        CORE_PEER_ADDRESS=peer:7051 peer chaincode instantiate -o orderer:7050 -C myc -l node -n mycontract -v v0 -c '{"Args":["org.mynamespace.updates_Init",""]}' 
     
-  This can take a little time to instantiate on the channel, please note. After some 60s or so, you will see messages about the sample running chaincode being instantiated on the channel.
+  This can take a little time to instantiate on the channel, please note. After some 60s or so, you will see messages about the sample running chaincode being instantiated on the channel. Eg.
+  
+     =========== Instantiated Sample chaincode ===========
+     <date> INFO [lib/handler.js] [myc-f09903a1]Calling chaincode Init() succeeded. Sending COMPLETED message back to peer
    
 9. From the same CLI terminal, invoke the first Smart Contract function we've implemented, called `Init_Contract` - which creates a simple asset/key value in the world state as follows:
 
