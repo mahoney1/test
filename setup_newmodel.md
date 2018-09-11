@@ -66,25 +66,25 @@ ie find the latest images under this directory (datestamp on right) for the plat
 
     `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-orderer:amd64-1.3.0-stable-3139ec2`
     
-    `docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-orderer:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-orderer:x86_64-1.3.0`
+    `docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-orderer:amd64-1.3.0-stable-3139ec2 hyperledger/fabric-orderer:x86_64-1.3.0`
 
-3. For the Fabric base image - do the following:
+3. For the Fabric base image - do the following: NOT NEEDED - Paul
 
     `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-baseimage:amd64-1.3.0-stable-3139ec2`
     
-    `docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-baseimage:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-baseimage:x86_64-1.3.0`
+    `docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-baseimage:amd64-1.3.0-stable-3139ec2 hyperledger/fabric-baseimage:x86_64-1.3.0`
 
 4. For fabric tools, CLI - do the following:
 
    `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-tools:amd64-1.3.0-stable-3139ec2`
    
-   `docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-tools:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-tools:x86_64-1.3.0`
+   `docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-tools:amd64-1.3.0-stable-3139ec2 hyperledger/fabric-tools:x86_64-1.3.0`
    
 5. For Fabric ccenv - do the following:
 
    `docker pull nexus3.hyperledger.org:10001/hyperledger/fabric-ccenv:amd64-1.3.0-stable-3139ec2`
    
-   `docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-ccenv:amd64-1.3.0-stable-1b2d58c hyperledger/fabric-ccenv:x86_64-1.3.0`
+   `docker tag nexus3.hyperledger.org:10001/hyperledger/fabric-ccenv:amd64-1.3.0-stable-3139ec2c hyperledger/fabric-ccenv:x86_64-1.3.0`
 
 
 # Setup your Development environment
