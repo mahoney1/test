@@ -109,7 +109,7 @@ Your chaincode development environment should now be up and running.
 
 # Create a sample chaincode using the new programming model
 
-1. Make a directory called `updatesamples` in the current directory and `cd into it.
+1. Make a directory called `updatesvalues` in the current directory and `cd` into it.
 
    `cd updatevalues`
 
