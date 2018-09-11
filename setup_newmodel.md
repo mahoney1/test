@@ -218,7 +218,7 @@ Lastly, the sample code has some debug messages (implemented with `console.log`)
    
 9. From the same CLI terminal, invoke the first Smart Contract function we've implemented, called `Init_Contract` - which creates a simple asset/key value in the world state as follows:
 
-      CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["Init_Contract","A1","10"]}' -n mycontract
+      CORE_PEER_ADDRESS=peer:7051 peer chaincode invoke --orderer orderer:7050 --channelID myc -c '{"Args":["InitContract","A1","10"]}' -n mycontract
 
 10. Next, invoke the following next two Smart Contract transactions in succession, and observe the console logged messages on the running chaincode window in the other terminal:
 
