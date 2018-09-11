@@ -178,10 +178,12 @@ Lastly, the sample code has some debug messages (implemented with `console.log`)
 
     `npm install`
 
-6. Now we're ready to start up our chaincode, by access the CLI container, using the following commands:
+6. Now we're ready to start up our chaincode, by accessing the CLI container, and directory where the smart contract is located, using the following commands:
 
     ```
        docker exec -it cli bash
+       
+       cd /opt/gopath/src/github.com/mycontract
 
        CORE_CHAINCODE_ID_NAME="mycontract:v0" node updatevalues.js --peer.address grpc://localhost:7052
        
