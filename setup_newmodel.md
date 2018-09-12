@@ -179,7 +179,7 @@ Lastly, the sample code has some debug messages (implemented with `console.log`)
 
     `npm install`
 
-6. Now we're ready to start up our chaincode, by accessing the CLI container, and directory where the smart contract is located, using the following commands from the `chaincodedev` directory, as accessed from the CLI container below:
+6. Now we're ready to start up our chaincode, by accessing the CLI container, and directory where the smart contract is located, using the following commands from the current directory, as accessed from the CLI container below:
 
     ```
        docker exec -it cli bash
