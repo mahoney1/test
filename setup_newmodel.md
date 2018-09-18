@@ -245,20 +245,20 @@ In this tutorial, you'll have seen how to get going with the new Fabric 1.3 prog
 We hope you found the tutorial useful :-) - thanks for completing it !
 
 
-<h2 class='everybody'>Appendix - Setting up a deployable Fabric environments</h2>
+<h2 class='everybody'>Appendix - Setting up a deployable Fabric environment</h2>
 
 The following steps are predicated on the earlier `git clone`, as it has the necessary 1.3 yaml / config files to set up a 1.3 Fabric environment.
 
-1. In addition to the Fabric environment you deployed for `chaincode dev mode` earlier, you will need to download two additional docker images to get going (ie the CA and CouchDB for queries later on) - the easiest way to do this is to use the `docker-compose-fabric.yaml` file below, which has the correct docker-compose configuration for a 1.3 environment. But first, ensure you keep your chaincode src backed up to a safe place initially/
+1. The main difference to the earlier `devmode` Fabric environment, is that you will download two additional docker images  (ie the CA and CouchDB - for rich queries later on) - the easiest way to do this is to use the `docker-compose-fabric.yaml` file below, which has the correct docker-compose configuration for a 1.3 environment and pulls the requisite docker images. But first, ensure you keep your chaincode src backed up to a safe place initially.
 
-2. Tear down the chaincode dev environment Fabric (from earlier) and start up a 'fresh' Fabric environment (different container names to the 'dev mode' environment), with the addition of the docker container instances for the CA server and CouchDB as the world state DB (so that rich queries can be performed). Go to the clones directory and run the following scripts, in sequence:
+2. Tear down the chaincode devmode environment Fabric (from earlier) and start up a 'fresh' Fabric environment (different container names to the 'dev mode' environment), with the addition of the docker container instances for the CA server and CouchDB as the world state DB (so that rich queries can be performed). Go to the clones directory and run the following scripts, in sequence:
        ./teardown.sh
        ./generate.sh
-       ./startFabric.sh
+       ./startFabric.sh     # uses hte docker-compose-fabric.yaml file and joins the peer to the channel 'mychannel'
 
 3. Do a `docker ps -a` and ensure you see running containers for the fabric-tools, fabric-peer, fabric-orderer, fabric-ca, and fabric-couchdb. Check there are no 'exited' containers.
 
-4. If the environment is up and running, we can proceed to start deploying our sample chaincode that we created earlier. There are helper scripts to enable you to do this - in particular, the script `instChaincode.sh` takes one parameter (eg. `./instChaincode.sh init`  that enables you to:
+4. If the environment is up and running, we can proceed to start deploying our sample chaincode, using an existing admin created by the `generate.sh` script, that we ran earlier. There is a helper script to enable you to deploy your chaincode and subsequently interact with it - the script `instChaincode.sh` takes one parameter (eg. `./instChaincode.sh init`) that enables you to:
 
          - `install` - runs a `docker exec` on the CLI container, that does a `peer chaincode install` of the sample `mycontract` chaincode package
          - `init` - ditto, but does a `peer chaincode instantiate` of the sample `mycontract` and passing the argument to the `Init` function as defined in the nodeJS chaincode file.
@@ -274,3 +274,5 @@ Examples are:
 "invoke" : docker exec -e "CORE_PEER_LOCALMSPID=Org1MSP" -e "CORE_CHAINCODE_EXECUTETIMEOUT=1200s"  -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp" cli **peer chaincode invoke** -o orderer.example.com:7050 -C mychannel -n mycontract -c '{"Args":["InitContract","A1","33"]}'
 
 "invokeA" : docker exec -e "CORE_PEER_LOCALMSPID=Org1MSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp" cli **peer chaincode invoke** -o orderer.example.com:7050 -C mychannel -n mycontract -c '{"Args":["transactionA","A1","44"]}'
+
+That's it! You should be up and running.
