@@ -253,12 +253,29 @@ The following steps are predicated on the earlier `git clone`, as it has the nec
 
 2. Tear down the chaincode devmode environment Fabric (from earlier) and start up a 'fresh' Fabric environment (different container names to the 'dev mode' environment), with the addition of the docker container instances for the CA server and CouchDB as the world state DB (so that rich queries can be performed). Go to the clones directory and run the following scripts, in sequence:
        ./teardown.sh
-       ./generate.sh
-       ./startFabric.sh     # uses hte docker-compose-fabric.yaml file and joins the peer to the channel 'mychannel'
 
-3. Do a `docker ps -a` and ensure you see running containers for the fabric-tools, fabric-peer, fabric-orderer, fabric-ca, and fabric-couchdb. Check there are no 'exited' containers.
+3. Go to the URL and grab the latest cryptogen binaries from https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric-1.3.0-stable/linux-amd64.1.3.0-stable-1b2d58c/ and in particular the .tar.gz file
 
-4. If the environment is up and running, we can proceed to start deploying our sample chaincode, using an existing admin created by the `generate.sh` script, that we ran earlier. There is a helper script to enable you to deploy your chaincode and subsequently interact with it - the script `instChaincode.sh` takes one parameter (eg. `./instChaincode.sh init`) that enables you to:
+4. extract the files to the current directory, using the command below:
+ 
+     tar zxvf hyperledger-fabric-1.3.0-stable-linux-amd64.1.3.0-stable-1b2d58c.tar.gz
+
+5. Set the PATH variable to look for this edition of cryptogen (the PATH variable below is important):
+     export PATH=${PWD}:/bin:$PATH
+     
+6. Run the crypto generator script to lay down the crypto artifacts and 
+
+     ./generate.sh
+ 
+7. Next, start the Fabric, (started on its own Docker network) which will also call the script to join the peers to the channel 'mychannel':
+
+     ./startFabric.sh     # uses the docker-compose-fabric.yaml file, and joins the peer to the channel 'mychannel'
+
+You should get messages that the peer joined the channel SUCCESSFULLY ! Please check this is the case.
+
+8. Do a `docker ps -a` and ensure you see running containers for the fabric-tools, fabric-peer, fabric-orderer, fabric-ca, and fabric-couchdb. Check there are no 'exited' containers.
+
+9. If the environment is up and running, we can proceed to start deploying our sample chaincode, using an existing admin created by the `generate.sh` script, that we ran earlier. There is a helper script to enable you to deploy your chaincode and subsequently interact with it - the script `instChaincode.sh` takes one parameter (eg. `./instChaincode.sh init`) that enables you to:
 
          - `install` - runs a `docker exec` on the CLI container, that does a `peer chaincode install` of the sample `mycontract` chaincode package
          - `init` - ditto, but does a `peer chaincode instantiate` of the sample `mycontract` and passing the argument to the `Init` function as defined in the nodeJS chaincode file.
