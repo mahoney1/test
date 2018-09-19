@@ -269,13 +269,21 @@ The following steps are predicated on the earlier `git clone`, as it has the nec
  
 7. Next, start the Fabric, (started on its own Docker network) which will also call the script to join the peers to the channel 'mychannel':
 
-     ./startFabric.sh     # uses the docker-compose-fabric.yaml file, and joins the peer to the channel 'mychannel'
+     ./startFabric.sh     # uses the docker-compose-fabric.yaml file, and joins the peer to the channel 'mychannel' using a subsidiary script
 
+    NOTE: `startFabric.sh` sets the DOCKER NETWORK NAME as `simple`
+    
 You should get messages that the peer joined the channel SUCCESSFULLY ! Please check this is the case.
 
 8. Do a `docker ps -a` and ensure you see running containers for the fabric-tools, fabric-peer, fabric-orderer, fabric-ca, and fabric-couchdb. Check there are no 'exited' containers.
 
-9. If the environment is up and running, we can proceed to start deploying our sample chaincode, using an existing admin created by the `generate.sh` script, that we ran earlier. There is a helper script to enable you to deploy your chaincode and subsequently interact with it - the script `instChaincode.sh` takes one parameter (eg. `./instChaincode.sh init`) that enables you to:
+9. on the command line, set your COMPOSE_PROJECT_NAME to simple:
+
+    export COMPOSE_PROJECT_NAME=simple
+    
+10. If the Fabric 1.3 environment is up and running, we can proceed to start deploying our sample chaincode, using an existing admin created by the `generate.sh` script, that we ran earlier. 
+
+There is a helper script to enable you to deploy your chaincode and subsequently interact with it - the script is `instChaincode.sh` and takes one parameter (eg. `./instChaincode.sh init`) that enables you to perform the following tasks (see options in sequence below):
 
          - `install` - runs a `docker exec` on the CLI container, that does a `peer chaincode install` of the sample `mycontract` chaincode package
          - `init` - ditto, but does a `peer chaincode instantiate` of the sample `mycontract` and passing the argument to the `Init` function as defined in the nodeJS chaincode file.
