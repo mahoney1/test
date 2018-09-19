@@ -285,6 +285,10 @@ You should get messages that the peer joined the channel SUCCESSFULLY ! Please c
          
 Examples are:
 
+"install" :  docker exec -e "CORE_PEER_LOCALMSPID=Org1MSP" -e "CORE_CHAINCODE_STARTUPTIMEOUT=1200s" -e "CORE_PEE
+R_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@or
+g1.example.com/msp" cli peer chaincode install -n mycontract -v 1.0 -p "$CC_SRC_PATH" -l "$LANGUAGE"
+
 "init" :  docker exec -e "CORE_PEER_LOCALMSPID=Org1MSP" -e "CORE_CHAINCODE_STARTUPTIMEOUT=2400s" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp" cli **peer chaincode instantiate** -o orderer.example.com:7050 -C mychannel -n mycontract -l "$LANGUAGE" -v 1.0 -c '{"Args":["org.mynamespace.updates_Init"]}' -P "OR ('Org1MSP.member','Org2MSP.member')"
 
 
