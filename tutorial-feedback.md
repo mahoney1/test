@@ -37,12 +37,17 @@ bullet 3 - Should remove the (leading) extra dollar symbol ? (I know you're show
 
 
 This DOESN'T work for me: 
-$(npm bin)/fabric-chaincode-node start --peer.address=localhost:7052 --chaincode-id-name=papernet:0
+
+`$(npm bin)/fabric-chaincode-node start --peer.address=localhost:7052 --chaincode-id-name=papernet:0`
+
 you get:
 ERROR [lib/chaincode.js] uncaughtException: Illegal value for namevalue element of type string: undefined (not a string) 
 
 This DOES work for me:
-CORE_CHAINCODE_ID_NAME=papernet:0 $(npm bin)/fabric-chaincode-node start --peer.address=localhost:7052 - as shown in https://github.com/mahoney1/docs/blob/master/Running-Commercial-Paper-Contract.md
+
+`CORE_CHAINCODE_ID_NAME=papernet:0 $(npm bin)/fabric-chaincode-node start --peer.address=localhost:7052`
+
+- as shown in https://github.com/mahoney1/docs/blob/master/Running-Commercial-Paper-Contract.md
 
 **Item 4**
 
@@ -52,16 +57,16 @@ General - remove leading '$' symbols for command line and keep consistent throug
 
 Bullet 2 - not required (CLI container already been started by the start.sh script earlier - ie remove it)
 
-docker-compose -f ./docker-compose.yml up -d cli
+`docker-compose -f ./docker-compose.yml up -d cli`
 
 Bullet 4:  you need to replace ':' with '.' (fullstop) before `instantiate` -  as in below (also: see earlier comment about removing leading $ too)
 
 
-$ docker exec cli peer chaincode instantiate -n papernet -v 0 -l node -c '{"Args":["org.papernet.commercialpaper:instantiate"]}' -C papernet
+`$ docker exec cli peer chaincode instantiate -n papernet -v 0 -l node -c '{"Args":["org.papernet.commercialpaper:instantiate"]}' -C papernet`
 
 (as it exists now - becomes):
 
-$ docker exec cli peer chaincode instantiate -n papernet -v 0 -l node -c '{"Args":["org.papernet.commercialpaper.instantiate"]}' -C papernet
+`$ docker exec cli peer chaincode instantiate -n papernet -v 0 -l node -c '{"Args":["org.papernet.commercialpaper.instantiate"]}' -C papernet`
 
 **Item 5**
 
