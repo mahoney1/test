@@ -2,11 +2,11 @@
 
 Under 'Enabling development mode'
 
-The instructions should say as below:  (ie correct the .yml filename in 2 places, and basic-network location is from `fabric-samples`)
+The instructions should say as below:  (ie correct the .yml filename in 2 places, and clarifying that the basic-network location is from `fabric-samples`)
 
 The `basic-network` sample is located under the `basic-network` directory of `fabric-samples` clone. The `docker-compose.yml` file must be edited to enable development mode. 
 
-(FYI Matthew - ie the docker-compose.yml found under 'commercial-paper/infrastructure' is old - doesn't reflect what you'd expect (and you can cross check this with the docker-compose.yml in 'fabric-samples/basic-network' fyi which DOES reflect what you would expect) - just pointing this out - you want them to always get the edition from github.com/fabric-samples not infrastructure (in your tutorial)
+As suggested - ignored basic-network stuff in gerrit tgz and used edition from github.com/fabric-samples - but 
 
 
 **Item 2**
@@ -21,18 +21,9 @@ Under 'starting the Hyperledger Fabric basic network '
 
 Under 'Starting the smart contract locally'
 
-Navigate to the contracts/javascript directory under the `commercialpaper' folder
+Navigate to the contracts/javascript directory under the `commercialpaper` folder
 
-bullet 2: npm install 
 
-the package.json in the .tgz downloaded has local "file:" libraries, they should get them from NPM (ie 1.4 snapshot editions in particular, matching the application below) - I've replaced with snapshots (below)  
- 
-```
-"fabric-contract-api": "unstable",
-        "fabric-shim": "unstable",
-        etc
- ```
- 
 bullet 3 - Should remove the (leading) extra dollar symbol ? (I know you're showing its 'command line' but I think it may confuse, would suggest to remove (especially as previous command is not using that 'style')
 
 
