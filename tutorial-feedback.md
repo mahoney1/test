@@ -42,7 +42,7 @@ ERROR [lib/chaincode.js] uncaughtException: Illegal value for namevalue element 
 This DOES work for me:
 CORE_CHAINCODE_ID_NAME=papernet:0 $(npm bin)/fabric-chaincode-node start --peer.address=localhost:7052 - as shown in https://github.com/mahoney1/docs/blob/master/Running-Commercial-Paper-Contract.md
 
-**Item 5**
+**Item 4**
 
 Under:  'Installing and instantiating the smart contract'
 
@@ -58,6 +58,8 @@ $ docker exec cli peer chaincode instantiate -n papernet -v 0 -l node -c '{"Args
 as it exists now - becomes:
 
 $ docker exec cli peer chaincode instantiate -n papernet -v 0 -l node -c '{"Args":["org.papernet.commercialpaper.instantiate"]}' -C papernet
+
+**Item 5**
 
 Under 'Setting up the client application'
 
