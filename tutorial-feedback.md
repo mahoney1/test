@@ -26,11 +26,13 @@ Navigate to the contracts/javascript directory under the `commercialpaper' fol
 bullet 2: npm install 
 
 the package.json in the .tgz downloaded has local "file:" libraries, they should get them from NPM (ie 1.4 snapshot editions in particular, matching the application below) - I've replaced with snapshots (below)  
-      
+ 
+```
 "fabric-contract-api": "unstable",
         "fabric-shim": "unstable",
         etc
-        
+ ```
+ 
 bullet 3 - Should remove the (leading) extra dollar symbol ? (I know you're showing its 'command line' but I think it may confuse, would suggest to remove (especially as previous command is not using that 'style')
 
 
@@ -49,13 +51,15 @@ Under:  'Installing and instantiating the smart contract'
 General - remove leading '$' symbols for command line and keep consistent throughout
 
 Bullet 2 - not required (CLI container already been started by the start.sh script earlier - ie remove it)
+
 docker-compose -f ./docker-compose.yml up -d cli
 
 Bullet 4:  you need to replace ':' with '.' (fullstop) before `instantiate` -  as in below (also: see earlier comment about removing leading $ too)
 
 
 $ docker exec cli peer chaincode instantiate -n papernet -v 0 -l node -c '{"Args":["org.papernet.commercialpaper:instantiate"]}' -C papernet
-as it exists now - becomes:
+
+(as it exists now - becomes):
 
 $ docker exec cli peer chaincode instantiate -n papernet -v 0 -l node -c '{"Args":["org.papernet.commercialpaper.instantiate"]}' -C papernet
 
@@ -64,7 +68,8 @@ $ docker exec cli peer chaincode instantiate -n papernet -v 0 -l node -c '{"Args
 Under 'Setting up the client application'
 
 Bullet 3: setting up local idwallet - you require an extra '../' in `application.js` to get the correct relative path to the crypto-config directory (this was (correctly) the case in a previous edition of addToWallet.js FYI )
-const fixtures = path.resolve(__dirname,'../../infrastructure/basic-network');
+
+`const fixtures = path.resolve(__dirname,'../../infrastructure/basic-network');`
 
 Other than that, all good!
 
