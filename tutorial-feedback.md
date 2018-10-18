@@ -50,14 +50,8 @@ Bullet 2 - not required (CLI container already been started by the start.sh scri
 
 `docker-compose -f ./docker-compose.yml up -d cli`
 
-Bullet 4:  you need to replace ':' with '.' (fullstop) before `instantiate` -  as in below (also: see earlier comment about removing leading $ too)
+Bullet 4:  (see earlier comment about removing leading $ too)
 
-
-`$ docker exec cli peer chaincode instantiate -n papernet -v 0 -l node -c '{"Args":["org.papernet.commercialpaper:instantiate"]}' -C papernet`
-
-(as it exists now - becomes):
-
-`$ docker exec cli peer chaincode instantiate -n papernet -v 0 -l node -c '{"Args":["org.papernet.commercialpaper.instantiate"]}' -C papernet`
 
 **Item 5**
 
