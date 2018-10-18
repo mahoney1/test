@@ -4,7 +4,7 @@ Under 'Enabling development mode'
 
 The instructions should say as below:  (ie correct the .yml filename in 2 places, and clarifying that the basic-network location is from `fabric-samples`)
 
-The `basic-network` sample is located under the `basic-network` directory of `fabric-samples` clone. The `docker-compose.yml` file must be edited to enable development mode. 
+The `basic-network` sample is located under the `basic-network` directory of `fabric-samples` clone. The `docker-compose.yml` file must be edited to enable development mode. UNLESS you explicitly mean to use the `docker-compose.yml` provided under `infrastructure/basic-network` of the gerrit .tgz file (in which case, the `fabric-chaincode-node` 'error' I mention below, may not occur).
 
 As suggested - ignored basic-network stuff in gerrit tgz and used edition from github.com/fabric-samples - but 
 
